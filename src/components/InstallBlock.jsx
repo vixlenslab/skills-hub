@@ -15,9 +15,11 @@ const STEPS = [
   {
     label: '3. Sempre que sair versão nova',
     hint: 'A primeira linha atualiza o catálogo; as outras duas atualizam de fato cada plugin.',
-    command: 'claude plugin marketplace update vixlens-marketplace
-claude plugin update vixlens-brand@vixlens-marketplace
-claude plugin update vixlens-ui@vixlens-marketplace',
+    command: [
+      'claude plugin marketplace update vixlens-marketplace',
+      'claude plugin update vixlens-brand@vixlens-marketplace',
+      'claude plugin update vixlens-ui@vixlens-marketplace',
+    ].join('\n'),
   },
 ]
 
@@ -46,7 +48,7 @@ function CommandRow({ label, hint, command, onCopy }) {
         ) : (
           <Copy size={14} className="shrink-0 opacity-60 group-hover:opacity-100" />
         )}
-        <span className="min-w-0 flex-1 break-all">{command}</span>
+        <span className="min-w-0 flex-1 whitespace-pre-wrap break-all">{command}</span>
       </button>
     </div>
   )
@@ -67,7 +69,7 @@ export default function InstallBlock({ onCopy }) {
             Vixlens. Você instala uma vez e elas passam a valer em qualquer projeto seu, não só num repo específico.
           </p>
           <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
-            Quando o time publicar melhorias, você atualiza com um comando — sem ninguém precisar te mandar arquivo.
+            Quando o time publicar melhorias, você atualiza rodando o passo 3 — sem ninguém precisar te mandar arquivo.
           </p>
         </div>
       </div>

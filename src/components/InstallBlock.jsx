@@ -14,8 +14,10 @@ const STEPS = [
   },
   {
     label: '3. Sempre que sair versão nova',
-    hint: 'Puxa as atualizações que o time publicou.',
-    command: 'claude plugin marketplace update vixlens-marketplace',
+    hint: 'A primeira linha atualiza o catálogo; as outras duas atualizam de fato cada plugin.',
+    command: 'claude plugin marketplace update vixlens-marketplace
+claude plugin update vixlens-brand@vixlens-marketplace
+claude plugin update vixlens-ui@vixlens-marketplace',
   },
 ]
 

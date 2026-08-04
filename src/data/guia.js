@@ -596,7 +596,7 @@ export const guia = {
         {
           "type": "code",
           "label": "Quando sair versão nova",
-          "code": "claude plugin marketplace update vixlens-marketplace"
+          "code": "claude plugin marketplace update vixlens-marketplace\nclaude plugin update vixlens-brand@vixlens-marketplace\nclaude plugin update vixlens-ui@vixlens-marketplace"
         },
         {
           "type": "box",

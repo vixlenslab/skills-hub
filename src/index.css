@@ -56,8 +56,17 @@
     border-color: hsl(var(--border));
   }
 
+  /* A animacao fica a cargo do CSS: scrollIntoView em JS nao passa mais
+     behavior, entao herda daqui. Se o navegador nao animar, ele ainda pula
+     para o lugar certo — o destino importa mais que a transicao. */
   html {
     scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {

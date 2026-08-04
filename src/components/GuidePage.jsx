@@ -3,6 +3,7 @@ import { Lightning, List } from '@phosphor-icons/react'
 import { guia } from '@/data/guia'
 import { cn } from '@/lib/utils'
 import CodeBlock from './CodeBlock'
+import { secoesComNovidade } from '@/data/novidades'
 
 const LEVEL_STYLE = {
   Iniciante: 'bg-vix-amarelo text-vix-preto',
@@ -177,9 +178,11 @@ export default function GuidePage({ onCopy }) {
                 key={s.id}
                 href={`#/guia/${s.id}`}
                 onClick={(e) => {
-                  // A rota já usa o hash, então o scroll é feito na mão.
+                  // A rota ja usa o hash, entao o scroll e feito na mao.
+                  // 'instant' de proposito: com animacao o salto nao completa de
+                  // forma confiavel e a pessoa para no meio do capitulo errado.
                   e.preventDefault()
-                  document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  document.getElementById(s.id)?.scrollIntoView({ behavior: 'instant', block: 'start' })
                   setOpenToc(false)
                 }}
                 className={cn(
@@ -190,6 +193,9 @@ export default function GuidePage({ onCopy }) {
                 )}
               >
                 {s.title}
+                {secoesComNovidade.has(s.id) && (
+                  <span className="ml-1.5 inline-block h-1.5 w-1.5 rounded-full bg-vix-amarelo align-middle" />
+                )}
               </a>
             ))}
           </nav>
@@ -222,6 +228,11 @@ export default function GuidePage({ onCopy }) {
                   <h2 className="font-vix text-[26px] font-semibold leading-tight tracking-tight text-foreground">
                     {s.title}
                   </h2>
+                  {secoesComNovidade.has(s.id) && (
+                    <span className="rounded-vix-chip bg-vix-amarelo px-2 py-1 text-[11px] font-medium leading-none text-vix-preto">
+                      Novo
+                    </span>
+                  )}
                   {s.level && (
                     <span
                       className={cn(

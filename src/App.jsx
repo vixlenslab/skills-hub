@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { MagnifyingGlass, Star, Package } from '@phosphor-icons/react'
 import { skills, categories } from '@/data/skills'
 import { cn } from '@/lib/utils'
@@ -9,6 +9,8 @@ import InstallBlock from './components/InstallBlock'
 import GuidePage from './components/GuidePage'
 import HomePage from './components/HomePage'
 import SearchOverlay from './components/SearchOverlay'
+import NewsPage from './components/NewsPage'
+import { temNovidade } from '@/data/novidades'
 
 const TABS = [
   { value: 'Todas', label: 'Todas' },
@@ -19,17 +21,20 @@ const TABS = [
 const HOME = '#/'
 const SKILLS = '#/skills'
 const GUIA = '#/guia'
+const NOVIDADES = '#/novidades'
 
 const NAV = [
   { hash: HOME, label: 'Início' },
   { hash: SKILLS, label: 'Skills' },
   { hash: GUIA, label: 'Guia' },
+  { hash: NOVIDADES, label: 'Novidades', selo: temNovidade },
 ]
 
 // Rotas por hash — cada página tem link próprio, compartilhável.
 // `#/como-funciona` foi a URL da primeira versão do guia; segue redirecionando.
 function resolve(hash) {
   if (hash.startsWith('#/como-funciona') || hash.startsWith(GUIA)) return GUIA
+  if (hash.startsWith(NOVIDADES)) return NOVIDADES
   if (hash.startsWith(SKILLS)) return SKILLS
   return HOME
 }
@@ -83,10 +88,30 @@ export default function App() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  const navigate = useCallback((hash, tab) => {
+  // Trocar de rota tem que voltar pro topo — inclusive quando a pessoa clica no
+  // menu ou cola a URL. Excecao: quando o destino e uma ancora dentro da pagina.
+  const ancoraPendente = useRef(null)
+
+  useEffect(() => {
+    if (ancoraPendente.current) {
+      const id = ancoraPendente.current
+      ancoraPendente.current = null
+      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'instant', block: 'start' }), 60)
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+    }
+  }, [route])
+
+  const navigate = useCallback((hash, tab, ancora) => {
     if (tab) setActive(tab)
+    if (ancora) ancoraPendente.current = ancora
+    if (window.location.hash === hash) {
+      // Mesma rota: o hashchange nao dispara, entao resolve aqui.
+      if (ancora) document.getElementById(ancora)?.scrollIntoView({ behavior: 'instant', block: 'start' })
+      else window.scrollTo({ top: 0, behavior: 'instant' })
+      return
+    }
     window.location.hash = hash
-    window.scrollTo({ top: 0 })
   }, [])
 
   // Resultado da busca leva direto ao destino: skill no catálogo, capítulo no guia.
@@ -98,8 +123,7 @@ export default function App() {
         setQuery(r.title)
         navigate(SKILLS)
       } else {
-        navigate(GUIA)
-        setTimeout(() => document.getElementById(r.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120)
+        navigate(GUIA, null, r.id)
       }
     },
     [navigate],
@@ -134,6 +158,9 @@ export default function App() {
                 )}
               >
                 {n.label}
+                {n.selo && route !== n.hash && (
+                  <span className="ml-1.5 inline-block h-1.5 w-1.5 rounded-full bg-vix-amarelo align-middle" />
+                )}
               </a>
             ))}
           </nav>
@@ -153,6 +180,8 @@ export default function App() {
       {route === HOME && <HomePage onOpenSearch={() => setSearchOpen(true)} onNavigate={navigate} />}
 
       {route === GUIA && <GuidePage onCopy={onCopy} />}
+
+      {route === NOVIDADES && <NewsPage onNavigate={navigate} />}
 
       {route === SKILLS && (
         <>

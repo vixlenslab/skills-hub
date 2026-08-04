@@ -146,8 +146,8 @@ export const guia = {
             ],
             [
               "Skill carregada",
-              "<code>.agents/skills/</code>",
-              "Quando você chama <code>/skill</code>"
+              "<code>~/.claude/skills/</code> ou dentro de um plugin",
+              "Quando você digita <code>/nome</code> ou quando o assunto bate com a descrição"
             ],
             [
               "Sua mensagem agora",
@@ -1401,7 +1401,7 @@ export const guia = {
           "type": "box",
           "tone": "fun",
           "title": "Checklist do iniciante ao avançado:",
-          "body": "<br> ☐ Criou CLAUDE.md global<br> ☐ Criou Projeto no Chat com contexto da empresa<br> ☐ Instalou Claude Code e abriu primeira sessão<br> ☐ Usou 3 skills diferentes<br> ☐ Configurou claude-mem e rodou <code>npx claude-mem start</code><br> ☐ Criou sua própria skill pra algo recorrente<br> ☐ Configurou um MCP server<br> ☐ Criou um hook de automação<br> ☐ Rodou um workflow com subagentes"
+          "body": "<br> ☐ Criou CLAUDE.md global<br> ☐ Criou Projeto no Chat com contexto da empresa<br> ☐ Instalou Claude Code e abriu primeira sessão<br> ☐ Usou 3 skills diferentes<br> ☐ Instalou os plugins da Vixlens (<code>vixlens-brand</code> e <code>vixlens-ui</code>)<br> ☐ Configurou claude-mem e rodou <code>npx claude-mem start</code><br> ☐ Criou sua própria skill pra algo recorrente<br> ☐ Configurou um MCP server<br> ☐ Criou um hook de automação<br> ☐ Rodou um workflow com subagentes"
         }
       ]
     }

@@ -97,7 +97,7 @@ export default function HomePage({ onOpenSearch, onNavigate }) {
         >
           vixlenslab/vixlens-ds
         </a>
-        . Skill nova pra publicar ou dúvida: fala com o Otávio.
+        . Skill nova pra publicar ou dúvida: fala com a Mari.
       </p>
     </main>
   )

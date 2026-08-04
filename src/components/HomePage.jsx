@@ -6,7 +6,7 @@ const CAMINHOS = [
     icon: Package,
     kicker: 'Comece por aqui',
     title: 'Instalar as skills da Vixlens',
-    body: 'Dois comandos no terminal e você passa a ter as nossas skills em qualquer projeto — marca, documentos, interface.',
+    body: 'Dois comandos no terminal e você passa a ter as nossas skills em qualquer projeto: marca, documentos, interface.',
     cta: 'Ver como instalar',
     hash: '#/skills',
     tab: 'Proprietária',
@@ -16,7 +16,7 @@ const CAMINHOS = [
     icon: BookOpen,
     kicker: `${counts.capitulos} capítulos`,
     title: 'Entender como tudo funciona',
-    body: 'O que são skills, plugins, crons, MCP, hooks e memória — e como criar os seus. Do zero ao avançado, sem enrolação.',
+    body: 'O que são skills, plugins, crons, MCP, hooks e memória, e como criar os seus. Do zero ao avançado, sem enrolação.',
     cta: 'Abrir o guia',
     hash: '#/guia',
   },
@@ -45,7 +45,7 @@ export default function HomePage({ onOpenSearch, onNavigate }) {
         </h1>
         <p className="mt-5 text-[17px] leading-relaxed text-muted-foreground">
           O catálogo das <strong className="font-semibold text-foreground">{counts.skills} skills</strong> disponíveis,
-          as <strong className="font-semibold text-foreground">{counts.vixlens} nossas</strong> — feitas pra Vixlens — e
+          as <strong className="font-semibold text-foreground">{counts.vixlens} nossas</strong>, feitas pra Vixlens, e
           o guia que explica como usar, criar e compartilhar. Um lugar só.
         </p>
 

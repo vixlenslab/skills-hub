@@ -65,11 +65,11 @@ export default function InstallBlock({ onCopy }) {
             Como instalar as skills Vixlens
           </h2>
           <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
-            As 7 skills desta aba não vêm junto com o Claude Code — elas são nossas, e ficam num repositório da
+            As 7 skills desta aba não vêm junto com o Claude Code. Elas são nossas, e ficam num repositório da
             Vixlens. Você instala uma vez e elas passam a valer em qualquer projeto seu, não só num repo específico.
           </p>
           <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
-            Quando o time publicar melhorias, você atualiza rodando o passo 3 — sem ninguém precisar te mandar arquivo.
+            Quando o time publicar melhorias, você atualiza rodando o passo 3, sem ninguém precisar te mandar arquivo.
           </p>
         </div>
       </div>
@@ -97,13 +97,13 @@ export default function InstallBlock({ onCopy }) {
         <p className="text-[12px] leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground">Depois de instalar: </span>
           feche e abra o Claude Code. As skills com <span className="font-mono">/</span> você chama digitando o comando
-          no chat. As marcadas como <span className="font-mono">ref</span> carregam sozinhas quando o assunto aparece —
+          no chat. As marcadas como <span className="font-mono">ref</span> carregam sozinhas quando o assunto aparece,
           não precisa digitar nada.
         </p>
       </div>
 
       <p className="text-[12px] leading-relaxed text-muted-foreground">
-        As skills das outras abas já vêm com o Claude Code ou com plugins públicos — essas você não precisa instalar.{' '}
+        As skills das outras abas já vêm com o Claude Code ou com plugins públicos. Essas você não precisa instalar.{' '}
         <a
           href="#/guia"
           className="text-foreground underline decoration-vix-amarelo/50 underline-offset-4 hover:decoration-vix-amarelo"

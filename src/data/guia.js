@@ -425,7 +425,7 @@ export const guia = {
       "blocks": [
         {
           "type": "p",
-          "body": "Skill é uma pasta com um arquivo de texto dentro. Esse arquivo explica como fazer um tipo de tarefa: o formato, as regras, o que nunca fazer. Zero código — é português, escrito pro Claude ler."
+          "body": "Skill é uma pasta com um arquivo de texto dentro. Esse arquivo explica como fazer um tipo de tarefa: o formato, as regras, o que nunca fazer. Zero código: é português, escrito pro Claude ler."
         },
         {
           "type": "box",
@@ -439,7 +439,7 @@ export const guia = {
         },
         {
           "type": "p",
-          "body": "O Claude não carrega todas as skills o tempo todo — ele lê só a <em>descrição</em> de cada uma e puxa o resto quando o assunto bate. Ou seja: a descrição é o que decide se a sua skill vai ser usada ou vai morar esquecida numa pasta."
+          "body": "O Claude não carrega todas as skills o tempo todo. Ele lê só a <em>descrição</em> de cada uma e puxa o resto quando o assunto bate. Ou seja: a descrição é o que decide se a sua skill vai ser usada ou vai morar esquecida numa pasta."
         },
         {
           "type": "compare",
@@ -462,7 +462,7 @@ export const guia = {
         },
         {
           "type": "p",
-          "body": "Uma pasta em <code>~/.claude/skills/</code> — no Windows, <code>C:\\Users\\seu-usuario\\.claude\\skills\\</code> — e dentro dela um <code>SKILL.md</code>. Só isso:"
+          "body": "Uma pasta em <code>~/.claude/skills/</code>. No Windows é <code>C:\\Users\\seu-usuario\\.claude\\skills\\</code>, e dentro dela um <code>SKILL.md</code>. Só isso:"
         },
         {
           "type": "code",
@@ -481,7 +481,7 @@ export const guia = {
         },
         {
           "type": "p",
-          "body": "Fecha e abre o Claude Code. A partir daí, dois jeitos — e quem escolhe é a skill, não você:"
+          "body": "Fecha e abre o Claude Code. A partir daí, dois jeitos, e quem escolhe é a skill, não você:"
         },
         {
           "type": "table",
@@ -542,7 +542,7 @@ export const guia = {
         },
         {
           "type": "p",
-          "body": "Tarefa única, que você vai fazer uma vez na vida: pede direto no chat e segue o baile. Skill vale quando é <strong>recorrente</strong> ou quando exige um conhecimento que o Claude não tem — o jeito Vixlens de fazer, o formato que o cliente espera, a regra que só a gente sabe."
+          "body": "Tarefa única, que você vai fazer uma vez na vida: pede direto no chat e segue o baile. Skill vale quando é <strong>recorrente</strong> ou quando exige um conhecimento que o Claude não tem: o jeito Vixlens de fazer, o formato que o cliente espera, a regra que só a gente sabe."
         }
       ]
     },
@@ -551,7 +551,7 @@ export const guia = {
       "kicker": "Superpoder 2",
       "title": "Plugins",
       "level": "Intermediário",
-      "lead": "Se skill é um chapéu, plugin é o armário inteiro — e um armário que dá pra mandar pra 55 pessoas de uma vez.",
+      "lead": "Se skill é um chapéu, plugin é o armário inteiro, e um armário que dá pra mandar pra 55 pessoas de uma vez.",
       "blocks": [
         {
           "type": "p",
@@ -561,11 +561,11 @@ export const guia = {
           "type": "box",
           "tone": "fun",
           "title": "Analogia:",
-          "body": "skill é contratar alguém e explicar uma tarefa. Plugin é o onboarding completo, versionado — e todo mundo que entrar recebe o mesmo, sem você repetir."
+          "body": "skill é contratar alguém e explicar uma tarefa. Plugin é o onboarding completo, versionado, e todo mundo que entrar recebe o mesmo, sem você repetir."
         },
         {
           "type": "p",
-          "body": "O plugin mora num repositório do GitHub. Esse repositório é o <strong>marketplace</strong> — o catálogo, que pode ter vários plugins dentro. O nosso é o <code>vixlenslab/vixlens-ds</code>, com dois:"
+          "body": "O plugin mora num repositório do GitHub. Esse repositório é o <strong>marketplace</strong>, o catálogo, que pode ter vários plugins dentro. O nosso é o <code>vixlenslab/vixlens-ds</code>, com dois:"
         },
         {
           "type": "table",
@@ -602,7 +602,7 @@ export const guia = {
           "type": "box",
           "tone": "warn",
           "title": "No terminal, não no chat.",
-          "body": "Esses comandos vão no Prompt de Comando, PowerShell ou Terminal do Mac — não dentro da conversa com o Claude. E precisa ter o Claude Code instalado antes."
+          "body": "Esses comandos vão no Prompt de Comando, PowerShell ou Terminal do Mac, não dentro da conversa com o Claude. E precisa ter o Claude Code instalado antes."
         },
         {
           "type": "h3",
@@ -631,7 +631,7 @@ export const guia = {
           "type": "box",
           "tone": "warn",
           "title": "A pegadinha que já nos custou tempo:",
-          "body": "o <code>source</code> tem que ser caminho começando com <code>./</code>. Só o nome do plugin o Claude recusa — e não recusa só aquele plugin, recusa o marketplace inteiro com um <code>Invalid input</code> que não explica nada."
+          "body": "o <code>source</code> tem que ser caminho começando com <code>./</code>. Só o nome do plugin o Claude recusa, e não recusa só aquele plugin, recusa o marketplace inteiro com um <code>Invalid input</code> que não explica nada."
         },
         {
           "type": "p",
@@ -654,7 +654,7 @@ export const guia = {
       "blocks": [
         {
           "type": "p",
-          "body": "Serve pro que é repetitivo e tem hora certa. Puxar os números toda segunda de manhã. Conferir se algum pedido travou. Montar o resumo do dia às 18h. Coisa que hoje alguém lembra de fazer — ou esquece."
+          "body": "Serve pro que é repetitivo e tem hora certa. Puxar os números toda segunda de manhã. Conferir se algum pedido travou. Montar o resumo do dia às 18h. Coisa que hoje alguém lembra de fazer, ou esquece."
         },
         {
           "type": "h3",
@@ -671,7 +671,7 @@ export const guia = {
         },
         {
           "type": "p",
-          "body": "Vale pra uma vez só também — \"amanhã às 15h me lembra de conferir o pedido da Ótica Central\". Pra ver o que tá agendado ou desligar algo, pergunta: \"quais tarefas eu tenho agendadas?\"."
+          "body": "Vale pra uma vez só também: \"amanhã às 15h me lembra de conferir o pedido da Ótica Central\". Pra ver o que tá agendado ou desligar algo, pergunta: \"quais tarefas eu tenho agendadas?\"."
         },
         {
           "type": "h3",
@@ -681,17 +681,17 @@ export const guia = {
           "type": "box",
           "tone": "warn",
           "title": "1. O app precisa estar aberto.",
-          "body": "A tarefa roda enquanto o Claude Code tá aberto. Se estava fechado na hora marcada, ela roda quando você abrir de novo — atrasada, mas roda. Não confia nisso pra coisa com prazo duro."
+          "body": "A tarefa roda enquanto o Claude Code tá aberto. Se estava fechado na hora marcada, ela roda quando você abrir de novo, atrasada, mas roda. Não confia nisso pra coisa com prazo duro."
         },
         {
           "type": "box",
           "tone": "warn",
           "title": "2. A tarefa é amnésica.",
-          "body": "Cada execução começa do zero absoluto — ela não lembra da conversa em que foi criada. O texto tem que se explicar sozinho: onde buscar, onde salvar, em que formato. <em>\"Faz igual a gente combinou\"</em> não funciona, porque na hora que rodar não existe \"a gente combinou\"."
+          "body": "Cada execução começa do zero absoluto, ela não lembra da conversa em que foi criada. O texto tem que se explicar sozinho: onde buscar, onde salvar, em que formato. <em>\"Faz igual a gente combinou\"</em> não funciona, porque na hora que rodar não existe \"a gente combinou\"."
         },
         {
           "type": "p",
-          "body": "E se o que você quer é ficar de olho em algo que muda a qualquer momento — não em hora marcada — agendamento é a ferramenta errada. Aí é só pedir pro Claude monitorar, que ele te avisa na hora que mudar."
+          "body": "E se o que você quer é ficar de olho em algo que muda a qualquer momento, e não em hora marcada, agendamento é a ferramenta errada. Aí é só pedir pro Claude monitorar, que ele te avisa na hora que mudar."
         }
       ]
     },

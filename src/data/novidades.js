@@ -1,7 +1,7 @@
 // Changelog do hub, das skills e do guia. Mais recente primeiro.
 //
 // tipo: 'novo' | 'corrigido' | 'mudou'
-// guia: id da seção do guia que essa entrada afeta (opcional) — usado para
+// guia: id da seção do guia que essa entrada afeta (opcional). Usado para
 //       marcar o capítulo com um selo "Novo" enquanto a entrada estiver
 //       dentro da janela de DIAS_NOVIDADE.
 //
@@ -23,14 +23,14 @@ export const novidades = [
     titulo: 'Quatro skills estavam publicadas sem disparar sozinhas',
     tipo: 'corrigido',
     corpo:
-      'Um dois-pontos no lugar errado derrubava a descrição inteira delas, em silêncio. Elas apareciam na lista, instalavam normalmente — e nunca eram acionadas por contexto. Corrigido em <strong>vixlens-brand 0.3.1</strong> e <strong>vixlens-ui 0.2.1</strong>, e agora existe uma validação que barra o push se acontecer de novo.',
+      'Um dois-pontos no lugar errado derrubava a descrição inteira delas, em silêncio. Elas apareciam na lista, instalavam normalmente, e nunca eram acionadas por contexto. Corrigido em <strong>vixlens-brand 0.3.1</strong> e <strong>vixlens-ui 0.2.1</strong>, e agora existe uma validação que barra o push se acontecer de novo.',
   },
   {
     data: '2026-08-04',
     titulo: 'Nova skill: auditoria de UI',
     tipo: 'novo',
     corpo:
-      '<code>/ui-boas-praticas</code> revisa qualquer tela, componente ou formulário contra 80 boas práticas de interface — tipografia, cor, contraste, botões, grid, ícones e formulários. Aponta os achados por severidade e já sugere o valor corrigido.',
+      '<code>/ui-boas-praticas</code> revisa qualquer tela, componente ou formulário contra 80 boas práticas de interface: tipografia, cor, contraste, botões, grid, ícones e formulários. Aponta os achados por severidade e já sugere o valor corrigido.',
   },
   {
     data: '2026-08-04',
@@ -38,7 +38,7 @@ export const novidades = [
     tipo: 'mudou',
     guia: 'crons',
     corpo:
-      'Era uma página solta; agora tem a mesma navegação, tema escuro e índice lateral. Ganhou capítulo sobre <strong>tarefas agendadas</strong>, e os capítulos de Skills e Plugins foram reescritos — os antigos ensinavam caminhos que não funcionam mais. O link antigo continua abrindo.',
+      'Era uma página solta; agora tem a mesma navegação, tema escuro e índice lateral. Ganhou capítulo sobre <strong>tarefas agendadas</strong>, e os capítulos de Skills e Plugins foram reescritos, porque os antigos ensinavam caminhos que não funcionam mais. O link antigo continua abrindo.',
   },
   {
     data: '2026-08-04',
@@ -57,7 +57,7 @@ export function ehRecente(data) {
   return dias >= 0 && dias <= DIAS_NOVIDADE
 }
 
-/** Seções do guia com novidade dentro da janela — para o selo "Novo". */
+/** Seções do guia com novidade dentro da janela, para o selo "Novo". */
 export const secoesComNovidade = new Set(
   novidades.filter((n) => n.guia && ehRecente(n.data)).map((n) => n.guia),
 )

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills Index — Claude Code</title>
+<script>(function(){var t=localStorage.getItem('vix-theme');if(t==='light')document.documentElement.classList.add('light');else if(!t&&window.matchMedia('(prefers-color-scheme:light)').matches)document.documentElement.classList.add('light');})()</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0f0f;
+    --bg2: #1a1a1a;
+    --bg3: #222;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f5f5f5;
+    --text2: #d0d0d0;
+    --text3: #8a8a8a;
+    --accent: #f97316;
+    --accent-dim: rgba(249,115,22,0.12);
+    --radius: 8px;
+    --radius-lg: 12px;
+    --mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  }
+
+  :root.light {
+    --bg: #fafafa;
+    --bg2: #f0f0f0;
+    --bg3: #e8e8e8;
+    --border: rgba(0,0,0,0.08);
+    --border2: rgba(0,0,0,0.14);
+    --text: #111;
+    --text2: #444;
+    --text3: #888;
+  }
+
+  .theme-toggle {
+    margin-left: auto;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    color: var(--text2);
+    cursor: pointer;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; flex-shrink: 0; padding: 0;
+  }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent); }
+  .theme-toggle svg { width: 15px; height: 15px; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+
+  .logo {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  header h1 {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+
+  header p {
+    font-size: 13px;
+    color: var(--text2);
+  }
+
+  .controls {
+    padding: 20px 32px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .search-wrap svg {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text3);
+    pointer-events: none;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 9px 12px 9px 36px;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 14px;
+    font-family: var(--sans);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  input[type="text"]:focus { border-color: var(--accent); }
+
+  .filters {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    transition: all 0.15s;
+    user-select: none;
+  }
+
+  .pill:hover { border-color: var(--accent); color: var(--accent); }
+  .pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .stats-bar {
+    padding: 12px 32px;
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: var(--text3);
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+
+  .stats-bar span strong { color: var(--text2); font-weight: 500; }
+
+  .count { margin-left: auto; }
+
+  .grid {
+    padding: 24px 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 10px;
+  }
+
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.15s, transform 0.1s;
+    cursor: default;
+  }
+
+  .card:hover {
+    border-color: var(--border2);
+    transform: translateY(-1px);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .card-name {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    color: var(--text);
+  }
+
+  .cat-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .cat-Marketing { background: rgba(56,132,220,0.15); color: #5ba3f0; }
+  .cat-Design { background: rgba(139,92,246,0.15); color: #a78bfa; }
+  .cat-Escrita { background: rgba(52,211,153,0.15); color: #34d399; }
+  .cat-Plugin { background: rgba(249,115,22,0.15); color: var(--accent); }
+  .cat-Nativa { background: rgba(156,163,175,0.12); color: #9ca3af; }
+
+  .cmd {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--bg3);
+    color: var(--accent);
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .cmd:hover { background: var(--accent-dim); }
+
+  .cmd svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+  .desc {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .copied-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 100;
+  }
+
+  .copied-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .empty {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 60px 0;
+    color: var(--text3);
+    font-size: 14px;
+  }
+
+  .section-label {
+    grid-column: 1/-1;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text3);
+    padding: 8px 0 4px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .stats-bar { flex-wrap: wrap; gap: 8px; }
+    .count { margin-left: 0; width: 100%; }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 14px 16px; gap: 10px; }
+    header h1 { font-size: 15px; }
+    header p { font-size: 12px; }
+    .logo { width: 30px; height: 30px; font-size: 15px; }
+    .controls { padding: 12px 16px; flex-direction: column; gap: 8px; }
+    .search-wrap { min-width: unset; }
+    .filters { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .filters::-webkit-scrollbar { display: none; }
+    .pill { white-space: nowrap; padding: 7px 14px; }
+    .stats-bar { padding: 10px 16px; font-size: 11px; gap: 8px; }
+    .grid { padding: 14px 16px 24px; grid-template-columns: 1fr; gap: 8px; }
+    .card { padding: 14px; }
+    .cmd { font-size: 11px; padding: 5px 10px; }
+    .desc { font-size: 12px; }
+    .copied-toast { left: 16px; right: 16px; text-align: center; border-radius: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">⌘</div>
+  <div>
+    <h1>Skills Index</h1>
+    <p>Claude Code — referência rápida de skills instaladas</p>
+  </div>
+  <button class="theme-toggle" id="themeToggle" title="Alternar tema" aria-label="Alternar tema"></button>
+</header>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="search" placeholder="Buscar por nome ou descrição..." oninput="filter()">
+  </div>
+  <div class="filters" id="filters"></div>
+</div>
+
+<div class="stats-bar">
+  <span><strong id="statMarketing">53</strong> marketing</span>
+  <span><strong id="statDesign">21</strong> design</span>
+  <span><strong id="statEscrita">1</strong> escrita</span>
+  <span><strong id="statPlugin">169</strong> plugins</span>
+  <span><strong id="statNativa">44</strong> nativas</span>
+  <div class="count" id="countLabel">288 skills</div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="copied-toast" id="toast">Copiado!</div>
+
+<script>
+const TSUN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+const TMOON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+
+function syncThemeBtns() {
+  const light = document.documentElement.classList.contains('light');
+  document.querySelectorAll('.theme-toggle').forEach(b => b.innerHTML = light ? TMOON : TSUN);
+}
+function toggleTheme() {
+  const light = !document.documentElement.classList.contains('light');
+  document.documentElement.classList.toggle('light', light);
+  localStorage.setItem('vix-theme', light ? 'light' : 'dark');
+  syncThemeBtns();
+}
+syncThemeBtns();
+document.querySelectorAll('.theme-toggle').forEach(b => b.addEventListener('click', toggleTheme));
+
+const skills = [
+  ["ab-testing","Marketing","Planeja, desenha e roda testes A/B e experimentos de crescimento com rigor estatístico"],
+  ["ad-creative","Marketing","Gera e itera variações de copy de anúncios para qualquer plataforma de mídia paga"],
+  ["ads","Marketing","Cria e otimiza campanhas pagas no Google, Meta, LinkedIn e outras plataformas"],
+  ["ai-seo","Marketing","Otimiza conteúdo para aparecer em respostas de IAs (ChatGPT, Perplexity, Google AI Overview)"],
+  ["analytics","Marketing","Configura, melhora e audita tracking e medição de marketing (GA4, GTM)"],
+  ["aso","Marketing","Audita e otimiza listagens na App Store e Google Play para visibilidade e downloads"],
+  ["churn-prevention","Marketing","Reduz churn e cria save offers, cancel flows e estratégias de dunning"],
+  ["co-marketing","Marketing","Identifica parceiros de co-marketing e brainstorma campanhas conjuntas e parcerias"],
+  ["cold-email","Marketing","Escreve emails frios B2B e sequências de follow-up que geram respostas"],
+  ["community-marketing","Marketing","Constrói e usa comunidades online para crescimento e fidelização de marca"],
+  ["competitor-profiling","Marketing","Pesquisa e perfila concorrentes de forma abrangente com scraping e dados de SEO"],
+  ["competitors","Marketing","Cria páginas de comparação e alternativas de concorrentes para SEO e vendas"],
+  ["content-strategy","Marketing","Planeja estratégia de conteúdo e identifica tópicos de alto impacto"],
+  ["copy-editing","Marketing","Edita, revisa e melhora copy de marketing existente por passes focados"],
+  ["copywriting","Marketing","Escreve copy para landing pages, homepages, pricing e páginas de produto"],
+  ["cro","Marketing","Analisa páginas e fornece recomendações acionáveis para melhorar conversão"],
+  ["customer-research","Marketing","Conduz, analisa e sintetiza pesquisa com clientes a partir de entrevistas e fontes online"],
+  ["directory-submissions","Marketing","Submete produtos a diretórios de SaaS, AI e review para backlinks e descoberta"],
+  ["emails","Marketing","Cria e otimiza sequências de email, drip campaigns e programas de lifecycle"],
+  ["free-tools","Marketing","Planeja, avalia e constrói ferramentas gratuitas para marketing e geração de leads"],
+  ["image","Marketing","Cria, gera, edita e otimiza imagens de marketing com IA e ferramentas de design"],
+  ["launch","Marketing","Planeja lançamentos de produto e estratégias de release com o framework ORB"],
+  ["lead-magnets","Marketing","Cria e otimiza lead magnets para captura de emails e geração de leads"],
+  ["marketing-ideas","Marketing","Gera ideias de marketing, inspiração e estratégias para crescimento de SaaS"],
+  ["marketing-plan","Marketing","Cria planos de marketing de 12 meses estruturados pelo framework AARRR"],
+  ["marketing-psychology","Marketing","Aplica princípios psicológicos e modelos mentais para melhorar a eficácia do marketing"],
+  ["offers","Marketing","Desenha e constrói ofertas incluindo framing de valor, bônus, garantias e escassez"],
+  ["onboarding","Marketing","Otimiza fluxos de onboarding pós-signup para ativar usuários e reduzir time-to-value"],
+  ["paywalls","Marketing","Cria e otimiza paywalls in-app, telas de upgrade e modais de upsell"],
+  ["popups","Marketing","Cria e otimiza popups, modais, overlays e banners para conversão"],
+  ["pricing","Marketing","Auxilia em decisões de pricing, packaging e estratégia de monetização"],
+  ["product-marketing","Marketing","Cria e mantém documentos de posicionamento e messaging de produto"],
+  ["programmatic-seo","Marketing","Cria páginas de SEO em escala usando templates e dados"],
+  ["prospecting","Marketing","Constrói, qualifica e prioriza listas de prospects para B2B SaaS e local businesses"],
+  ["public-relations","Marketing","Auxilia com earned media, cobertura de imprensa, outreach para jornalistas e mídia"],
+  ["referrals","Marketing","Cria, otimiza e analisa programas de indicação e estratégias de word-of-mouth"],
+  ["revops","Marketing","Desenha e otimiza sistemas de revenue operations conectando marketing, vendas e CS"],
+  ["sales-enablement","Marketing","Cria materiais de vendas: pitch decks, one-pagers e docs de objeções"],
+  ["schema","Marketing","Adiciona, corrige e otimiza structured data e schema markup para rich results"],
+  ["seo-audit","Marketing","Audita, revisa e diagnostica problemas de SEO em sites com recomendações"],
+  ["signup","Marketing","Otimiza fluxos de cadastro para reduzir fricção e aumentar taxa de conclusão"],
+  ["site-architecture","Marketing","Planeja hierarquia de páginas, navegação, estrutura de URLs e links internos"],
+  ["sms","Marketing","Planeja, constrói e otimiza campanhas de SMS/MMS e sequências de marketing"],
+  ["social","Marketing","Cria, agenda e otimiza conteúdo para redes sociais em todas as plataformas"],
+  ["video","Marketing","Cria e produz conteúdo de vídeo usando ferramentas de IA e frameworks programáticos"],
+  ["brandkit","Design","Gera identidade visual premium: logos, sistemas de identidade e apresentações em múltiplos estilos"],
+  ["design-taste-frontend","Design","Anti-slop para landing pages e redesigns — elimina padrões genéricos de IA e aplica design de agência premium"],
+  ["design-taste-frontend-v1","Design","Versão original v1 preservada para retrocompatibilidade com configurações base de variância e motion"],
+  ["full-output-enforcement","Design","Força geração de código completo — elimina truncamentos e placeholders tipo '// resto do código'"],
+  ["gpt-taste","Design","UX/UI avançado com GSAP, randomização Python, grids bento sem gaps e micro-interações perpétuas"],
+  ["high-end-visual-design","Design","Ensina fontes, espaçamentos, sombras, estruturas de card e animações de agência premium"],
+  ["image-to-code","Design","Gera imagem de referência de design por seção e implementa código fiel a ela"],
+  ["imagegen-frontend-mobile","Design","Conceitos premium de telas de app mobile com hierarquia forte e sistemas de design consistentes"],
+  ["imagegen-frontend-web","Design","Direção de imagem por seção para landing pages — evita boards genéricos comprimidos"],
+  ["industrial-brutalist-ui","Design","Interfaces brutais/industriais — dashboards e sites editoriais com estética de terminal militar"],
+  ["minimalist-ui","Design","Interfaces editoriais limpas com monocromático, tipografia contrastante e grids bento sem gradientes"],
+  ["redesign-existing-projects","Design","Faz upgrade de sites/apps existentes para padrão premium sem quebrar funcionalidade"],
+  ["stitch-design-taste","Design","Gera arquivos DESIGN.md para Google Stitch com sistema de design premium e tipografia estrita"],
+  ["humanizer","Escrita","Remove padrões de escrita IA: em dashes, listas com bold, linguagem inflada, frases genéricas (33 padrões)"],
+  ["claude-mem","Plugin","Memória persistente entre sessões: captura o que aconteceu e reinjecta contexto automaticamente"],
+  ["caveman","Plugin","Faz o agente responder de forma enxuta (estilo caveman) e corta ~75% dos tokens de saída"],
+  ["marketing:brand-review","Marketing","Revisa identidade, posicionamento e consistência de marca em materiais existentes"],
+  ["marketing:campaign-plan","Marketing","Planeja campanhas de marketing do início ao fim com objetivos, canais e métricas"],
+  ["marketing:competitive-brief","Marketing","Cria briefings de inteligência competitiva para equipes de marketing e produto"],
+  ["marketing:content-creation","Marketing","Cria conteúdo de marketing: artigos, posts, roteiros e materiais para qualquer canal"],
+  ["marketing:draft-content","Marketing","Redige rascunhos de conteúdo de marketing com base em briefings e diretrizes"],
+  ["marketing:email-sequence","Marketing","Escreve sequências de email automatizadas para nurturing, onboarding e vendas"],
+  ["marketing:performance-report","Marketing","Analisa métricas e gera relatórios de performance de campanhas e canais"],
+  ["marketing:seo-audit","Marketing","Audita SEO técnico e de conteúdo com recomendações priorizadas por impacto"],
+  ["design:accessibility-review","Design","Audita acessibilidade de interfaces (WCAG) e sugere correções com exemplos"],
+  ["design:design-critique","Design","Critica designs com feedback estruturado em usabilidade, hierarquia e consistência"],
+  ["design:design-handoff","Design","Prepara especificações de handoff design→dev com tokens, medidas e comportamentos"],
+  ["design:design-system","Design","Constrói e documenta sistemas de design: componentes, tokens e guias de uso"],
+  ["design:research-synthesis","Design","Sintetiza pesquisa de UX em insights acionáveis, personas e mapas de jornada"],
+  ["design:user-research","Design","Planeja e conduz pesquisa com usuários: roteiros de entrevista, surveys e análise"],
+  ["design:ux-copy","Design","Escreve microcopy, labels, empty states e textos de UI com foco em clareza"],
+  ["frontend-design:frontend-design","Design","Guia de design premium para frontend: tipografia, espaçamento, paleta e componentes"],
+  ["deep-research","Plugin","Pesquisa profunda multi-fonte: busca na web, verifica claims e sintetiza relatório citado"],
+  ["common-room:account-research","Plugin","Pesquisa contas-alvo no Common Room: sinais de engajamento e contexto de compra"],
+  ["common-room:call-prep","Plugin","Prepara briefing pré-call com histórico, contexto e ângulos de conversa"],
+  ["common-room:compose-outreach","Plugin","Redige mensagens de outreach personalizadas baseadas em sinais do Common Room"],
+  ["common-room:contact-research","Plugin","Pesquisa contatos: cargo, engajamento, interesses e último ponto de contato"],
+  ["common-room:generate-account-plan","Plugin","Gera plano de conta com estratégia de entrada, stakeholders e próximos passos"],
+  ["common-room:prospect","Plugin","Identifica e qualifica prospects a partir de sinais de comunidade e engajamento"],
+  ["common-room:weekly-brief","Plugin","Gera resumo semanal de movimentos da comunidade, sinais e oportunidades"],
+  ["common-room:weekly-prep-brief","Plugin","Prepara briefing semanal com top contas, conversas ativas e próximas ações"],
+  ["brand-voice:brand-voice-enforcement","Plugin","Aplica tom e voz de marca em qualquer conteúdo com base nas diretrizes configuradas"],
+  ["brand-voice:discover-brand","Plugin","Descobre e mapeia materiais de marca espalhados em plataformas conectadas"],
+  ["brand-voice:enforce-voice","Plugin","Revisa e corrige conteúdo para alinhar com a voz de marca definida"],
+  ["brand-voice:generate-guidelines","Plugin","Gera diretrizes de voz de marca a partir de exemplos de conteúdo e transcrições"],
+  ["brand-voice:guideline-generation","Plugin","Cria documento completo de guia de voz de marca a partir de amostras existentes"],
+  ["product-management:brainstorm","Plugin","Facilita brainstorming estruturado de produto com frameworks como RICE e oportunidade"],
+  ["product-management:competitive-brief","Plugin","Cria análise competitiva para produto: posicionamento, features e gaps"],
+  ["product-management:metrics-review","Plugin","Revisa e interpreta métricas de produto para decisões de roadmap"],
+  ["product-management:product-brainstorming","Plugin","Gera ideias de produto com base em dados de usuário, mercado e tendências"],
+  ["product-management:roadmap-update","Plugin","Atualiza e prioriza roadmap de produto com contexto de stakeholders e métricas"],
+  ["product-management:sprint-planning","Plugin","Planeja sprint com priorização de backlog, estimativas e critérios de aceitação"],
+  ["product-management:stakeholder-update","Plugin","Redige updates para stakeholders com status, bloqueios e próximos passos"],
+  ["product-management:synthesize-research","Plugin","Sintetiza pesquisa de usuário e dados em insights acionáveis para o produto"],
+  ["product-management:write-spec","Plugin","Escreve PRDs e especificações técnicas completas com requisitos e critérios de aceite"],
+  ["slack-by-salesforce:channel-digest","Plugin","Resume conversas de canal Slack: decisões, ações e pontos principais"],
+  ["slack-by-salesforce:draft-announcement","Plugin","Redige anúncios para canais Slack com tom adequado ao público e contexto"],
+  ["slack-by-salesforce:find-discussions","Plugin","Encontra discussões relevantes em canais Slack por tópico ou keyword"],
+  ["slack-by-salesforce:slack-messaging","Plugin","Ajuda a redigir mensagens Slack diretas, eficazes e no tom certo"],
+  ["slack-by-salesforce:slack-search","Plugin","Busca informações em histórico de mensagens e canais Slack"],
+  ["slack-by-salesforce:standup","Plugin","Formata e publica updates de standup em canais Slack"],
+  ["slack-by-salesforce:summarize-channel","Plugin","Resume atividade de canal Slack em período definido com highlights e ações"],
+  ["claude-mem:babysit","Plugin","Monitora projeto em background e alerta sobre problemas ou mudanças relevantes"],
+  ["claude-mem:design-is","Plugin","Captura e documenta decisões de design e arquitetura para referência futura"],
+  ["claude-mem:do","Plugin","Executa tarefas usando contexto de memória persistente acumulado"],
+  ["claude-mem:how-it-works","Plugin","Explica como o sistema de memória funciona e como acessar contexto salvo"],
+  ["claude-mem:knowledge-agent","Plugin","Agente de conhecimento que responde perguntas usando memória e contexto do projeto"],
+  ["claude-mem:learn-codebase","Plugin","Aprende a estrutura do codebase e salva mapa de arquitetura na memória"],
+  ["claude-mem:make-plan","Plugin","Cria plano estruturado de implementação e salva na memória para continuidade"],
+  ["claude-mem:mem-search","Plugin","Busca na memória persistente por contexto, decisões e histórico relevante"],
+  ["claude-mem:oh-my-issues","Plugin","Analisa issues e PRs abertos e gera resumo de prioridades e status"],
+  ["claude-mem:pathfinder","Plugin","Mapeia caminhos no codebase e encontra onde implementar mudanças"],
+  ["claude-mem:smart-explore","Plugin","Explora codebase com inteligência usando memória para evitar retrabalho"],
+  ["claude-mem:standup","Plugin","Gera update de standup baseado em atividade recente do projeto"],
+  ["claude-mem:timeline-report","Plugin","Gera relatório de timeline com marcos, decisões e progresso do projeto"],
+  ["claude-mem:version-bump","Plugin","Gerencia bump de versão com changelog e atualização de dependências"],
+  ["claude-mem:weekly-digests","Plugin","Gera digest semanal de atividade, decisões e progressos do projeto"],
+  ["claude-mem:wowerpoint","Plugin","Cria apresentações PowerPoint a partir de contexto e dados do projeto"],
+  ["legal:brief","Plugin","Produz briefings legais estruturados para reuniões, audiências e negociações"],
+  ["legal:compliance-check","Plugin","Verifica conformidade de documentos, processos e práticas com regulamentações"],
+  ["legal:legal-response","Plugin","Redige respostas jurídicas a notificações, cartas e comunicações legais"],
+  ["legal:legal-risk-assessment","Plugin","Avalia riscos jurídicos em contratos, decisões e operações de negócio"],
+  ["legal:meeting-briefing","Plugin","Prepara briefing pré-reunião com pontos legais críticos e questões a cobrir"],
+  ["legal:review-contract","Plugin","Revisa contratos identificando riscos, lacunas e cláusulas problemáticas"],
+  ["legal:signature-request","Plugin","Gerencia solicitações de assinatura com contexto e próximos passos"],
+  ["legal:triage-nda","Plugin","Triagem rápida de NDAs com análise de cláusulas-chave e riscos"],
+  ["legal:vendor-check","Plugin","Avalia vendors juridicamente: contratos, compliance e riscos de parceria"],
+  ["productivity:memory-management","Plugin","Gerencia e organiza memória persistente: limpeza, reorganização e priorização"],
+  ["productivity:start","Plugin","Inicia sessão de trabalho com contexto recuperado e plano do dia"],
+  ["productivity:task-management","Plugin","Gerencia tarefas, prioridades e próximas ações com contexto do projeto"],
+  ["productivity:update","Plugin","Atualiza status de tarefas, memórias e planos ao final de sessões"],
+  ["cowork-plugin-management:cowork-plugin-customizer","Plugin","Personaliza plugins do Cowork: comportamentos, prompts e configurações"],
+  ["cowork-plugin-management:create-cowork-plugin","Plugin","Cria novos plugins para o ecossistema Cowork com estrutura e documentação"],
+  ["customer-support:customer-escalation","Plugin","Gerencia escalações de suporte com contexto do cliente e plano de resolução"],
+  ["customer-support:customer-research","Plugin","Pesquisa perfil e histórico de cliente para suporte personalizado"],
+  ["customer-support:draft-response","Plugin","Redige respostas de suporte ao cliente: precisas, empáticas e acionáveis"],
+  ["customer-support:kb-article","Plugin","Cria artigos de base de conhecimento a partir de tickets e resoluções"],
+  ["customer-support:ticket-triage","Plugin","Triagem e categorização de tickets de suporte por urgência e tipo"],
+  ["small-business:business-pulse","Plugin","Diagnóstico rápido da saúde do negócio: receita, custos e oportunidades"],
+  ["small-business:call-list","Plugin","Cria lista de ligações priorizadas com contexto e objetivos para cada contato"],
+  ["small-business:canva-creator","Plugin","Cria diretrizes de design e prompts para materiais no Canva"],
+  ["small-business:cash-flow-snapshot","Plugin","Resume posição de caixa e fluxo financeiro com projeções de curto prazo"],
+  ["small-business:close-month","Plugin","Checklist e processo de fechamento mensal: contas, reconciliações e relatórios"],
+  ["small-business:content-strategy","Plugin","Estratégia de conteúdo para pequenos negócios: canais, frequência e temas"],
+  ["small-business:contract-review","Plugin","Revisão rápida de contratos para pequenos negócios: riscos e pontos de negociação"],
+  ["small-business:crm-cleanup","Plugin","Limpa e normaliza dados de CRM: duplicatas, campos vazios e registros obsoletos"],
+  ["small-business:crm-maintenance","Plugin","Mantém CRM atualizado com processos de higiene e atualização de dados"],
+  ["small-business:customer-pulse","Plugin","Pulso rápido de satisfação do cliente: NPS, feedbacks e alertas"],
+  ["small-business:customer-pulse-check","Plugin","Verifica saúde do relacionamento com clientes e identifica riscos de churn"],
+  ["small-business:friday-brief","Plugin","Resumo da semana: conquistas, pendências e prioridades para a semana seguinte"],
+  ["small-business:handle-complaint","Plugin","Trata reclamações de clientes com protocolo estruturado de resolução"],
+  ["small-business:invoice-chase","Plugin","Gerencia cobrança de faturas em atraso com mensagens e estratégia de follow-up"],
+  ["small-business:job-post-builder","Plugin","Cria vagas de emprego atrativas com descrição, requisitos e benefícios"],
+  ["small-business:lead-triage","Plugin","Qualifica e prioriza leads com critérios de fit e próxima ação"],
+  ["small-business:margin-analyzer","Plugin","Analisa margens por produto/serviço e identifica oportunidades de melhoria"],
+  ["small-business:monday-brief","Plugin","Planejamento da semana: prioridades, reuniões e metas do período"],
+  ["small-business:month-end-prep","Plugin","Prepara fechamento do mês: tarefas, documentos e relatórios pendentes"],
+  ["small-business:month-heads-up","Plugin","Alerta antecipado de obrigações e vencimentos do mês seguinte"],
+  ["small-business:plan-payroll","Plugin","Planejamento de folha de pagamento: cálculos, datas e obrigações trabalhistas"],
+  ["small-business:price-check","Plugin","Analisa pricing atual vs. mercado e sugere ajustes para competitividade"],
+  ["small-business:quarterly-review","Plugin","Revisão trimestral: metas, resultados, aprendizados e próximo trimestre"],
+  ["small-business:review-contract","Plugin","Revisa contratos de fornecedores e clientes com foco em riscos práticos"],
+  ["small-business:run-campaign","Plugin","Executa campanha de marketing para pequenos negócios do planejamento à análise"],
+  ["small-business:sales-brief","Plugin","Briefing de vendas: oportunidades ativas, próximas ações e forecast"],
+  ["small-business:smb-onboard","Plugin","Onboarding de novos clientes pequenos: checklist, comunicações e primeiros passos"],
+  ["small-business:smb-router","Plugin","Router inteligente para direcionar tarefas ao skill correto de pequenos negócios"],
+  ["small-business:tax-prep","Plugin","Prepara documentação e organiza dados para declaração de impostos"],
+  ["small-business:tax-season-organizer","Plugin","Organiza obrigações fiscais do período com calendário e documentos necessários"],
+  ["small-business:ticket-deflector","Plugin","Reduz volume de suporte com respostas automáticas e base de conhecimento"],
+  ["operations:capacity-plan","Plugin","Planeja capacidade operacional: recursos, demanda e gaps de entrega"],
+  ["operations:change-request","Plugin","Documenta e gerencia solicitações de mudança com análise de impacto"],
+  ["operations:compliance-tracking","Plugin","Rastreia conformidade regulatória com checklist e alertas de vencimento"],
+  ["operations:process-doc","Plugin","Documenta processos operacionais com fluxogramas, SOPs e guias de execução"],
+  ["operations:process-optimization","Plugin","Analisa e otimiza processos operacionais eliminando gargalos e desperdícios"],
+  ["operations:risk-assessment","Plugin","Avalia riscos operacionais com matriz de impacto e probabilidade"],
+  ["operations:runbook","Plugin","Cria runbooks de operações: passos, decisões e escalação para incidentes"],
+  ["operations:status-report","Plugin","Gera relatório de status operacional com métricas, incidentes e próximas ações"],
+  ["operations:vendor-review","Plugin","Avalia performance de vendors com scorecard e recomendações de contrato"],
+  ["human-resources:comp-analysis","Plugin","Analisa compensação vs. mercado e sugere ajustes para retenção e equidade"],
+  ["human-resources:draft-offer","Plugin","Redige cartas de oferta com pacote de compensação e próximos passos"],
+  ["human-resources:interview-prep","Plugin","Prepara roteiro de entrevista com perguntas comportamentais e técnicas"],
+  ["human-resources:onboarding","Plugin","Cria plano de onboarding para novos colaboradores com milestones e atividades"],
+  ["human-resources:org-planning","Plugin","Planeja estrutura organizacional: papéis, responsabilidades e crescimento"],
+  ["human-resources:people-report","Plugin","Gera relatório de pessoas: headcount, turnover, engajamento e tendências"],
+  ["human-resources:performance-review","Plugin","Estrutura avaliações de desempenho com critérios, feedbacks e metas"],
+  ["human-resources:policy-lookup","Plugin","Busca e interpreta políticas de RH para responder dúvidas de colaboradores"],
+  ["human-resources:recruiting-pipeline","Plugin","Gerencia pipeline de recrutamento: funil, status de candidatos e próximas ações"],
+  ["caveman:cavecrew","Plugin","Agente especializado do Caveman: executa tarefas específicas no modo ultra-compacto"],
+  ["caveman:caveman","Plugin","Ativa modo de resposta enxuto (estilo caveman) — corta artigos, filler e redundância"],
+  ["caveman:caveman-commit","Plugin","Gera mensagens de commit no estilo caveman: direto, sem fluff"],
+  ["caveman:caveman-compress","Plugin","Comprime output extenso em versão caveman (~75% menos tokens)"],
+  ["caveman:caveman-help","Plugin","Mostra comandos e modos disponíveis do plugin caveman"],
+  ["caveman:caveman-review","Plugin","Revisa código no estilo caveman: um achado por linha, sem elogios"],
+  ["caveman:caveman-stats","Plugin","Mostra estatísticas de compressão e economia de tokens do caveman"],
+  ["engineering:architecture","Plugin","Desenha e documenta arquitetura de sistemas com diagramas e decisões técnicas"],
+  ["engineering:code-review","Plugin","Revisa código por bugs, performance e padrões — findings diretos com severity"],
+  ["engineering:debug","Plugin","Debug sistemático: reprodução, hipóteses, isolamento e fix"],
+  ["engineering:deploy-checklist","Plugin","Checklist de deploy: validações pré/pós, rollback e monitoramento"],
+  ["engineering:documentation","Plugin","Escreve documentação técnica: ADRs, READMEs, guias de API e tutoriais"],
+  ["engineering:incident-response","Plugin","Gerencia incidentes: triagem, comunicação, resolução e postmortem"],
+  ["engineering:standup","Plugin","Formata update de standup técnico com progresso, bloqueios e plano"],
+  ["engineering:system-design","Plugin","Conduz sessões de system design com trade-offs, escalabilidade e componentes"],
+  ["engineering:tech-debt","Plugin","Mapeia e prioriza débito técnico com impacto e esforço estimado"],
+  ["engineering:testing-strategy","Plugin","Define estratégia de testes: unitários, integração, E2E e cobertura crítica"],
+  ["finance:audit-support","Plugin","Prepara documentação e evidências para auditorias internas e externas"],
+  ["finance:close-management","Plugin","Gerencia fechamento contábil: checklist, reconciliações e deadlines"],
+  ["finance:financial-statements","Plugin","Prepara e analisa demonstrações financeiras: BP, DRE e DFC"],
+  ["finance:journal-entry","Plugin","Lança entradas contábeis com validação de débito/crédito e contas"],
+  ["finance:journal-entry-prep","Plugin","Prepara lançamentos contábeis a partir de documentos e extratos"],
+  ["finance:reconciliation","Plugin","Reconcilia contas e extratos bancários identificando divergências"],
+  ["finance:sox-testing","Plugin","Executa testes de controles SOX com evidências e documentação"],
+  ["finance:variance-analysis","Plugin","Analisa variações orçamentárias explicando desvios e impacto"],
+  ["apollo:enrich-lead","Plugin","Enriquece dados de leads no Apollo: contatos, empresa e sinais de intenção"],
+  ["apollo:prospect","Plugin","Busca e qualifica prospects no Apollo com filtros de ICP e scoring"],
+  ["apollo:sequence-load","Plugin","Carrega e configura sequências de outreach no Apollo com steps e mensagens"],
+  ["sales:account-research","Plugin","Pesquisa contas-alvo: negócio, stakeholders, triggers e ângulos de abordagem"],
+  ["sales:call-prep","Plugin","Prepara briefing de call: contexto, objetivos, perguntas e material de apoio"],
+  ["sales:call-summary","Plugin","Resume call de vendas com próximas ações, comprometimentos e status"],
+  ["sales:competitive-intelligence","Plugin","Levanta inteligência competitiva para negociações e propostas"],
+  ["sales:create-an-asset","Plugin","Cria ativos de vendas: one-pagers, decks e materiais de proposta"],
+  ["sales:daily-briefing","Plugin","Briefing diário de vendas: pipeline, follow-ups urgentes e oportunidades"],
+  ["sales:draft-outreach","Plugin","Redige mensagens de outreach personalizadas para prospecção"],
+  ["sales:forecast","Plugin","Gera forecast de vendas com análise de pipeline e probabilidade de fechamento"],
+  ["sales:pipeline-review","Plugin","Revisa pipeline de vendas: estágio, saúde e próximas ações por oportunidade"],
+  ["data:analyze","Plugin","Analisa datasets identificando padrões, anomalias e insights relevantes"],
+  ["data:build-dashboard","Plugin","Constrói dashboards de dados com métricas, filtros e visualizações"],
+  ["data:create-viz","Plugin","Cria visualizações de dados: gráficos, tabelas e charts para qualquer contexto"],
+  ["data:data-context-extractor","Plugin","Extrai e estrutura contexto de datasets para análise e reporting"],
+  ["data:data-visualization","Plugin","Produz visualizações avançadas com foco em clareza e storytelling"],
+  ["data:explore-data","Plugin","Explora dados com análise exploratória, distribuições e correlações"],
+  ["data:sql-queries","Plugin","Escreve, otimiza e explica queries SQL para análise e extração de dados"],
+  ["data:statistical-analysis","Plugin","Aplica análise estatística: testes de hipótese, regressão e métricas"],
+  ["data:validate-data","Plugin","Valida qualidade de dados: completude, consistência e duplicatas"],
+  ["data:write-query","Plugin","Escreve queries eficientes para bancos de dados SQL e NoSQL"],
+  ["enterprise-search:digest","Plugin","Gera digest de busca enterprise: resumo de fontes, highlights e ações"],
+  ["enterprise-search:knowledge-synthesis","Plugin","Sintetiza conhecimento de múltiplas fontes em resposta estruturada"],
+  ["enterprise-search:search","Plugin","Busca informações em fontes enterprise conectadas com relevância e contexto"],
+  ["enterprise-search:search-strategy","Plugin","Define estratégia de busca: fontes, termos e processo de verificação"],
+  ["enterprise-search:source-management","Plugin","Gerencia fontes de busca: prioridade, confiabilidade e cobertura"],
+  ["anthropic-skills:algorithmic-art","Nativa","Cria arte algorítmica e generativa com código e criatividade computacional"],
+  ["anthropic-skills:brand-guidelines","Nativa","Cria e documenta diretrizes de marca completas com voz, visual e exemplos"],
+  ["anthropic-skills:canvas-design","Nativa","Design de canvas e artefatos visuais para apresentações e workshops"],
+  ["anthropic-skills:consolidate-memory","Nativa","Consolida e reorganiza memórias persistentes eliminando redundâncias"],
+  ["anthropic-skills:doc-coauthoring","Nativa","Co-autoria de documentos com estrutura, revisão e colaboração iterativa"],
+  ["anthropic-skills:docx","Nativa","Cria e edita documentos Word (.docx) com formatação profissional"],
+  ["anthropic-skills:internal-comms","Nativa","Redige comunicações internas: anúncios, updates e mensagens para equipes"],
+  ["anthropic-skills:mcp-builder","Nativa","Constrói servidores MCP com tools, schemas e integração com Claude"],
+  ["anthropic-skills:pdf","Nativa","Lê, analisa e extrai informações de arquivos PDF"],
+  ["anthropic-skills:pptx","Nativa","Cria apresentações PowerPoint profissionais com estrutura e design"],
+  ["anthropic-skills:schedule","Nativa","Cria e gerencia tarefas agendadas e rotinas automáticas no Claude Code"],
+  ["anthropic-skills:setup-cowork","Nativa","Configura ambiente Cowork com plugins, skills e integrações"],
+  ["anthropic-skills:skill-creator","Nativa","Cria novos skills para Claude Code com estrutura, trigger e instruções"],
+  ["anthropic-skills:slack-gif-creator","Nativa","Cria GIFs animados para Slack a partir de prompts e contexto"],
+  ["anthropic-skills:theme-factory","Nativa","Cria e personaliza temas visuais para interfaces e componentes"],
+  ["anthropic-skills:web-artifacts-builder","Nativa","Constrói artefatos web interativos: widgets, apps e demos em HTML/JS"],
+  ["anthropic-skills:xlsx","Nativa","Cria e manipula planilhas Excel (.xlsx) com dados, fórmulas e formatação"],
+  ["superpowers:brainstorming","Nativa","Facilita brainstorming estruturado com divergência, convergência e critérios"],
+  ["superpowers:dispatching-parallel-agents","Nativa","Despacha múltiplos agentes paralelos para tarefas independentes"],
+  ["superpowers:executing-plans","Nativa","Executa planos de implementação seguindo sequência e verificando cada etapa"],
+  ["superpowers:finishing-a-development-branch","Nativa","Finaliza branch de desenvolvimento: testes, review e preparação para merge"],
+  ["superpowers:receiving-code-review","Nativa","Processa feedback de code review com aplicação sistemática das sugestões"],
+  ["superpowers:requesting-code-review","Nativa","Prepara e solicita code review com contexto, diff e pontos de atenção"],
+  ["superpowers:subagent-driven-development","Nativa","Desenvolvimento orientado por subagentes: decompõe e delega tarefas"],
+  ["superpowers:systematic-debugging","Nativa","Debug sistemático com hipóteses, isolamento e verificação de correção"],
+  ["superpowers:test-driven-development","Nativa","TDD completo: testes primeiro, implementação mínima e refatoração"],
+  ["superpowers:using-git-worktrees","Nativa","Usa git worktrees para trabalho paralelo em múltiplos branches"],
+  ["superpowers:using-superpowers","Nativa","Guia de como usar skills e superpowers disponíveis no Claude Code"],
+  ["superpowers:verification-before-completion","Nativa","Verifica que implementação funciona antes de declarar tarefa concluída"],
+  ["superpowers:writing-plans","Nativa","Escreve planos de implementação estruturados com passos e critérios"],
+  ["superpowers:writing-skills","Nativa","Cria e documenta skills para o ecossistema Claude Code"],
+  ["update-config","Nativa","Atualiza configurações do Claude Code: settings.json, permissões, hooks e env vars"],
+  ["keybindings-help","Nativa","Personaliza atalhos de teclado no ~/.claude/keybindings.json"],
+  ["verify","Nativa","Verifica que uma mudança de código funciona rodando o app e observando comportamento"],
+  ["code-review","Nativa","Revisa diff por bugs, simplificações e eficiência com nível de esforço configurável"],
+  ["simplify","Nativa","Revisa código para reuso, simplificação e eficiência — aplica cleanups automaticamente"],
+  ["fewer-permission-prompts","Nativa","Adiciona permissões de allowlist para reduzir prompts de autorização"],
+  ["loop","Nativa","Executa prompt ou skill em intervalo recorrente com auto-pacing"],
+  ["schedule","Nativa","Cria e gerencia agentes cloud agendados (routines) com cron schedule"],
+  ["claude-api","Nativa","Referência da API Claude/Anthropic: modelos, pricing, streaming, tool use e MCP"],
+  ["run","Nativa","Inicia e conduz o app do projeto para verificar mudanças funcionando"],
+  ["init","Nativa","Inicializa projeto com configurações e estrutura básica do Claude Code"],
+  ["review","Nativa","Revisa branch ou PR com análise de qualidade e sugestões"],
+  ["security-review","Nativa","Revisa código por vulnerabilidades de segurança e boas práticas"],
+];
+
+const cmdOverride = {
+  "claude-mem": "npx claude-mem start",
+  "caveman": "/caveman",
+};
+
+const cats = ["Todas", "Marketing", "Design", "Escrita", "Plugin", "Nativa"];
+let activeCat = "Todas";
+
+function buildFilters() {
+  const wrap = document.getElementById('filters');
+  cats.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'pill' + (cat === activeCat ? ' active' : '');
+    btn.textContent = cat;
+    btn.onclick = () => {
+      activeCat = cat;
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      filter();
+    };
+    wrap.appendChild(btn);
+  });
+}
+
+function copyCmd(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1800);
+  });
+}
+
+function filter() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const cat = activeCat === 'Todas' ? '' : activeCat;
+  const filtered = skills.filter(([name, c, desc]) => {
+    const matchQ = !q || name.includes(q) || desc.toLowerCase().includes(q);
+    const matchC = !cat || c === cat;
+    return matchQ && matchC;
+  });
+  renderGrid(filtered);
+}
+
+function renderGrid(data) {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+
+  if (!data.length) {
+    grid.innerHTML = '<div class="empty">Nenhuma skill encontrada.</div>';
+    document.getElementById('countLabel').textContent = '0 skills';
+    return;
+  }
+
+  const groups = {};
+  data.forEach(s => {
+    if (!groups[s[1]]) groups[s[1]] = [];
+    groups[s[1]].push(s);
+  });
+
+  const order = ['Marketing', 'Design', 'Escrita', 'Plugin', 'Nativa'];
+  order.forEach(cat => {
+    if (!groups[cat]) return;
+    const label = document.createElement('div');
+    label.className = 'section-label';
+    label.textContent = cat + ' · ' + groups[cat].length;
+    grid.appendChild(label);
+
+    groups[cat].forEach(([name, cat, desc]) => {
+      const cmd = cmdOverride[name] || '/' + name;
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-top">
+          <span class="card-name">${name}</span>
+          <span class="cat-badge cat-${cat}">${cat}</span>
+        </div>
+        <div class="cmd" onclick="copyCmd('${cmd}')" title="Clique para copiar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          ${cmd}
+        </div>
+        <div class="desc">${desc}</div>
+      `;
+      grid.appendChild(card);
+    });
+  });
+
+  document.getElementById('countLabel').textContent = data.length + ' skills';
+}
+
+buildFilters();
+filter();
+</script>
+</body>
+</html>

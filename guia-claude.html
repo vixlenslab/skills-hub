@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Claude — sem enrolação</title>
+<script>(function(){var t=localStorage.getItem('vix-theme');if(t==='light')document.documentElement.classList.add('light');else if(!t&&window.matchMedia('(prefers-color-scheme:light)').matches)document.documentElement.classList.add('light');})()</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0f0f0f;
+  --bg2: #181818;
+  --bg3: #222;
+  --bg4: #2a2a2a;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text: #f5f5f5;
+  --text2: #d0d0d0;
+  --text3: #8a8a8a;
+  --accent: #f97316;
+  --accent2: rgba(249,115,22,0.12);
+  --blue: #60a5fa;
+  --blue2: rgba(96,165,250,0.1);
+  --green: #4ade80;
+  --green2: rgba(74,222,128,0.1);
+  --purple: #a78bfa;
+  --purple2: rgba(167,139,250,0.1);
+  --yellow: #fbbf24;
+  --yellow2: rgba(251,191,36,0.1);
+  --red: #f87171;
+  --red2: rgba(248,113,113,0.1);
+  --mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  --sidebar: 260px;
+}
+
+:root.light {
+  --bg: #f8f8f8;
+  --bg2: #efefef;
+  --bg3: #e4e4e4;
+  --bg4: #d8d8d8;
+  --border: rgba(0,0,0,0.07);
+  --border2: rgba(0,0,0,0.13);
+  --text: #111;
+  --text2: #444;
+  --text3: #777;
+  --accent: #ea6d0e;
+  --accent2: rgba(234,109,14,0.1);
+  --blue: #1d4ed8;
+  --blue2: rgba(29,78,216,0.08);
+  --green: #15803d;
+  --green2: rgba(21,128,61,0.08);
+  --purple: #6d28d9;
+  --purple2: rgba(109,40,217,0.08);
+  --yellow: #92400e;
+  --yellow2: rgba(146,64,14,0.08);
+  --red: #b91c1c;
+  --red2: rgba(185,28,28,0.08);
+}
+
+html.light h2,
+html.light h3 { color: var(--text); }
+html.light .hero h1 { color: var(--text); }
+html.light .tip  { color: var(--green);  } html.light .tip strong  { color: var(--green);  }
+html.light .warn { color: var(--yellow); } html.light .warn strong { color: var(--yellow); }
+html.light .info { color: var(--blue);   } html.light .info strong { color: var(--blue);   }
+html.light .danger { color: var(--red);  } html.light .danger strong { color: var(--red);  }
+html.light .fun  { color: var(--purple); } html.light .fun strong  { color: var(--purple); }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+nav {
+  width: var(--sidebar);
+  min-height: 100vh;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: 0; left: 0;
+  overflow-y: auto;
+  padding: 0 0 40px;
+  z-index: 10;
+}
+
+.nav-header {
+  padding: 16px 16px 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+
+.theme-toggle {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 7px;
+  color: var(--text2);
+  cursor: pointer;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s; flex-shrink: 0; padding: 0;
+}
+.theme-toggle:hover { color: var(--text); border-color: var(--accent); }
+.theme-toggle svg { width: 14px; height: 14px; }
+
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo .icon {
+  width: 32px; height: 32px;
+  background: var(--accent);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: #fff; font-weight: 700;
+}
+.nav-logo span { font-size: 14px; font-weight: 600; letter-spacing: -0.2px; }
+.nav-logo small { display: block; font-size: 11px; color: var(--text2); font-weight: 400; }
+
+.nav-section {
+  padding: 8px 16px 2px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text3); margin-top: 8px;
+}
+
+nav a {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 16px; font-size: 13px;
+  color: var(--text2); text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 0.12s;
+}
+nav a:hover { color: var(--text); background: var(--bg3); }
+nav a.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent2); }
+nav a .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+main {
+  margin-left: var(--sidebar);
+  flex: 1; max-width: 860px;
+  padding: 48px 48px 80px;
+}
+
+section { margin-bottom: 72px; scroll-margin-top: 24px; }
+
+.section-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px; margin-bottom: 12px;
+}
+.tag-fundamentos { background: var(--purple2); color: var(--purple); }
+.tag-chat { background: var(--blue2); color: var(--blue); }
+.tag-code { background: var(--accent2); color: var(--accent); }
+.tag-skills { background: var(--green2); color: var(--green); }
+.tag-plugins { background: var(--yellow2); color: var(--yellow); }
+.tag-hooks { background: var(--red2); color: var(--red); }
+.tag-prompting { background: var(--purple2); color: var(--purple); }
+.tag-workflows { background: var(--blue2); color: var(--blue); }
+
+h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.6px; margin-bottom: 8px; color: #fff; }
+.section-subtitle { font-size: 15px; color: var(--text2); margin-bottom: 28px; line-height: 1.6; }
+h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 32px 0 12px; color: #fff; }
+h4 { font-size: 13px; font-weight: 700; margin: 20px 0 8px; color: var(--text); text-transform: uppercase; letter-spacing: 0.06em; }
+
+p { margin-bottom: 14px; color: var(--text2); }
+strong { color: var(--text); font-weight: 600; }
+em { color: var(--text); font-style: italic; }
+
+ul, ol { padding-left: 20px; margin-bottom: 14px; }
+li { color: var(--text2); margin-bottom: 6px; line-height: 1.6; }
+li strong { color: var(--text); }
+
+code {
+  font-family: var(--mono); font-size: 13px;
+  background: var(--bg3); color: var(--accent);
+  padding: 2px 6px; border-radius: 5px; border: 1px solid var(--border);
+}
+
+pre {
+  background: var(--bg2); border: 1px solid var(--border2);
+  border-radius: 10px; padding: 16px 20px;
+  overflow-x: auto; margin: 12px 0 20px; position: relative;
+}
+pre code { background: none; border: none; padding: 0; color: var(--text); font-size: 13px; line-height: 1.7; }
+
+.copy-btn {
+  position: absolute; top: 10px; right: 10px;
+  background: var(--bg3); border: 1px solid var(--border2);
+  color: var(--text2); font-size: 11px; font-weight: 500;
+  padding: 4px 10px; border-radius: 5px;
+  cursor: pointer; transition: all 0.15s; font-family: var(--sans);
+}
+.copy-btn:hover { background: var(--bg4); color: var(--text); }
+
+.tip, .warn, .info, .danger, .fun {
+  border-radius: 10px; padding: 14px 18px;
+  margin: 16px 0; font-size: 14px; border-left: 3px solid; line-height: 1.6;
+}
+.tip { background: var(--green2); border-color: var(--green); color: #c9ffd1; }
+.tip strong { color: var(--green); }
+.warn { background: var(--yellow2); border-color: var(--yellow); color: #fef3c7; }
+.warn strong { color: var(--yellow); }
+.info { background: var(--blue2); border-color: var(--blue); color: #dbeafe; }
+.info strong { color: var(--blue); }
+.danger { background: var(--red2); border-color: var(--red); color: #fee2e2; }
+.danger strong { color: var(--red); }
+.fun { background: var(--purple2); border-color: var(--purple); color: #e9d5ff; }
+.fun strong { color: var(--purple); }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 16px 0 24px; }
+th {
+  text-align: left; padding: 8px 14px;
+  background: var(--bg2); color: var(--text2);
+  font-weight: 600; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
+  border-bottom: 1px solid var(--border2);
+}
+td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+tr:hover td { background: var(--bg2); }
+td code { font-size: 12px; }
+td strong { color: var(--text); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin: 16px 0; }
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.card-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.card-body { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+.level {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  padding: 2px 8px; border-radius: 20px;
+  text-transform: uppercase; letter-spacing: 0.06em; margin-left: 8px; vertical-align: middle;
+}
+.level-basic { background: var(--green2); color: var(--green); }
+.level-inter { background: var(--yellow2); color: var(--yellow); }
+.level-adv { background: var(--red2); color: var(--red); }
+
+.kbd {
+  display: inline-block; background: var(--bg3); border: 1px solid var(--border2);
+  font-family: var(--mono); font-size: 11px; color: var(--text);
+  padding: 2px 7px; border-radius: 5px; box-shadow: 0 1px 0 var(--border2);
+}
+
+hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+.big-quote {
+  border-left: 3px solid var(--accent);
+  padding: 12px 20px; margin: 20px 0;
+  background: var(--accent2); border-radius: 0 10px 10px 0;
+  font-size: 16px; color: var(--text); font-style: italic;
+}
+
+.versus {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0;
+}
+.versus-bad { background: var(--red2); border: 1px solid var(--red); border-radius: 10px; padding: 14px; }
+.versus-good { background: var(--green2); border: 1px solid var(--green); border-radius: 10px; padding: 14px; }
+.versus-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.versus-bad .versus-label { color: var(--red); }
+.versus-good .versus-label { color: var(--green); }
+.versus-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+.hero {
+  border: 1px solid var(--border2); border-radius: 14px;
+  padding: 36px; margin-bottom: 52px;
+  background: var(--bg2);
+}
+.hero h1 { font-size: 36px; font-weight: 900; letter-spacing: -1.5px; color: #fff; margin-bottom: 12px; }
+.hero h1 span { color: var(--accent); }
+.hero p { font-size: 16px; color: var(--text2); margin-bottom: 0; }
+
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--accent); color: #fff;
+  padding: 10px 18px; border-radius: 8px;
+  font-size: 13px; font-weight: 500;
+  opacity: 0; transform: translateY(8px);
+  transition: all 0.2s; pointer-events: none; z-index: 100;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* mobile header + hamburger */
+.mobile-header {
+  display: none;
+  position: sticky; top: 0; z-index: 20;
+  background: var(--bg2); border-bottom: 1px solid var(--border);
+  padding: 12px 20px; align-items: center; justify-content: space-between;
+}
+.mobile-logo { display: flex; align-items: center; gap: 10px; }
+.mobile-logo .icon {
+  width: 30px; height: 30px; background: var(--accent);
+  border-radius: 7px; display: flex; align-items: center;
+  justify-content: center; font-size: 15px; color: #fff; font-weight: 700;
+}
+.mobile-logo span { font-size: 15px; font-weight: 600; letter-spacing: -0.2px; }
+
+.hamburger {
+  background: none; border: 1px solid var(--border2); cursor: pointer;
+  padding: 8px 10px; border-radius: 7px;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.hamburger span {
+  display: block; width: 20px; height: 2px;
+  background: var(--text); border-radius: 2px; transition: all 0.25s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55); z-index: 15;
+  opacity: 0; transition: opacity 0.25s;
+}
+.nav-overlay.active { display: block; opacity: 1; }
+
+@media (max-width: 900px) {
+  body { display: block; }
+
+  .mobile-header { display: flex; }
+
+  nav {
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 16;
+  }
+  nav.open { transform: translateX(0); }
+
+  main { margin-left: 0; padding: 24px 20px 60px; }
+
+  .versus { grid-template-columns: 1fr; }
+
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  .hero { padding: 22px; margin-bottom: 36px; }
+  .hero h1 { font-size: 26px; letter-spacing: -0.8px; }
+  .hero p { font-size: 14px; }
+
+  h2 { font-size: 22px; letter-spacing: -0.4px; }
+  h3 { font-size: 16px; margin: 24px 0 10px; }
+
+  section { margin-bottom: 52px; }
+
+  .cards { grid-template-columns: 1fr; }
+
+  pre { padding-top: 44px; }
+}
+
+@media (max-width: 480px) {
+  main { padding: 20px 16px 60px; }
+  .mobile-header { padding: 10px 16px; }
+  .hero { padding: 18px; }
+  .hero h1 { font-size: 22px; }
+  h2 { font-size: 20px; }
+  pre code { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-header" id="mobileHeader">
+  <div class="mobile-logo">
+    <div class="icon">⚡</div>
+    <span>Guia Claude</span>
+  </div>
+  <div style="display:flex;gap:6px;align-items:center">
+    <button class="theme-toggle" title="Alternar tema" aria-label="Alternar tema"></button>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav id="sidebar">
+  <div class="nav-header">
+    <div class="nav-logo">
+      <div class="icon">⚡</div>
+      <div>
+        <span>Guia Claude</span>
+        <small>do iniciante ao boss</small>
+      </div>
+    </div>
+    <button class="theme-toggle" title="Alternar tema" aria-label="Alternar tema"></button>
+  </div>
+
+  <div class="nav-section">Ponto de partida</div>
+  <a href="#intro"><span class="dot" style="background:#a78bfa"></span>O mapa do tesouro</a>
+  <a href="#mindset"><span class="dot" style="background:#a78bfa"></span>Como Claude pensa</a>
+
+  <div class="nav-section">As 3 formas do Claude</div>
+  <a href="#chat"><span class="dot" style="background:#60a5fa"></span>Chat — o básico</a>
+  <a href="#code"><span class="dot" style="background:#f97316"></span>Code — o poderoso</a>
+  <a href="#cowork"><span class="dot" style="background:#4ade80"></span>Cowork — o colaborativo</a>
+
+  <div class="nav-section">Superpoderes</div>
+  <a href="#skills"><span class="dot" style="background:#4ade80"></span>Skills</a>
+  <a href="#plugins"><span class="dot" style="background:#fbbf24"></span>Plugins</a>
+  <a href="#mcp"><span class="dot" style="background:#f87171"></span>MCP Servers</a>
+  <a href="#hooks"><span class="dot" style="background:#f87171"></span>Hooks</a>
+  <a href="#memory"><span class="dot" style="background:#a78bfa"></span>Memória</a>
+
+  <div class="nav-section">Nível avançado</div>
+  <a href="#prompting"><span class="dot" style="background:#a78bfa"></span>Arte do prompting</a>
+  <a href="#claudemd"><span class="dot" style="background:#f97316"></span>CLAUDE.md</a>
+  <a href="#agents"><span class="dot" style="background:#60a5fa"></span>Exército de Claudes</a>
+  <a href="#workflows"><span class="dot" style="background:#60a5fa"></span>Fluxos na prática</a>
+
+  <div class="nav-section">Cola rápida</div>
+  <a href="#shortcuts"><span class="dot" style="background:#fbbf24"></span>Atalhos</a>
+  <a href="#commands"><span class="dot" style="background:#fbbf24"></span>Comandos slash</a>
+</nav>
+
+<main>
+
+<div class="hero">
+  <h1>Domina o <span>Claude</span> de vez</h1>
+  <p>Você tá usando 10% do que dá pra fazer. Esse guia muda isso. Sem blá-blá, sem papo acadêmico — só o que funciona na prática, na ordem certa pra aprender.</p>
+</div>
+
+<!-- MAPA DO TESOURO -->
+<section id="intro">
+  <div class="section-tag tag-fundamentos">Ponto de partida</div>
+  <h2>O mapa do tesouro</h2>
+  <p class="section-subtitle">Antes de sair usando tudo, entende o ecossistema. São três mundos diferentes com poderes diferentes.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-title" style="color:var(--blue)">💬 Claude Chat</div>
+      <div class="card-body">O claude.ai que você já conhece. Conversa, análise, criação de conteúdo, pesquisa. Simples. Mas tem uns segredos (Projetos, Artifacts) que a maioria ignora.</div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--accent)">⌨️ Claude Code</div>
+      <div class="card-body">Claude que vive no seu terminal. Lê os seus arquivos, edita código, roda comandos. É tipo contratar um dev que trabalha na sua máquina. Assustador? Só no começo.</div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--green)">🤝 Cowork</div>
+      <div class="card-body">Claude Code configurado para trabalho em equipe e fluxos de negócio. Agents com papéis, skills de time, contexto compartilhado. Pensa como um escritório inteiro de IAs.</div>
+    </div>
+  </div>
+
+  <div class="big-quote">A maioria das pessoas usa só o Chat. Quem usa o Code + Skills + Plugins tá jogando num jogo completamente diferente.</div>
+
+  <h3>Qual usar quando?</h3>
+  <table>
+    <thead><tr><th>Situação</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>Escrever copy, email, conteúdo, pesquisar</td><td><strong>Chat</strong></td></tr>
+      <tr><td>Mexer em arquivos, código, git, automações</td><td><strong>Code</strong></td></tr>
+      <tr><td>Projetos longos com contexto persistente</td><td><strong>Chat (com Projetos)</strong></td></tr>
+      <tr><td>Tasks recorrentes especializadas</td><td><strong>Code + Skills</strong></td></tr>
+      <tr><td>Trabalhar em equipe, múltiplas áreas</td><td><strong>Cowork</strong></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- COMO CLAUDE PENSA -->
+<section id="mindset">
+  <div class="section-tag tag-fundamentos">Fundamentos</div>
+  <h2>Como Claude pensa</h2>
+  <p class="section-subtitle">Entender isso é o maior unlock que existe. A maioria nunca para pra pensar nisso.</p>
+
+  <h3>Claude é literalmente amnésico por padrão</h3>
+  <p>Cada nova conversa começa do <strong>zero absoluto</strong>. Claude não lembra que você existe. Não lembra do seu negócio. Não lembra que você prefere respostas curtas. Nada. Por isso você fica reexplicando as mesmas coisas toda hora.</p>
+  <p>A solução? <strong>CLAUDE.md</strong>, <strong>Projetos</strong> e <strong>plugins de memória</strong>. Veremos cada um. Mas por enquanto: a razão das suas respostas serem genéricas é que Claude não te conhece.</p>
+
+  <h3>Contexto = qualidade da resposta</h3>
+  <p>Claude não é mágico. Ele responde baseado no que você deu pra ele. Pouco contexto = resposta genérica. Muito contexto relevante = resposta cirúrgica.</p>
+
+  <div class="versus">
+    <div class="versus-bad">
+      <div class="versus-label">❌ Pergunta sem contexto</div>
+      <div class="versus-text">"Escreve uma copy pra mim"<br><br>Claude vai escrever algo genérico que poderia ser qualquer coisa pra qualquer empresa.</div>
+    </div>
+    <div class="versus-good">
+      <div class="versus-label">✅ Pergunta com contexto</div>
+      <div class="versus-text">"Sou CMO de uma startup de software pra óticas. Público: oculistas pequenos. Produto: gestão de estoque. Escreve headline pra landing page."<br><br>Agora sim.</div>
+    </div>
+  </div>
+
+  <h3>As camadas de instrução (quem manda em quem)</h3>
+  <p>Claude segue instruções em ordem de prioridade. Da mais fraca pra mais forte:</p>
+  <table>
+    <thead><tr><th>Camada</th><th>Onde fica</th><th>Quando vale</th></tr></thead>
+    <tbody>
+      <tr><td>Personalidade base da Anthropic</td><td>Embutida no modelo</td><td>Sempre (mas pode ser sobrescrita)</td></tr>
+      <tr><td>CLAUDE.md global</td><td><code>~/.claude/CLAUDE.md</code></td><td>Em todos os projetos na sua máquina</td></tr>
+      <tr><td>CLAUDE.md do projeto</td><td><code>./CLAUDE.md</code></td><td>Só nesse projeto</td></tr>
+      <tr><td>Skill carregada</td><td><code>.agents/skills/</code></td><td>Quando você chama <code>/skill</code></td></tr>
+      <tr><td>Sua mensagem agora</td><td>A conversa</td><td>Prioridade máxima</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>TL;DR do mindset:</strong> Claude é um estagiário brilhante com amnésia total. Quanto mais contexto você der, mais ele brilha. Sua missão é criar sistemas que guardem esse contexto automaticamente.
+  </div>
+</section>
+
+<!-- CHAT -->
+<section id="chat">
+  <div class="section-tag tag-chat">Chat</div>
+  <h2>Claude Chat <span class="level level-basic">Básico</span></h2>
+  <p class="section-subtitle">claude.ai — você já usa, mas provavelmente não usa os recursos que realmente importam.</p>
+
+  <h3>Projetos — o recurso que muda tudo no Chat</h3>
+  <p>Projetos são pastas de conversa com <strong>contexto persistente</strong>. Você configura uma vez, e todas as conversas dentro do projeto herdam esse contexto. Acabou de reexplicar teu negócio todo dia.</p>
+
+  <p>O que colocar num projeto:</p>
+  <ul>
+    <li><strong>Arquivo de contexto:</strong> O que é a empresa, produtos, público, tom de voz</li>
+    <li><strong>Instruções fixas:</strong> "Sempre responde em português", "Não usa gerundismo", "Tom direto"</li>
+    <li><strong>Documentos de referência:</strong> Brand guide, briefings, tabelas de preço</li>
+    <li><strong>Exemplos de output:</strong> Textos que você gosta, emails que funcionaram</li>
+  </ul>
+
+  <div class="fun">
+    <strong>Analogia:</strong> Projeto é como contratar um funcionário e dar pra ele um onboarding completo. Em vez de repetir tudo pra cada conversa nova (estagiário novo todo dia), você faz o onboarding uma vez e pronto.
+  </div>
+
+  <h3>Artifacts — o canvas do Claude</h3>
+  <p>Quando Claude gera código, HTML, SVG ou documento longo, aparece um <strong>Artifact</strong> ao lado. Você vê o resultado renderizado, pede alterações direto nele, e itera sem perder o histórico. É o jeito certo de fazer qualquer coisa visual ou técnica no Chat.</p>
+
+  <h3>Memória automática</h3>
+  <p>O ícone de livro no Chat — Claude pode salvar informações entre conversas. Você pode pedir: <em>"Lembra que eu prefiro respostas sem introdução"</em> ou <em>"Salva que meu produto é X"</em>. Funciona, mas é menos confiável que CLAUDE.md.</p>
+
+  <h3>Modelos — qual usar?</h3>
+  <table>
+    <thead><tr><th>Modelo</th><th>Quando usar</th><th>Velocidade</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Opus 4.8</strong></td><td>Tarefa difícil, análise complexa, código desafiador. Quando qualidade importa mais que velocidade.</td><td>☕ (vai buscar café)</td></tr>
+      <tr><td><strong>Sonnet 4.6</strong></td><td>90% das tarefas. Ótimo equilíbrio. Padrão inteligente.</td><td>⚡ rápido</td></tr>
+      <tr><td><strong>Haiku 4.5</strong></td><td>Respostas rápidas, resumos, tasks simples.</td><td>🚀 muito rápido</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Regra prática:</strong> Começa com Sonnet. Só muda pro Opus se o Sonnet errar ou simplificar demais. Haiku só pra coisas que não precisam de raciocínio.
+  </div>
+</section>
+
+<!-- CODE -->
+<section id="code">
+  <div class="section-tag tag-code">Code</div>
+  <h2>Claude Code <span class="level level-inter">Intermediário</span></h2>
+  <p class="section-subtitle">O Claude que vive no seu terminal e tem acesso real à sua máquina. Parece assustador. Na prática é libertador.</p>
+
+  <h3>A diferença que muda sua vida</h3>
+  <p>No Chat, você copia e cola código manualmente. No Code, Claude lê seu arquivo, faz a alteração, roda o teste e te fala o resultado. Você só aprova ou rejeita. É a diferença entre ter um assistente remoto e ter alguém sentado do seu lado.</p>
+
+  <h3>Instalando e iniciando</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>npm install -g @anthropic-ai/claude-code
+
+claude                    # abre sessão interativa
+claude "faz X no projeto" # modo rápido, processa e sai
+claude -p "faz X" --model opus  # escolhe modelo</code></pre>
+
+  <h3>O que Claude Code consegue fazer</h3>
+  <ul>
+    <li>Ler qualquer arquivo do seu sistema</li>
+    <li>Editar código, criar arquivos, deletar (com confirmação)</li>
+    <li>Rodar comandos no terminal (npm, git, python, o que for)</li>
+    <li>Fazer commit, criar branch, abrir PR no GitHub</li>
+    <li>Pesquisar na web, acessar APIs via MCP servers</li>
+    <li>Spawnar outros Claudes pra trabalhar em paralelo</li>
+  </ul>
+
+  <h3>Permissões — o segurança na porta</h3>
+  <p>Claude pede confirmação antes de coisas destrutivas. Isso é bom. Você pode afinar o que ele pode ou não fazer sem pedir:</p>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>// .claude/settings.json
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(git *)",
+      "Read(**)",
+      "Edit(src/**)"
+    ],
+    "deny": ["Bash(rm -rf *)"]
+  }
+}</code></pre>
+
+  <div class="warn">
+    <strong>Não faça isso em produção:</strong> <code>--dangerously-skip-permissions</code> desliga todas as confirmações. Claude vai fazer tudo sem perguntar. Use só em ambientes controlados e isolados.
+  </div>
+
+  <h3>Modos de operação</h3>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">Interativo</div>
+      <div class="card-body">Você conversa, Claude age. Perfeito pra desenvolvimento, análise, tarefas que precisam de vai-e-vem.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Não-interativo (<code>-p</code>)</div>
+      <div class="card-body">Manda um prompt, recebe resposta, sai. Perfeito pra scripts, CI/CD, automações.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Pipe (<code>|</code>)</div>
+      <div class="card-body"><code>cat arquivo | claude -p "revisa"</code>. Integra com qualquer pipeline Unix.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Background (<code>--bg</code>)</div>
+      <div class="card-body">Roda como agente em segundo plano enquanto você faz outra coisa.</div>
+    </div>
+  </div>
+
+  <h3>O Code lê automaticamente</h3>
+  <p>Quando você abre uma sessão num diretório, Claude já leu:</p>
+  <ul>
+    <li>O <code>CLAUDE.md</code> do projeto e dos diretórios pai</li>
+    <li>O status do git atual</li>
+    <li>A estrutura de arquivos quando relevante</li>
+  </ul>
+  <p>Não precisa ficar explicando a estrutura do projeto toda vez. É por isso que o CLAUDE.md vale tanto ouro.</p>
+</section>
+
+<!-- COWORK -->
+<section id="cowork">
+  <div class="section-tag tag-skills">Cowork</div>
+  <h2>Claude Cowork <span class="level level-inter">Intermediário</span></h2>
+  <p class="section-subtitle">Claude Code turboalimentado para trabalho em equipe. Agents com papéis definidos, skills de negócio, contexto compartilhado.</p>
+
+  <h3>A diferença em uma linha</h3>
+  <p>Code é você e Claude. Cowork é você, Claude e um ecossistema inteiro de agents especializados trabalhando juntos. Pensa como um escritório onde cada agent tem um papel.</p>
+
+  <h3>Setup</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>/setup-cowork   # guia de configuração inicial</code></pre>
+  <p>Ele pergunta seu papel (dev, designer, marketing, etc), instala as ferramentas certas e conecta com seus sistemas.</p>
+
+  <h3>Skills exclusivas do ecossistema</h3>
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">/standup</div>
+      <div class="card-body">Gera relatório de standup baseado no que você fez na última sessão. Chega de escrever update manual.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">/make-plan</div>
+      <div class="card-body">Cria plano estruturado com etapas, dependências e estimativas. Antes de codificar, planeja.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">/timeline-report</div>
+      <div class="card-body">Cronologia do que foi feito no projeto. Útil pra briefings e retrospectivas.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">/pathfinder</div>
+      <div class="card-body">Mapeia um codebase que você nunca viu. Essencial ao entrar em projeto legado.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">/weekly-digests</div>
+      <div class="card-body">Resumo semanal do que foi feito, automático, baseado na memória acumulada.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">/oh-my-issues</div>
+      <div class="card-body">Analisa issues do GitHub e sugere prioridade, tamanho de esforço e próximos passos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag tag-skills">Skills</div>
+  <h2>Skills <span class="level level-inter">Intermediário</span></h2>
+  <p class="section-subtitle">Imagine que você pudesse dar ao Claude um "modo especialista" pra qualquer área. É isso que skills fazem.</p>
+
+  <h3>O que é uma skill na prática</h3>
+  <p>Uma skill é um arquivo <code>SKILL.md</code> com instruções específicas. Quando você digita <code>/copywriting</code>, Claude carrega aquele arquivo e passa a operar como um copywriter especializado — com frameworks, exemplos, regras de tom, o que evitar. Não é mágica: é contexto certo na hora certa.</p>
+
+  <div class="fun">
+    <strong>Analogia perfeita:</strong> Skill é tipo instalar um "modo" no Claude. <code>/caveman</code> = modo econômico de tokens. <code>/design-taste-frontend</code> = modo designer de agência. <code>/marketing-plan</code> = modo CMO estrategista. Você escolhe qual "chapéu" o Claude coloca.
+  </div>
+
+  <h3>Como instalar</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code># Pacote de skills do marketplace (recomendado)
+npx skills add usuario/repositorio
+
+# Skill individual via git
+git clone https://github.com/usuario/skill.git ~/.claude/skills/nome
+
+# Exemplo — humanizer (remove padrões de IA do texto)
+git clone https://github.com/blader/humanizer.git ~/.claude/skills/humanizer</code></pre>
+
+  <h3>Como usar</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>/copywriting      # ativa modo copywriter
+/humanizer        # ativa humanizador de texto
+/marketing-plan   # ativa planejador de marketing
+/design-taste-frontend  # ativa modo designer premium</code></pre>
+
+  <h3>Onde ficam</h3>
+  <table>
+    <thead><tr><th>Local</th><th>Escopo</th><th>Quando usar</th></tr></thead>
+    <tbody>
+      <tr><td><code>~/.claude/skills/nome/</code></td><td>Todos os projetos</td><td>Skills que você usa em qualquer contexto</td></tr>
+      <tr><td><code>.agents/skills/nome/</code></td><td>Só este projeto</td><td>Skills específicas do projeto</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Criar sua própria skill</h3>
+  <p>Qualquer coisa que você repete — um estilo de escrita, um processo de análise, um template — vira skill. Estrutura mínima:</p>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>---
+name: minha-skill
+description: Quando e por que usar esta skill
+allowed-tools:
+  - Read
+  - Edit
+---
+
+# Você é [papel especializado]
+
+Quando ativado, você [comportamento específico].
+
+## Regras
+- [regra 1]
+- [regra 2]
+
+## O que nunca fazer
+- [anti-padrão 1]</code></pre>
+
+  <div class="tip">
+    <strong>Atalho:</strong> Use <code>/skill-creator</code> — ela guia você passo a passo na criação de uma skill nova. Você descreve o que quer, ela gera o arquivo.
+  </div>
+
+  <h3>Quando NÃO usar skill</h3>
+  <p>Pra tarefa única e simples, não precisa. Skill vale quando a tarefa é <strong>recorrente</strong> (você vai fazer isso várias vezes) ou precisa de <strong>conhecimento especializado</strong> que Claude não tem por padrão.</p>
+</section>
+
+<!-- PLUGINS -->
+<section id="plugins">
+  <div class="section-tag tag-plugins">Plugins</div>
+  <h2>Plugins <span class="level level-inter">Intermediário</span></h2>
+  <p class="section-subtitle">Se skill é um chapéu, plugin é um armário inteiro. Skills + hooks + MCP + agents num bundle só.</p>
+
+  <h3>A diferença que você precisa entender</h3>
+  <table>
+    <thead><tr><th>Conceito</th><th>O que é</th><th>Analogia</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Skill</strong></td><td>Arquivo de instruções. Você chama com <code>/nome</code></td><td>Um chapéu específico</td></tr>
+      <tr><td><strong>Plugin</strong></td><td>Bundle completo com skills + hooks + agentes</td><td>Um funcionário com treinamento completo</td></tr>
+      <tr><td><strong>MCP Server</strong></td><td>Servidor que expõe ferramentas externas ao Claude</td><td>Uma nova mão que Claude pode usar</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Plugin: claude-mem</h3>
+  <p>O plugin de memória persistente. Claude observa tudo que acontece na sessão e injeta contexto relevante na próxima. É como ter um assistente que lembra tudo automaticamente.</p>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>npx claude-mem start      # liga o worker de memória
+# worker fica rodando em http://localhost:37777
+
+/learn-codebase           # aprende o repo inteiro (~5 min, opcional)
+/mem-search "auth"        # busca o que já foi feito/decidido
+/standup                  # gera update do que você fez
+/timeline-report          # cronologia de atividades</code></pre>
+
+  <div class="info">
+    <strong>Como funciona:</strong> Worker fica em segundo plano, registra observações (arquivos lidos, erros, decisões). Próxima sessão, injeta automaticamente o que é relevante. Tudo em <code>~/.claude-mem</code> na sua máquina — não sai do seu computador.
+  </div>
+
+  <h3>Plugin: caveman</h3>
+  <p>Muda completamente o estilo de resposta. Resposta enxuta, sem firula, ~75% menos tokens de saída. Você vai longe mais rápido no limite de uso.</p>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>/caveman         # modo padrão
+/caveman lite    # um pouco menos agressivo
+/caveman full    # sem artigos, sem filler (modo atual)
+/caveman ultra   # mínimo absoluto, quase telegrama
+stop caveman     # volta ao normal</code></pre>
+
+  <div class="fun">
+    <strong>Modo caveman em ação:</strong><br>
+    Normal: "Claro! Fico feliz em ajudar com isso. O problema que você está descrevendo é provavelmente causado por..."<br>
+    Caveman: "Bug no middleware. Token usa <code>&lt;</code> não <code>&lt;=</code>. Fix:"
+  </div>
+</section>
+
+<!-- MCP -->
+<section id="mcp">
+  <div class="section-tag tag-hooks">MCP Servers</div>
+  <h2>MCP Servers <span class="level level-adv">Avançado</span></h2>
+  <p class="section-subtitle">Model Context Protocol. Basicamente: você dá ao Claude acesso a sistemas externos — GitHub, banco de dados, Google Drive, qualquer API.</p>
+
+  <h3>O que são na prática</h3>
+  <p>MCP servers são processos rodando em paralelo com o Claude que expõem ferramentas. Claude chama essas ferramentas exatamente como chama Read, Edit ou Bash. A diferença é que você define o que elas fazem.</p>
+
+  <div class="fun">
+    <strong>Analogia:</strong> Claude nasceu com mãos (Read, Edit, Bash). MCP server é você dar ao Claude um braço novo com ferramentas customizadas. "Agora você tem acesso ao GitHub." "Agora você consegue consultar nosso banco." "Agora você lê o Google Drive."
+  </div>
+
+  <h3>Configurar um MCP server</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>// .claude/settings.json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": { "GITHUB_TOKEN": "seu_token_aqui" }
+    }
+  }
+}</code></pre>
+
+  <h3>MCP servers mais úteis no dia a dia</h3>
+  <table>
+    <thead><tr><th>Server</th><th>O que dá pro Claude</th><th>Caso de uso</th></tr></thead>
+    <tbody>
+      <tr><td><code>server-github</code></td><td>Criar PRs, issues, ler repos</td><td>Dev workflow completo</td></tr>
+      <tr><td><code>server-filesystem</code></td><td>Acesso a pastas fora do projeto</td><td>Arquivos em outros diretórios</td></tr>
+      <tr><td><code>server-postgres</code></td><td>Consultar e escrever no banco</td><td>Análise de dados, migrations</td></tr>
+      <tr><td>Figma MCP</td><td>Ler designs, extrair tokens</td><td>Design → código</td></tr>
+      <tr><td>Gmail MCP</td><td>Ler e rascunhar emails</td><td>Automação de email</td></tr>
+      <tr><td>Google Calendar MCP</td><td>Ver e criar eventos</td><td>Gestão de agenda</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <strong>Instale com critério:</strong> MCP server tem acesso real ao sistema que ele conecta. Se é o GitHub server, Claude consegue criar, editar e deletar repos. Só instala de fontes confiáveis e revisa o que o server pode fazer.
+  </div>
+</section>
+
+<!-- HOOKS -->
+<section id="hooks">
+  <div class="section-tag tag-hooks">Hooks</div>
+  <h2>Hooks <span class="level level-adv">Avançado</span></h2>
+  <p class="section-subtitle">Automações que disparam em resposta a eventos do Claude Code. Claude edita um arquivo? Roda prettier. Claude inicia sessão? Injeta contexto.</p>
+
+  <h3>A regra de ouro: hooks vs skills</h3>
+  <div class="versus">
+    <div class="versus-bad" style="background:var(--blue2); border-color:var(--blue)">
+      <div class="versus-label" style="color:var(--blue)">📚 Use SKILL quando...</div>
+      <div class="versus-text">É uma orientação que <em>deve ser seguida</em>. Um estilo, um padrão, contexto especializado. Você ativa com <code>/nome</code>. Opcional.</div>
+    </div>
+    <div class="versus-good">
+      <div class="versus-label">⚙️ Use HOOK quando...</div>
+      <div class="versus-text">É algo que <em>deve acontecer sempre</em>, sem você precisar pedir. Formatar código, bloquear ações perigosas, logar eventos.</div>
+    </div>
+  </div>
+
+  <h3>Eventos disponíveis</h3>
+  <table>
+    <thead><tr><th>Evento</th><th>Quando dispara</th><th>Exemplo de uso</th></tr></thead>
+    <tbody>
+      <tr><td><code>SessionStart</code></td><td>Claude inicia</td><td>Injetar contexto, ativar modo caveman</td></tr>
+      <tr><td><code>UserPromptSubmit</code></td><td>Você envia mensagem</td><td>Pré-processar, adicionar contexto ao prompt</td></tr>
+      <tr><td><code>PreToolUse</code></td><td>Antes de qualquer ferramenta</td><td>Bloquear ações perigosas</td></tr>
+      <tr><td><code>PostToolUse</code></td><td>Depois de qualquer ferramenta</td><td>Formatar código editado, notificações</td></tr>
+      <tr><td><code>Stop</code></td><td>Sessão termina</td><td>Gerar relatório, limpeza</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Hook na prática: prettier automático</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>// .claude/settings.json
+{
+  "hooks": {
+    "PostToolUse": [{
+      "matcher": "Edit",
+      "hooks": [{
+        "type": "command",
+        "command": "npx prettier --write $CLAUDE_FILE_PATHS"
+      }]
+    }]
+  }
+}</code></pre>
+  <p>Agora toda vez que Claude edita um arquivo, prettier roda automaticamente. Nunca mais código mal formatado saindo de uma sessão.</p>
+</section>
+
+<!-- MEMÓRIA -->
+<section id="memory">
+  <div class="section-tag tag-plugins">Memória</div>
+  <h2>Sistema de Memória <span class="level level-inter">Intermediário</span></h2>
+  <p class="section-subtitle">O problema: Claude tem amnésia. A solução: vários sistemas diferentes pra persistir contexto. Aqui estão todos.</p>
+
+  <h3>Os 4 jeitos de dar memória ao Claude</h3>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-title" style="color:var(--accent)">1. CLAUDE.md</div>
+      <div class="card-body">Arquivo de texto que Claude lê automaticamente. O mais confiável. Você escreve, ele lê toda sessão. Melhor pra contexto permanente.</div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--blue)">2. Projetos (Chat)</div>
+      <div class="card-body">No claude.ai, Projetos têm contexto persistente. Arquivos, instruções e conversas ficam conectados. Perfeito pro Chat.</div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--green)">3. Auto-memória</div>
+      <div class="card-body">Claude Code salva memórias em arquivos quando você pede. <code>/memory</code> abre o arquivo. Pra preferências e contexto de projeto.</div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--yellow)">4. claude-mem plugin</div>
+      <div class="card-body">Worker que observa tudo e constrói base de conhecimento buscável. O mais poderoso, requer setup do worker.</div>
+    </div>
+  </div>
+
+  <h3>Auto-memória — os 4 tipos</h3>
+  <p>Quando você pede ao Claude pra lembrar algo, ele cria um arquivo de memória categorizado:</p>
+  <table>
+    <thead><tr><th>Tipo</th><th>O que salvar</th><th>Exemplo</th></tr></thead>
+    <tbody>
+      <tr><td><code>user</code></td><td>Seu perfil e preferências</td><td>"Prefere respostas diretas sem introdução"</td></tr>
+      <tr><td><code>feedback</code></td><td>Correções e confirmações</td><td>"Não usa comentários óbvios em código"</td></tr>
+      <tr><td><code>project</code></td><td>Estado do projeto, decisões</td><td>"Projeto usa React 19, deploy na Vercel"</td></tr>
+      <tr><td><code>reference</code></td><td>Onde encontrar informações</td><td>"Docs da API estão em /docs/api"</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Como pedir:</strong> <em>"Lembra que eu prefiro respostas sem introdução"</em>, <em>"Salva que o projeto usa Tailwind v4"</em>, <em>"Guarda que o deploy é feito com esse comando"</em>.
+  </div>
+
+  <h3>Onde ficam as memórias</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>~/.claude/CLAUDE.md                    # global: sempre carregado
+~/.claude/projects/[projeto]/memory/  # memórias automáticas por projeto
+./CLAUDE.md                            # memória do projeto atual</code></pre>
+</section>
+
+<!-- PROMPTING -->
+<section id="prompting">
+  <div class="section-tag tag-prompting">Arte do prompting</div>
+  <h2>A Arte do Prompting <span class="level level-inter">Intermediário</span></h2>
+  <p class="section-subtitle">Isso aqui vai ser difícil de ouvir: a maioria das respostas ruins que você recebe é culpa do prompt. Boas notícias: dá pra aprender.</p>
+
+  <h3>A fórmula que funciona</h3>
+  <div class="big-quote">Contexto → Objetivo → Restrições → Pedido → Formato</div>
+
+  <h3>Na prática</h3>
+  <div class="versus">
+    <div class="versus-bad">
+      <div class="versus-label">❌ Que a maioria faz</div>
+      <div class="versus-text">"Escreve um email de vendas pro meu cliente"<br><br>Claude vai inventar um cliente, um produto e um tom. Vai ficar genérico demais pra servir.</div>
+    </div>
+    <div class="versus-good">
+      <div class="versus-label">✅ O que funciona</div>
+      <div class="versus-text">"Contexto: Software de gestão pra óticas pequenas. Cliente: Diego, oculista, 2 lojas, viu demo ontem. Objetivo: marcar reunião de fechamento. Tom: profissional mas direto. Máximo 150 palavras. Assunto: máximo 6 palavras."</div>
+    </div>
+  </div>
+
+  <h3>5 técnicas que mudam o jogo</h3>
+
+  <h4>1. Mostre, não descreva</h4>
+  <p>Em vez de descrever o estilo que quer, cole um exemplo. <em>"Escreve no estilo deste parágrafo: [exemplo]"</em> é mil vezes mais eficaz que <em>"tom informal mas profissional"</em>.</p>
+
+  <h4>2. Diga o que NÃO fazer</h4>
+  <p>Claude tem vieses. Proibir explicitamente funciona: <em>"Não use 'transformar', 'elevar', 'jornada', 'potencializar'. Não comece frases com 'Além disso' ou 'Portanto'."</em></p>
+
+  <h4>3. Peça o formato antes de responder</h4>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>"Responde neste formato:
+HEADLINE: [texto]
+SUBHEADLINE: [texto]
+CTA: [texto]
+JUSTIFICATIVA: [uma linha por item]"</code></pre>
+
+  <h4>4. Peça pra pensar antes</h4>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>"Antes de escrever, identifica os 3 principais riscos
+desta abordagem e como contornaria cada um. Depois escreve."</code></pre>
+
+  <h4>5. Itere precisamente</h4>
+  <div class="versus">
+    <div class="versus-bad">
+      <div class="versus-label">❌ Vago</div>
+      <div class="versus-text">"Melhora esse texto"<br>"Faz ficar melhor"<br>"Não gostei, refaz"</div>
+    </div>
+    <div class="versus-good">
+      <div class="versus-label">✅ Cirúrgico</div>
+      <div class="versus-text">"Mantém a estrutura, torna o tom 30% mais direto, corta todos os advérbios e remove a última frase"</div>
+    </div>
+  </div>
+
+  <h3>Anti-padrões clássicos</h3>
+  <table>
+    <thead><tr><th>Você diz</th><th>Claude entende</th><th>O que fazer</th></tr></thead>
+    <tbody>
+      <tr><td>"Melhora isso"</td><td>Muda qualquer coisa aleatória</td><td>Especifica o que melhorar e como</td></tr>
+      <tr><td>"Escreve sobre X"</td><td>Escreve Wikipedia sobre X</td><td>Define ângulo, público, objetivo e tamanho</td></tr>
+      <tr><td>"O que você acha?"</td><td>Resposta genérica e diplomática</td><td>Perguntas critério específicas</td></tr>
+      <tr><td>"Cria algo criativo"</td><td>Criativo segundo Claude, não você</td><td>Dê referências, mostre exemplos, defina o que é criativo pra você</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- CLAUDE.MD -->
+<section id="claudemd">
+  <div class="section-tag tag-code">CLAUDE.md</div>
+  <h2>CLAUDE.md <span class="level level-inter">Intermediário</span></h2>
+  <p class="section-subtitle">O arquivo mais impactante que você pode criar. Claude lê automaticamente toda sessão. É o onboarding permanente.</p>
+
+  <h3>Por que isso é o maior unlock do Code</h3>
+  <p>Sem CLAUDE.md: você passa os primeiros 5 minutos de toda sessão explicando quem você é, o que é o projeto, como funciona a stack. Com CLAUDE.md bem escrito: Claude já sabe de tudo quando você digita a primeira mensagem.</p>
+
+  <div class="fun">
+    <strong>É sério:</strong> Escrever um bom CLAUDE.md global (<code>~/.claude/CLAUDE.md</code>) é o investimento com maior ROI que existe no Claude Code. 30 minutos agora economiza horas por semana.
+  </div>
+
+  <h3>Template global (~/.claude/CLAUDE.md)</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code># Sobre mim
+Sou [seu papel]. Trabalho principalmente com [tecnologias/áreas].
+Nível técnico: [iniciante/intermediário/sênior] em [áreas].
+
+# Como prefiro trabalhar
+- Respostas diretas, sem introdução tipo "Claro! Fico feliz em ajudar"
+- Português brasileiro sempre
+- Perguntas antes de ação se o escopo for ambíguo
+- Código com comentários só quando realmente necessário
+
+# O que NUNCA fazer
+- Não adiciona features que não foram pedidas
+- Não refatora código fora do escopo
+- Não cria arquivos de doc sem pedir
+- Não usa gerundismo ("Estou fazendo X")
+
+# Meu contexto de negócio
+[Descreva: empresa, produto, público, tom de voz]</code></pre>
+
+  <h3>Template de projeto (./CLAUDE.md)</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code># [Nome do Projeto]
+[Uma linha do que é o projeto]
+
+## Stack
+- Frontend: React 19 + TypeScript + Tailwind v4
+- Backend: Node.js + Express
+- DB: PostgreSQL (Supabase)
+- Deploy: Vercel (frontend) + Railway (backend)
+
+## Estrutura de pastas
+src/
+  components/    # componentes React reutilizáveis
+  pages/         # páginas Next.js
+  lib/           # utilitários e helpers
+  types/         # tipos TypeScript
+
+## Comandos que você precisa saber
+npm run dev       # desenvolvimento local
+npm run build     # build de produção
+npm test          # roda testes
+npm run lint      # lint + format check
+
+## Convenções do projeto
+- Componentes em PascalCase
+- Funções e hooks em camelCase
+- Commits: conventional commits (feat/fix/chore/docs)
+- Branches: feature/nome, fix/nome, chore/nome
+
+## Decisões de arquitetura importantes
+[Explica por que certas decisões foram tomadas,
+evita que Claude "melhore" o código desfazendo decisões]
+
+## O que NÃO mexer sem perguntar
+[Lista áreas críticas ou com dependências não óbvias]</code></pre>
+</section>
+
+<!-- AGENTES -->
+<section id="agents">
+  <div class="section-tag tag-prompting">Agentes</div>
+  <h2>Exército de Claudes <span class="level level-adv">Avançado</span></h2>
+  <p class="section-subtitle">Claude pode criar outros Claudes pra trabalhar em paralelo. Coisas grandes ficam rápidas quando você tem um exército.</p>
+
+  <h3>A ideia por trás</h3>
+  <p>Tarefas grandes têm partes independentes. Em vez de fazer uma por uma, o Claude principal delega a subagentes que rodam em paralelo. No final, sintetiza tudo. É como gerenciar uma equipe em vez de fazer tudo sozinho.</p>
+
+  <div class="fun">
+    <strong>Exemplo real:</strong> "Audita todos os 50 componentes React deste projeto" sem agentes = Claude lê um por um, leva horas. Com agentes = Claude spawna 10 agentes, cada um audita 5, termina em 10% do tempo.
+  </div>
+
+  <h3>Agentes disponíveis no caveman</h3>
+  <table>
+    <thead><tr><th>Agente</th><th>Propósito</th><th>Quando usar</th></tr></thead>
+    <tbody>
+      <tr><td><strong>cavecrew-builder</strong></td><td>Edições cirúrgicas em 1-2 arquivos</td><td>Typo, rename de variável, pequena função</td></tr>
+      <tr><td><strong>cavecrew-investigator</strong></td><td>Localizar código (só leitura)</td><td>"Onde é definido X?" — retorna file:line</td></tr>
+      <tr><td><strong>cavecrew-reviewer</strong></td><td>Review de diff/branch</td><td>"Revisa esse PR" — saída comprimida</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Agentes gerais</h3>
+  <table>
+    <thead><tr><th>Agente</th><th>Para que</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Explore</strong></td><td>Busca ampla no codebase. "Encontra todos os lugares que usam X"</td></tr>
+      <tr><td><strong>Plan</strong></td><td>Arquiteta implementação antes de codificar</td></tr>
+      <tr><td><strong>code-reviewer</strong></td><td>Review independente — perspectiva diferente do agente principal</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <strong>Custo real:</strong> Cada subagente tem contexto próprio e consome tokens. Use pra tarefas que genuinamente precisam de paralelismo. Não spawna agentes pra coisas simples — é canhão pra matar mosquito.
+  </div>
+</section>
+
+<!-- WORKFLOWS -->
+<section id="workflows">
+  <div class="section-tag tag-workflows">Fluxos</div>
+  <h2>Fluxos na Prática <span class="level level-adv">Avançado</span></h2>
+  <p class="section-subtitle">Recipes reais. Pega, adapta pro teu contexto, usa.</p>
+
+  <h3>🖊️ Criar conteúdo de marketing</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>1. /customer-research    → quem é a persona de verdade
+2. /marketing-plan       → estratégia e canais
+3. /copywriting          → escreve o copy
+4. /humanizer            → remove padrões de IA do texto
+5. /copy-editing         → revisão final de qualidade</code></pre>
+
+  <h3>⚙️ Desenvolver uma feature</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>1. "Analisa o código atual e mapeia a arquitetura"
+2. /design-taste-frontend  (se tiver componentes UI)
+3. "Implementa [feature] seguindo os padrões do projeto"
+4. /code-review            → revisa o que foi feito
+5. /verify                 → confirma que funciona no browser</code></pre>
+
+  <h3>🔍 Pesquisa com relatório</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code">1. /deep-research "sua pergunta aqui"
+   → múltiplas buscas, verifica fontes, sintetiza
+2. /humanizer              → remove padrões de IA
+3. /pdf                    → gera PDF do relatório</code></pre>
+
+  <h3>🎯 Análise de concorrência</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>1. /competitor-profiling   → pesquisa o concorrente em profundidade
+2. /competitors            → gera página de comparação pra SEO
+3. /copywriting            → escreve positioning baseado no gap encontrado</code></pre>
+
+  <h3>🚀 Lançamento de produto</h3>
+  <pre><button class="copy-btn" onclick="copyCode(this)">copiar</button><code>1. /launch                 → plano de lançamento (framework ORB)
+2. /social                 → calendário de conteúdo pra redes
+3. /emails                 → sequência de lançamento por email
+4. /ads                    → estratégia de mídia paga
+5. /directory-submissions  → submete em diretórios de SaaS/AI</code></pre>
+
+  <h3>Dicas de produtividade que realmente importam</h3>
+  <ul>
+    <li><strong>Uma sessão = uma tarefa.</strong> Misturar assuntos polui o contexto e piora as respostas.</li>
+    <li><strong>/compact quando a sessão ficar longa.</strong> Comprime histórico, mantém qualidade.</li>
+    <li><strong>CLAUDE.md bem escrito > qualquer prompt.</strong> 30 min investidos hoje = horas economizadas por semana.</li>
+    <li><strong>Itere rápido e preciso.</strong> Claude trabalha melhor com refinamentos específicos do que com pedidos vagos de melhoria.</li>
+    <li><strong>Verifique output crítico.</strong> Claude pode errar — especialmente em código novo, cálculos e fatos específicos. Não confie cegamente.</li>
+    <li><strong>Quando Claude errar, corrija e peça pra lembrar.</strong> "Isso tá errado por causa de X. Lembra essa regra." Constrói memória útil.</li>
+  </ul>
+</section>
+
+<!-- ATALHOS -->
+<section id="shortcuts">
+  <div class="section-tag tag-plugins">Cola rápida</div>
+  <h2>Atalhos de Teclado</h2>
+  <p class="section-subtitle">Os que você vai usar toda hora.</p>
+
+  <h3>Claude Code (terminal)</h3>
+  <table>
+    <thead><tr><th>Atalho</th><th>O que faz</th></tr></thead>
+    <tbody>
+      <tr><td><span class="kbd">Enter</span></td><td>Envia mensagem</td></tr>
+      <tr><td><span class="kbd">Shift</span> + <span class="kbd">Enter</span></td><td>Nova linha sem enviar (pra prompts longos)</td></tr>
+      <tr><td><span class="kbd">Ctrl</span> + <span class="kbd">C</span></td><td>Cancela operação em andamento</td></tr>
+      <tr><td><span class="kbd">Ctrl</span> + <span class="kbd">R</span></td><td>Busca no histórico de prompts anteriores</td></tr>
+      <tr><td><span class="kbd">↑</span> / <span class="kbd">↓</span></td><td>Navega no histórico</td></tr>
+      <tr><td><span class="kbd">Shift</span> + <span class="kbd">Tab</span></td><td>Auto-aceita todas as sugestões sem confirmar uma por uma</td></tr>
+      <tr><td><span class="kbd">Tab</span></td><td>Autocomplete de skill ou comando</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Claude Chat (claude.ai)</h3>
+  <table>
+    <thead><tr><th>Atalho</th><th>O que faz</th></tr></thead>
+    <tbody>
+      <tr><td><span class="kbd">Ctrl</span> + <span class="kbd">Enter</span></td><td>Envia mensagem</td></tr>
+      <tr><td><span class="kbd">Ctrl</span> + <span class="kbd">K</span></td><td>Nova conversa</td></tr>
+      <tr><td><span class="kbd">Ctrl</span> + <span class="kbd">/</span></td><td>Busca nas conversas</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- COMANDOS -->
+<section id="commands">
+  <div class="section-tag tag-code">Cola rápida</div>
+  <h2>Comandos Slash Nativos</h2>
+  <p class="section-subtitle">Comandos que vêm com o Claude Code — não são skills instaladas, são nativos.</p>
+
+  <table>
+    <thead><tr><th>Comando</th><th>O que faz</th></tr></thead>
+    <tbody>
+      <tr><td><code>/help</code></td><td>Lista tudo disponível na sessão atual</td></tr>
+      <tr><td><code>/clear</code></td><td>Limpa a conversa, começa do zero</td></tr>
+      <tr><td><code>/compact</code></td><td>Comprime o histórico sem perder contexto (use quando a sessão tá longa)</td></tr>
+      <tr><td><code>/status</code></td><td>Modelo atual, uso de tokens, configurações ativas</td></tr>
+      <tr><td><code>/cost</code></td><td>Custo estimado da sessão em tokens</td></tr>
+      <tr><td><code>/model [nome]</code></td><td>Troca o modelo agora — ex: <code>/model opus</code></td></tr>
+      <tr><td><code>/memory</code></td><td>Abre o arquivo de memória do projeto pra editar</td></tr>
+      <tr><td><code>/init</code></td><td>Cria um CLAUDE.md básico no projeto atual</td></tr>
+      <tr><td><code>/review</code></td><td>Code review do diff atual</td></tr>
+      <tr><td><code>/doctor</code></td><td>Diagnostica problemas de configuração</td></tr>
+      <tr><td><code>/permissions</code></td><td>Gerencia o que Claude pode ou não fazer</td></tr>
+      <tr><td><code>/config</code></td><td>Abre configurações interativas</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <div class="tip">
+    <strong>Seu próximo passo agora mesmo:</strong> Abre um editor, cria <code>~/.claude/CLAUDE.md</code> e escreve quem você é, suas preferências e contexto do negócio. Isso muda a qualidade das respostas a partir da próxima sessão.
+  </div>
+
+  <div class="fun">
+    <strong>Checklist do iniciante ao avançado:</strong><br>
+    ☐ Criou CLAUDE.md global<br>
+    ☐ Criou Projeto no Chat com contexto da empresa<br>
+    ☐ Instalou Claude Code e abriu primeira sessão<br>
+    ☐ Usou 3 skills diferentes<br>
+    ☐ Configurou claude-mem e rodou <code>npx claude-mem start</code><br>
+    ☐ Criou sua própria skill pra algo recorrente<br>
+    ☐ Configurou um MCP server<br>
+    ☐ Criou um hook de automação<br>
+    ☐ Rodou um workflow com subagentes
+  </div>
+</section>
+
+</main>
+
+<div class="toast" id="toast">Copiado!</div>
+
+<script>
+const TSUN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+const TMOON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+function syncThemeBtns() {
+  const light = document.documentElement.classList.contains('light');
+  document.querySelectorAll('.theme-toggle').forEach(b => b.innerHTML = light ? TMOON : TSUN);
+}
+function toggleTheme() {
+  const light = !document.documentElement.classList.contains('light');
+  document.documentElement.classList.toggle('light', light);
+  localStorage.setItem('vix-theme', light ? 'light' : 'dark');
+  syncThemeBtns();
+}
+syncThemeBtns();
+document.querySelectorAll('.theme-toggle').forEach(b => b.addEventListener('click', toggleTheme));
+
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('navOverlay');
+
+function openNav() {
+  sidebar.classList.add('open');
+  overlay.classList.add('active');
+  hamburger.classList.add('open');
+  hamburger.setAttribute('aria-label', 'Fechar menu');
+  document.body.style.overflow = 'hidden';
+}
+function closeNav() {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('active');
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-label', 'Abrir menu');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+  sidebar.classList.contains('open') ? closeNav() : openNav();
+});
+overlay.addEventListener('click', closeNav);
+sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  if (window.innerWidth <= 900) closeNav();
+}));
+
+function copyCode(btn) {
+  const pre = btn.parentElement;
+  const code = pre.querySelector('code').innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = '✓';
+    setTimeout(() => btn.textContent = 'copiar', 1500);
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1800);
+  });
+}
+
+const sections = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('nav a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const a = document.querySelector(`nav a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

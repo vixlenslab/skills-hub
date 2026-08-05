@@ -18,7 +18,7 @@ export default function ThemeToggle() {
       onClick={() => setDark((d) => !d)}
       title="Alternar tema"
       aria-label="Alternar tema"
-      className="ml-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-vix-button border border-border bg-secondary text-secondary-foreground transition-colors hover:border-vix-amarelo hover:text-vix-amarelo"
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-vix-button border border-border bg-secondary text-secondary-foreground transition-colors hover:border-vix-amarelo hover:text-vix-amarelo"
     >
       {dark ? <Sun size={16} weight="bold" /> : <Moon size={16} weight="bold" />}
     </button>

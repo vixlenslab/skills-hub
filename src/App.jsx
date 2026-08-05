@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { MagnifyingGlass, Star, Package } from '@phosphor-icons/react'
+import { MagnifyingGlass, Star, Package, List, X } from '@phosphor-icons/react'
 import { skills, categories } from '@/data/skills'
 import { cn } from '@/lib/utils'
 import ThemeToggle from './components/ThemeToggle'
@@ -54,6 +54,7 @@ export default function App() {
   const [active, setActive] = useState('Todas')
   const [toast, setToast] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const route = useRoute()
 
   const counts = useMemo(() => {
@@ -82,6 +83,8 @@ export default function App() {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault()
         setSearchOpen((v) => !v)
+      } else if (e.key === 'Escape') {
+        setMenuOpen(false)
       }
     }
     window.addEventListener('keydown', onKey)
@@ -91,6 +94,11 @@ export default function App() {
   // Trocar de rota tem que voltar pro topo — inclusive quando a pessoa clica no
   // menu ou cola a URL. Excecao: quando o destino e uma ancora dentro da pagina.
   const ancoraPendente = useRef(null)
+
+  // Trocar de rota fecha o menu, senão ele fica aberto sobre a página nova.
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [route])
 
   useEffect(() => {
     if (ancoraPendente.current) {
@@ -145,13 +153,16 @@ export default function App() {
             </span>
           </a>
 
-          <nav className="ml-auto flex items-center gap-0.5 sm:gap-1">
+          {/* Desktop: nav inline. No mobile os quatro itens não cabem ao lado dos
+              dois botões — o de Novidades quebrava linha por causa do ponto — então
+              abaixo de md viram menu. */}
+          <nav className="ml-auto hidden items-center gap-1 md:flex">
             {NAV.map((n) => (
               <a
                 key={n.hash}
                 href={n.hash}
                 className={cn(
-                  'rounded-vix-chip px-2.5 py-2 text-[13px] font-medium transition-colors sm:px-3',
+                  'flex items-center gap-1.5 whitespace-nowrap rounded-vix-chip px-3 py-2 text-[13px] font-medium transition-colors',
                   route === n.hash
                     ? 'bg-vix-amarelo text-vix-preto'
                     : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
@@ -159,12 +170,15 @@ export default function App() {
               >
                 {n.label}
                 {n.selo && route !== n.hash && (
-                  <span className="ml-1.5 inline-block h-1.5 w-1.5 rounded-full bg-vix-amarelo align-middle" />
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-vix-amarelo" />
                 )}
               </a>
             ))}
           </nav>
 
+          {/* Os três botões andam juntos: um ml-auto no grupo, nunca em cada um,
+              senão o espaço livre se divide entre eles. */}
+          <div className="ml-auto flex shrink-0 items-center gap-1.5 md:ml-0">
           <button
             onClick={() => setSearchOpen(true)}
             title="Buscar (Ctrl K)"
@@ -174,7 +188,44 @@ export default function App() {
             <MagnifyingGlass size={16} weight="bold" />
           </button>
           <ThemeToggle />
+
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={menuOpen}
+            className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-vix-button border border-border bg-secondary text-secondary-foreground transition-colors hover:border-vix-amarelo hover:text-vix-amarelo md:hidden"
+          >
+            {menuOpen ? <X size={16} weight="bold" /> : <List size={16} weight="bold" />}
+            {!menuOpen && temNovidade && route !== NOVIDADES && (
+              <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-vix-amarelo" />
+            )}
+          </button>
+          </div>
         </div>
+
+        {/* Menu mobile */}
+        {menuOpen && (
+          <nav className="border-t border-border bg-background px-4 pb-3 pt-2 md:hidden">
+            {NAV.map((n) => (
+              <a
+                key={n.hash}
+                href={n.hash}
+                onClick={() => setMenuOpen(false)}
+                className={cn(
+                  'flex min-h-[48px] items-center gap-2 rounded-vix-chip px-3 text-[15px] font-medium transition-colors',
+                  route === n.hash
+                    ? 'bg-vix-amarelo text-vix-preto'
+                    : 'text-foreground active:bg-secondary',
+                )}
+              >
+                {n.label}
+                {n.selo && route !== n.hash && (
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-vix-amarelo" />
+                )}
+              </a>
+            ))}
+          </nav>
+        )}
       </header>
 
       {route === HOME && <HomePage onOpenSearch={() => setSearchOpen(true)} onNavigate={navigate} />}

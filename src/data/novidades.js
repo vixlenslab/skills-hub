@@ -12,6 +12,27 @@ export const DIAS_NOVIDADE = 21
 export const novidades = [
   {
     data: '2026-08-04',
+    titulo: 'vixlens-brand e vixlens-design-system viraram uma só',
+    tipo: 'mudou',
+    corpo:
+      'As duas faziam quase a mesma coisa: 84% das cores e todos os termos canônicos eram idênticos, e já tinham começado a divergir. Agora existe uma mestre, a <strong>vixlens-design-system</strong>, com tudo o que as duas tinham. Se você digitava <code>vixlens-brand</code>, passe a usar a outra. O plugin continua com o mesmo nome, só a skill saiu.',
+  },
+  {
+    data: '2026-08-04',
+    titulo: 'Comunicado, manual e proposta usavam cores que não existem',
+    tipo: 'corrigido',
+    corpo:
+      'As três mandavam usar "barra Navy" e "barra Amber". Nenhuma das duas existe no Design System, então o documento saía com uma cor inventada na hora. Agora usam os quatro callouts de verdade (Destaque, Informativo, Crítico, Sucesso) com os hex exatos. As três também citavam códigos de voz sem carregar onde eles estão definidos; agora abrem carregando a mestre.',
+  },
+  {
+    data: '2026-08-04',
+    titulo: 'Tipografia da skill de UI estava um passo grande demais',
+    tipo: 'corrigido',
+    corpo:
+      'Seis dos onze níveis divergiam do Design System: H1 saía 96px em vez de 64, e o corpo de texto 18px em vez de 16. Quem gerava componente pela skill entregava tipografia fora do sistema. Corrigido a partir do token do DS, com tracking incluído.',
+  },
+  {
+    data: '2026-08-04',
     titulo: 'As skills da Vixlens agora se instalam por comando',
     tipo: 'novo',
     guia: 'plugins',

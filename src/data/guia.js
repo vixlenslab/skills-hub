@@ -576,7 +576,7 @@ export const guia = {
           "rows": [
             [
               "<strong>vixlens-brand</strong>",
-              "Marca, Design System em documentos, comunicado interno, manual de cliente, proposta comercial"
+              "Skill mestre da marca (paleta, tipografia, tokens, voz, vocabulário) mais comunicado interno, manual de cliente e proposta comercial"
             ],
             [
               "<strong>vixlens-ui</strong>",

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Copy, Check, Package, Terminal, ArrowClockwise } from '@phosphor-icons/react'
+import { counts } from '@/lib/search'
 
 const STEPS = [
   {
@@ -65,7 +66,7 @@ export default function InstallBlock({ onCopy }) {
             Como instalar as skills Vixlens
           </h2>
           <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
-            As 7 skills desta aba não vêm junto com o Claude Code. Elas são nossas, e ficam num repositório da
+            As {counts.vixlens} skills desta aba não vêm junto com o Claude Code. Elas são nossas, e ficam num repositório da
             Vixlens. Você instala uma vez e elas passam a valer em qualquer projeto seu, não só num repo específico.
           </p>
           <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">

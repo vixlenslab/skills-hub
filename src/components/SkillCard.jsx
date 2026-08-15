@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Copy, Check, Command, Sparkle, Lightbulb } from '@phosphor-icons/react'
-import { cn } from '@/lib/utils'
+import { Copy, Check, Command, Sparkle, Lightbulb, Terminal } from '@phosphor-icons/react'
+import { cn, skillCommand } from '@/lib/utils'
 
 const badgeStyle = {
   Proprietária: 'bg-vix-amarelo text-vix-preto',
@@ -19,9 +19,12 @@ export default function SkillCard({ skill, onCopy }) {
   const [copied, setCopied] = useState(false)
   const isRef = skill.type === 'reference'
   const isProp = skill.category === 'Proprietária'
+  const command = skillCommand(skill.command)
+  // sem "/" depois de normalizar = comando de terminal, não se digita no chat.
+  const isTerminal = !command.startsWith('/')
 
   function copy() {
-    navigator.clipboard.writeText(skill.command).then(() => {
+    navigator.clipboard.writeText(command).then(() => {
       setCopied(true)
       onCopy?.()
       setTimeout(() => setCopied(false), 1400)
@@ -53,24 +56,38 @@ export default function SkillCard({ skill, onCopy }) {
 
       <button
         onClick={copy}
-        title={isRef ? 'Skill de referência — copiar nome' : 'Clique para copiar o comando'}
+        title={
+          isTerminal
+            ? 'Comando de terminal — copiar'
+            : isRef
+              ? 'Skill de referência — copiar comando'
+              : 'Clique para copiar o comando'
+        }
         className={cn(
           'group inline-flex w-fit max-w-full items-center gap-2 rounded-vix-chip border border-border bg-muted px-3 py-1.5 font-mono text-[13px] text-muted-foreground transition-colors hover:border-vix-amarelo hover:text-foreground',
         )}
       >
         {copied ? (
           <Check size={14} weight="bold" className="text-vix-amarelo" />
+        ) : isTerminal ? (
+          <Terminal size={14} weight="bold" />
         ) : isRef ? (
           <Sparkle size={14} weight="bold" />
         ) : (
           <Command size={14} weight="bold" />
         )}
-        <span className="truncate">{skill.command}</span>
+        <span className="truncate">{command}</span>
         {!copied && <Copy size={13} className="opacity-50 group-hover:opacity-100" />}
-        {isRef && (
-          <span className="ml-1 rounded-vix-chip bg-background px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-muted-foreground">
-            ref
+        {isTerminal ? (
+          <span className="ml-1 shrink-0 rounded-vix-chip bg-background px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-muted-foreground">
+            terminal
           </span>
+        ) : (
+          isRef && (
+            <span className="ml-1 shrink-0 rounded-vix-chip bg-background px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-muted-foreground">
+              ref
+            </span>
+          )
         )}
       </button>
 

@@ -1,5 +1,6 @@
 import { skills } from '@/data/skills'
 import { guia } from '@/data/guia'
+import { skillCommand } from '@/lib/utils'
 
 const stripTags = (s) => String(s || '').replace(/<[^>]+>/g, ' ')
 
@@ -34,10 +35,11 @@ export const index = [
     kind: 'skill',
     id: s.name,
     title: s.name,
-    subtitle: s.command,
+    subtitle: skillCommand(s.command),
     body: s.description,
     category: s.category,
-    haystack: `${s.name} ${s.command} ${s.description} ${s.tip || ''}`.toLowerCase(),
+    // guarda o comando cru também: busca por "ui-architect" (sem barra) segue achando.
+    haystack: `${s.name} ${s.command} ${skillCommand(s.command)} ${s.description} ${s.tip || ''}`.toLowerCase(),
   })),
   ...guia.sections.map((s) => {
     const body = stripTags(s.blocks.map(blockText).join(' '))

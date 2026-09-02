@@ -10,17 +10,22 @@ const STEPS = [
     commands: ['claude plugin marketplace add vixlenslab/vixlens-ds'],
   },
   {
-    label: '2. Instale os dois plugins',
-    hint: 'Rode uma linha de cada vez. vixlens-brand traz marca e documentos; vixlens-ui traz interface e código.',
-    commands: ['claude plugin install vixlens-brand', 'claude plugin install vixlens-ui'],
+    label: '2. Instale os três plugins',
+    hint: 'Rode uma linha de cada vez. vixlens-brand traz marca e documentos; vixlens-ui traz interface e código; vixlens-catalogo monta a tabela de preço no Figma.',
+    commands: [
+      'claude plugin install vixlens-brand',
+      'claude plugin install vixlens-ui',
+      'claude plugin install vixlens-catalogo',
+    ],
   },
   {
     label: '3. Sempre que sair versão nova',
-    hint: 'Rode uma linha de cada vez, nesta ordem: a primeira atualiza o catálogo; as outras duas atualizam de fato cada plugin.',
+    hint: 'Rode uma linha de cada vez, nesta ordem: a primeira atualiza o catálogo; as outras atualizam de fato cada plugin.',
     commands: [
       'claude plugin marketplace update vixlens-marketplace',
       'claude plugin update vixlens-brand@vixlens-marketplace',
       'claude plugin update vixlens-ui@vixlens-marketplace',
+      'claude plugin update vixlens-catalogo@vixlens-marketplace',
     ],
   },
 ]
@@ -111,7 +116,9 @@ export default function InstallBlock({ onCopy }) {
           feche e abra o Claude Code. Todo atalho de skill começa com <span className="font-mono">/</span> e é digitado
           no chat. As marcadas como <span className="font-mono">ref</span> carregam sozinhas quando o assunto aparece —
           digitar o comando só força na hora. Já as marcadas como <span className="font-mono">terminal</span> não são
-          skills de chat: rodam no terminal, como os comandos aqui de cima.
+          skills de chat: rodam no terminal, como os comandos aqui de cima. A{' '}
+          <span className="font-mono">/tabela-optica-figma</span> ainda precisa do conector do Figma ligado, numa conta
+          com permissão de edição no arquivo.
         </p>
       </div>
 

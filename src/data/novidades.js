@@ -11,6 +11,14 @@ export const DIAS_NOVIDADE = 21
 
 export const novidades = [
   {
+    data: '2026-09-08',
+    titulo: 'Relatório Transitions do mês virou skill: /transitionsvix',
+    tipo: 'novo',
+    guia: 'plugins',
+    corpo:
+      'Novo plugin <strong>vixlens-relatorios</strong>, o primeiro que tira relatório direto do Volpe. A skill <strong>transitionsvix</strong> gera em um comando o relatório que o Fabricio recebe todo mês (quem comprou Transitions, quem comprou lente e não levou, total geral) e o completo interno, e confere sozinha que os dois fecham antes de entregar. Instale com <code>claude plugin install vixlens-relatorios</code>. Precisa do clone do AI-Vixlens e do cofre do Volpe na máquina.',
+  },
+  {
     data: '2026-08-04',
     titulo: 'vixlens-brand e vixlens-design-system viraram uma só',
     tipo: 'mudou',

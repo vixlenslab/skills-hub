@@ -581,6 +581,14 @@ export const guia = {
             [
               "<strong>vixlens-ui</strong>",
               "Interface em React + Tailwind no padrão da casa, auditoria de 80 boas práticas de UI"
+            ],
+            [
+              "<strong>vixlens-catalogo</strong>",
+              "Catálogo A4 de tabela de preço no Figma a partir do CSV por ótica"
+            ],
+            [
+              "<strong>vixlens-relatorios</strong>",
+              "Relatórios mensais de venda tirados do Volpe, somente leitura — hoje o Transitions do mês (<code>/transitionsvix</code>)"
             ]
           ]
         },
@@ -591,12 +599,12 @@ export const guia = {
         {
           "type": "code",
           "label": "Uma vez só, no terminal",
-          "code": "claude plugin marketplace add vixlenslab/vixlens-ds\nclaude plugin install vixlens-brand\nclaude plugin install vixlens-ui"
+          "code": "claude plugin marketplace add vixlenslab/vixlens-ds\nclaude plugin install vixlens-brand\nclaude plugin install vixlens-ui\nclaude plugin install vixlens-catalogo\nclaude plugin install vixlens-relatorios"
         },
         {
           "type": "code",
           "label": "Quando sair versão nova",
-          "code": "claude plugin marketplace update vixlens-marketplace\nclaude plugin update vixlens-brand@vixlens-marketplace\nclaude plugin update vixlens-ui@vixlens-marketplace"
+          "code": "claude plugin marketplace update vixlens-marketplace\nclaude plugin update vixlens-brand@vixlens-marketplace\nclaude plugin update vixlens-ui@vixlens-marketplace\nclaude plugin update vixlens-catalogo@vixlens-marketplace\nclaude plugin update vixlens-relatorios@vixlens-marketplace"
         },
         {
           "type": "box",
@@ -1401,7 +1409,7 @@ export const guia = {
           "type": "box",
           "tone": "fun",
           "title": "Checklist do iniciante ao avançado:",
-          "body": "<br> ☐ Criou CLAUDE.md global<br> ☐ Criou Projeto no Chat com contexto da empresa<br> ☐ Instalou Claude Code e abriu primeira sessão<br> ☐ Usou 3 skills diferentes<br> ☐ Instalou os plugins da Vixlens (<code>vixlens-brand</code> e <code>vixlens-ui</code>)<br> ☐ Configurou claude-mem e rodou <code>npx claude-mem start</code><br> ☐ Criou sua própria skill pra algo recorrente<br> ☐ Configurou um MCP server<br> ☐ Criou um hook de automação<br> ☐ Rodou um workflow com subagentes"
+          "body": "<br> ☐ Criou CLAUDE.md global<br> ☐ Criou Projeto no Chat com contexto da empresa<br> ☐ Instalou Claude Code e abriu primeira sessão<br> ☐ Usou 3 skills diferentes<br> ☐ Instalou os plugins da Vixlens (<code>vixlens-brand</code>, <code>vixlens-ui</code>, <code>vixlens-catalogo</code> e <code>vixlens-relatorios</code>)<br> ☐ Configurou claude-mem e rodou <code>npx claude-mem start</code><br> ☐ Criou sua própria skill pra algo recorrente<br> ☐ Configurou um MCP server<br> ☐ Criou um hook de automação<br> ☐ Rodou um workflow com subagentes"
         }
       ]
     }

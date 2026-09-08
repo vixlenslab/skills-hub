@@ -10,12 +10,13 @@ const STEPS = [
     commands: ['claude plugin marketplace add vixlenslab/vixlens-ds'],
   },
   {
-    label: '2. Instale os três plugins',
-    hint: 'Rode uma linha de cada vez. vixlens-brand traz marca e documentos; vixlens-ui traz interface e código; vixlens-catalogo monta a tabela de preço no Figma.',
+    label: '2. Instale os quatro plugins',
+    hint: 'Rode uma linha de cada vez. vixlens-brand traz marca e documentos; vixlens-ui traz interface e código; vixlens-catalogo monta a tabela de preço no Figma; vixlens-relatorios tira os relatórios mensais do Volpe.',
     commands: [
       'claude plugin install vixlens-brand',
       'claude plugin install vixlens-ui',
       'claude plugin install vixlens-catalogo',
+      'claude plugin install vixlens-relatorios',
     ],
   },
   {
@@ -26,6 +27,7 @@ const STEPS = [
       'claude plugin update vixlens-brand@vixlens-marketplace',
       'claude plugin update vixlens-ui@vixlens-marketplace',
       'claude plugin update vixlens-catalogo@vixlens-marketplace',
+      'claude plugin update vixlens-relatorios@vixlens-marketplace',
     ],
   },
 ]
@@ -118,7 +120,8 @@ export default function InstallBlock({ onCopy }) {
           digitar o comando só força na hora. Já as marcadas como <span className="font-mono">terminal</span> não são
           skills de chat: rodam no terminal, como os comandos aqui de cima. A{' '}
           <span className="font-mono">/tabela-optica-figma</span> ainda precisa do conector do Figma ligado, numa conta
-          com permissão de edição no arquivo.
+          com permissão de edição no arquivo. A <span className="font-mono">/transitionsvix</span> roda de dentro do
+          clone do AI-Vixlens e precisa do cofre do Volpe na máquina.
         </p>
       </div>
 

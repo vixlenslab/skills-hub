@@ -11,6 +11,14 @@ export const DIAS_NOVIDADE = 21
 
 export const novidades = [
   {
+    data: '2026-09-26',
+    titulo: 'Landing page em minutos: /nova-pagina',
+    tipo: 'novo',
+    guia: 'plugins',
+    corpo:
+      'Nova skill no plugin <strong>vixlens-ui</strong> (0.5.0). Ela cria página ou landing page no site da Vixlens, em <code>vixlens.com.br/palavra</code> ou <code>palavra.vixlens.com.br</code>: recomenda o formato, gera a página no padrão (menu, animações, formulário que cai no Pipedrive), confere no celular, tablet e desktop e abre o PR. Atualize com <code>claude plugin marketplace update vixlens-marketplace</code> e digite <code>/nova-pagina</code>.',
+  },
+  {
     data: '2026-09-08',
     titulo: 'Relatório Transitions do mês virou skill: /transitionsvix',
     tipo: 'novo',

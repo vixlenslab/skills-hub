@@ -580,7 +580,7 @@ export const guia = {
             ],
             [
               "<strong>vixlens-ui</strong>",
-              "Interface em React + Tailwind no padrão da casa, auditoria de 80 boas práticas de UI"
+              "Interface em React + Tailwind no padrão da casa, auditoria de 80 boas práticas de UI e criação de páginas e landing pages no site (/nova-pagina)"
             ],
             [
               "<strong>vixlens-catalogo</strong>",

@@ -12,6 +12,13 @@ export const DIAS_NOVIDADE = 21
 export const novidades = [
   {
     data: '2026-09-28',
+    titulo: 'Atualizar as skills virou um comando só',
+    tipo: 'novo',
+    corpo:
+      'Eram cinco linhas de terminal, na ordem certa: primeiro o catálogo do marketplace, depois um update para cada plugin. Quem trocava a ordem atualizava o catálogo e não os plugins, e seguia na versão velha achando que tinha atualizado — e a lista crescia a cada plugin novo. Agora é <code>/atualizar-skills</code>, digitado no chat do Claude. Ele roda os comandos por dentro, descobre os plugins sozinho (plugin novo entra sem ninguém mexer aqui), diz o que mudou de versão e avisa para reiniciar. Os passos 1 e 2, de instalação, continuam no terminal.',
+  },
+  {
+    data: '2026-09-28',
     titulo: 'Catálogo mais barato de imprimir: famílias dividem página',
     tipo: 'novo',
     corpo:

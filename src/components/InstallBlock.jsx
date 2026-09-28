@@ -21,18 +21,15 @@ const STEPS = [
   },
   {
     label: '3. Sempre que sair versão nova',
-    hint: 'Rode uma linha de cada vez, nesta ordem: a primeira atualiza o catálogo; as outras atualizam de fato cada plugin.',
-    commands: [
-      'claude plugin marketplace update vixlens-marketplace',
-      'claude plugin update vixlens-brand@vixlens-marketplace',
-      'claude plugin update vixlens-ui@vixlens-marketplace',
-      'claude plugin update vixlens-catalogo@vixlens-marketplace',
-      'claude plugin update vixlens-relatorios@vixlens-marketplace',
-    ],
+    // Eram cinco linhas de terminal na ordem certa. Quem trocava a ordem
+    // atualizava o catálogo e não os plugins, e seguia na versão velha.
+    hint: 'Esta aqui não é no terminal: digite no chat do Claude. Ele atualiza o catálogo e todos os plugins, diz o que mudou de versão e avisa para reiniciar.',
+    commands: ['/atualizar-skills'],
+    noTerminal: true,
   },
 ]
 
-function CommandLine({ command, onCopy }) {
+function CommandLine({ command, noTerminal, onCopy }) {
   const [copied, setCopied] = useState(false)
 
   function copy() {
@@ -43,11 +40,18 @@ function CommandLine({ command, onCopy }) {
     })
   }
 
+  // O comando de chat ganha destaque: é o único que não vai no terminal, e
+  // confundir os dois é o erro que faz a pessoa achar que atualizou.
   return (
     <button
       onClick={copy}
       title="Clique para copiar esta linha"
-      className="group flex min-h-[44px] w-full items-center gap-2.5 rounded-vix-chip border border-border bg-background px-3 py-2 text-left font-mono text-[12px] leading-relaxed text-muted-foreground transition-colors hover:border-vix-amarelo hover:text-foreground"
+      className={
+        'group flex min-h-[44px] w-full items-center gap-2.5 rounded-vix-chip border px-3 py-2 text-left font-mono text-[12px] leading-relaxed transition-colors hover:border-vix-amarelo hover:text-foreground ' +
+        (noTerminal
+          ? 'border-vix-amarelo/40 bg-vix-amarelo/[0.07] text-foreground'
+          : 'border-border bg-background text-muted-foreground')
+      }
     >
       {copied ? (
         <Check size={15} weight="bold" className="shrink-0 text-vix-amarelo" />
@@ -55,18 +59,23 @@ function CommandLine({ command, onCopy }) {
         <Copy size={14} className="shrink-0 opacity-60 group-hover:opacity-100" />
       )}
       <span className="min-w-0 flex-1 break-all">{command}</span>
+      {noTerminal && (
+        <span className="shrink-0 rounded-vix-chip bg-vix-amarelo px-2 py-0.5 font-sans text-[10px] font-semibold text-black">
+          no chat
+        </span>
+      )}
     </button>
   )
 }
 
-function CommandRow({ label, hint, commands, onCopy }) {
+function CommandRow({ label, hint, commands, noTerminal, onCopy }) {
   return (
     <div className="flex flex-col gap-1.5">
       <span className="text-[13px] font-medium text-foreground">{label}</span>
       {hint && <span className="text-[12px] leading-snug text-muted-foreground">{hint}</span>}
       <div className="mt-0.5 flex flex-col gap-2">
         {commands.map((c) => (
-          <CommandLine key={c} command={c} onCopy={onCopy} />
+          <CommandLine key={c} command={c} noTerminal={noTerminal} onCopy={onCopy} />
         ))}
       </div>
     </div>
@@ -88,7 +97,9 @@ export default function InstallBlock({ onCopy }) {
             Vixlens. Você instala uma vez e elas passam a valer em qualquer projeto seu, não só num repo específico.
           </p>
           <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
-            Quando o time publicar melhorias, você atualiza rodando o passo 3, sem ninguém precisar te mandar arquivo.
+            Quando o time publicar melhorias, você atualiza digitando{' '}
+            <span className="font-mono text-foreground">/atualizar-skills</span> no chat do Claude — ele faz o resto
+            sozinho, sem ninguém precisar te mandar arquivo.
           </p>
         </div>
       </div>
@@ -98,15 +109,16 @@ export default function InstallBlock({ onCopy }) {
         <Terminal size={16} weight="bold" className="mt-0.5 shrink-0 text-muted-foreground" />
         <p className="text-[12px] leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground">Antes de começar: </span>
-          rode os comandos no <strong className="font-semibold text-foreground">terminal</strong> (Prompt de Comando,
-          PowerShell ou Terminal do Mac), não dentro do chat do Claude. Precisa ter o Claude Code já instalado.
+          os passos 1 e 2 rodam no <strong className="font-semibold text-foreground">terminal</strong> (Prompt de
+          Comando, PowerShell ou Terminal do Mac), não dentro do chat do Claude. Precisa ter o Claude Code já instalado.
+          O passo 3 é o contrário: vai no chat, e está marcado.
         </p>
       </div>
 
       {/* Comandos */}
       <div className="flex flex-col gap-4">
         {STEPS.map((s) => (
-          <CommandRow key={s.label} label={s.label} hint={s.hint} commands={s.commands} onCopy={onCopy} />
+          <CommandRow key={s.label} label={s.label} hint={s.hint} commands={s.commands} noTerminal={s.noTerminal} onCopy={onCopy} />
         ))}
       </div>
 

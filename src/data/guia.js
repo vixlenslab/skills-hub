@@ -603,8 +603,8 @@ export const guia = {
         },
         {
           "type": "code",
-          "label": "Quando sair versão nova",
-          "code": "claude plugin marketplace update vixlens-marketplace\nclaude plugin update vixlens-brand@vixlens-marketplace\nclaude plugin update vixlens-ui@vixlens-marketplace\nclaude plugin update vixlens-catalogo@vixlens-marketplace\nclaude plugin update vixlens-relatorios@vixlens-marketplace"
+          "label": "Quando sair versão nova — digite no chat do Claude, não no terminal",
+          "code": "/atualizar-skills"
         },
         {
           "type": "box",

@@ -12,6 +12,20 @@ export const DIAS_NOVIDADE = 21
 export const novidades = [
   {
     data: '2026-09-28',
+    titulo: 'Catálogo mais barato de imprimir: famílias dividem página',
+    tipo: 'novo',
+    corpo:
+      'O múltiplo de 4 da gráfica é degrau, não rampa: 21 páginas custam o mesmo que 24. A <strong>vixlens-catalogo 0.7.0</strong> ganhou as duas alavancas que faltavam para descer um degrau inteiro sem encolher letra. Famílias pequenas e parecidas agora dividem uma página, com separador por família no lugar do separador por índice — e quando elas divergem em cilindro ou adição, essas pílulas descem para o separador de cada bloco. A segunda alavanca é tirar os separadores de índice de uma família que estoura por pouco: eles custam 21px cada, e é isso, não o número de lentes, que empurra família para a segunda página. No catálogo da Ótica do Toninho as duas levaram de 24 para 20 páginas.',
+  },
+  {
+    data: '2026-09-28',
+    titulo: 'As pílulas do cabeçalho passavam por cima da borda',
+    tipo: 'corrigido',
+    corpo:
+      'Nome de família longo com três ou quatro pílulas passa da largura útil do cabeçalho, e auto-layout que não quebra também não trunca: ele cresce por cima da borda do bloco colorido, sem erro nenhum aparecer. Estava em 8 dos 24 cabeçalhos, o pior com 740px num espaço de 523. Agora a linha de título quebra. Entrou junto a checagem que deixou isso passar — a validação media truncamento de célula, que é outra coisa — e um teste que roda o construtor fora do Figma, contra um stub da API, para pegar erro de lógica antes de gastar chamada.',
+  },
+  {
+    data: '2026-09-28',
     titulo: 'A tabela no Figma aprendeu marca própria da ótica',
     tipo: 'novo',
     corpo:

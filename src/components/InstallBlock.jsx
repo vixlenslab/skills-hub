@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { Copy, Check, Package, Terminal, ArrowClockwise } from '@phosphor-icons/react'
 import { counts } from '@/lib/search'
 
-// Cada linha se copia e se roda sozinha. A instalação dos plugins é uma linha
-// só, encadeada com ";": funciona no PowerShell (5.1 e 7) e no Terminal do Mac.
-// Não use "&&" (o PowerShell 5.1 do Windows rejeita). Plugin já instalado só é
-// confirmado, então rodar de novo não faz mal.
+// Cada linha se copia e se roda sozinha. O passo 2 instala o plugin "vixlens",
+// um pacote sem skill própria que declara os quatro como dependência: o install
+// puxa todos junto. Atualizar NÃO cascateia para as dependências, por isso o
+// passo 3 é a /atualizar-skills, que percorre a lista de plugins instalados.
 const STEPS = [
   {
     label: '1. Registre o marketplace da Vixlens',
@@ -13,11 +13,9 @@ const STEPS = [
     commands: ['claude plugin marketplace add vixlenslab/vixlens-ds'],
   },
   {
-    label: '2. Instale os quatro plugins',
-    hint: 'Uma linha só instala os quatro. vixlens-brand traz marca e documentos; vixlens-ui traz interface e código; vixlens-catalogo monta a tabela de preço no Figma e leva ao projeto de Marca Própria; vixlens-relatorios tira os relatórios mensais do Volpe.',
-    commands: [
-      'claude plugin install vixlens-brand; claude plugin install vixlens-ui; claude plugin install vixlens-catalogo; claude plugin install vixlens-relatorios',
-    ],
+    label: '2. Instale o pacote Vixlens',
+    hint: 'Uma linha só instala os quatro plugins: vixlens-brand traz marca e documentos; vixlens-ui traz interface e código; vixlens-catalogo monta a tabela de preço no Figma e leva ao projeto de Marca Própria; vixlens-relatorios tira os relatórios mensais do Volpe.',
+    commands: ['claude plugin install vixlens'],
   },
   {
     label: '3. Sempre que sair versão nova',
@@ -110,7 +108,7 @@ export default function InstallBlock({ onCopy }) {
         <p className="text-[12px] leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground">Antes de começar: </span>
           os passos 1 e 2 rodam no <strong className="font-semibold text-foreground">terminal</strong> (PowerShell
-          no Windows, Terminal no Mac; o Prompt de Comando antigo não roda a linha do passo 2), não dentro do chat do
+          ou Prompt de Comando no Windows, Terminal no Mac), não dentro do chat do
           Claude. Precisa ter o Claude Code já instalado.
           O passo 3 é o contrário: vai no chat, e está marcado.
         </p>

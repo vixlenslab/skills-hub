@@ -12,6 +12,13 @@ export const DIAS_NOVIDADE = 21
 export const novidades = [
   {
     data: '2026-09-28',
+    titulo: 'Os quatro plugins numa linha: claude plugin install vixlens',
+    tipo: 'mudou',
+    corpo:
+      'Novo plugin <strong>vixlens</strong>, um pacote sem skill própria que puxa os quatro de uma vez: <code>vixlens-brand</code>, <code>vixlens-ui</code>, <code>vixlens-catalogo</code> e <code>vixlens-relatorios</code>. Instalar virou <code>claude plugin install vixlens</code>, no terminal. Atualizar continua sendo <code>/atualizar-skills</code> no chat, porque o update do pacote não sobe as dependências.',
+  },
+  {
+    data: '2026-09-28',
     titulo: 'Marca própria ganhou skill: /marca-propria',
     tipo: 'novo',
     corpo:

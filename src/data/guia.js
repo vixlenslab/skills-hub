@@ -599,7 +599,7 @@ export const guia = {
         {
           "type": "code",
           "label": "Uma vez só, no terminal",
-          "code": "claude plugin marketplace add vixlenslab/vixlens-ds\nclaude plugin install vixlens-brand\nclaude plugin install vixlens-ui\nclaude plugin install vixlens-catalogo\nclaude plugin install vixlens-relatorios"
+          "code": "claude plugin marketplace add vixlenslab/vixlens-ds\nclaude plugin install vixlens"
         },
         {
           "type": "code",
@@ -1409,7 +1409,7 @@ export const guia = {
           "type": "box",
           "tone": "fun",
           "title": "Checklist do iniciante ao avançado:",
-          "body": "<br> ☐ Criou CLAUDE.md global<br> ☐ Criou Projeto no Chat com contexto da empresa<br> ☐ Instalou Claude Code e abriu primeira sessão<br> ☐ Usou 3 skills diferentes<br> ☐ Instalou os plugins da Vixlens (<code>vixlens-brand</code>, <code>vixlens-ui</code>, <code>vixlens-catalogo</code> e <code>vixlens-relatorios</code>)<br> ☐ Configurou claude-mem e rodou <code>npx claude-mem start</code><br> ☐ Criou sua própria skill pra algo recorrente<br> ☐ Configurou um MCP server<br> ☐ Criou um hook de automação<br> ☐ Rodou um workflow com subagentes"
+          "body": "<br> ☐ Criou CLAUDE.md global<br> ☐ Criou Projeto no Chat com contexto da empresa<br> ☐ Instalou Claude Code e abriu primeira sessão<br> ☐ Usou 3 skills diferentes<br> ☐ Instalou o pacote <code>vixlens</code> (os quatro plugins da Vixlens)<br> ☐ Configurou claude-mem e rodou <code>npx claude-mem start</code><br> ☐ Criou sua própria skill pra algo recorrente<br> ☐ Configurou um MCP server<br> ☐ Criou um hook de automação<br> ☐ Rodou um workflow com subagentes"
         }
       ]
     }

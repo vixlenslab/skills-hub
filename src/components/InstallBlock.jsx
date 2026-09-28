@@ -2,7 +2,10 @@ import { useState } from 'react'
 import { Copy, Check, Package, Terminal, ArrowClockwise } from '@phosphor-icons/react'
 import { counts } from '@/lib/search'
 
-// Um comando por linha, sempre: cada linha se copia e se roda sozinha.
+// Cada linha se copia e se roda sozinha. A instalação dos plugins é uma linha
+// só, encadeada com ";": funciona no PowerShell (5.1 e 7) e no Terminal do Mac.
+// Não use "&&" (o PowerShell 5.1 do Windows rejeita). Plugin já instalado só é
+// confirmado, então rodar de novo não faz mal.
 const STEPS = [
   {
     label: '1. Registre o marketplace da Vixlens',
@@ -11,12 +14,9 @@ const STEPS = [
   },
   {
     label: '2. Instale os quatro plugins',
-    hint: 'Rode uma linha de cada vez. vixlens-brand traz marca e documentos; vixlens-ui traz interface e código; vixlens-catalogo monta a tabela de preço no Figma e leva ao projeto de Marca Própria; vixlens-relatorios tira os relatórios mensais do Volpe.',
+    hint: 'Uma linha só instala os quatro. vixlens-brand traz marca e documentos; vixlens-ui traz interface e código; vixlens-catalogo monta a tabela de preço no Figma e leva ao projeto de Marca Própria; vixlens-relatorios tira os relatórios mensais do Volpe.',
     commands: [
-      'claude plugin install vixlens-brand',
-      'claude plugin install vixlens-ui',
-      'claude plugin install vixlens-catalogo',
-      'claude plugin install vixlens-relatorios',
+      'claude plugin install vixlens-brand; claude plugin install vixlens-ui; claude plugin install vixlens-catalogo; claude plugin install vixlens-relatorios',
     ],
   },
   {
@@ -109,8 +109,9 @@ export default function InstallBlock({ onCopy }) {
         <Terminal size={16} weight="bold" className="mt-0.5 shrink-0 text-muted-foreground" />
         <p className="text-[12px] leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground">Antes de começar: </span>
-          os passos 1 e 2 rodam no <strong className="font-semibold text-foreground">terminal</strong> (Prompt de
-          Comando, PowerShell ou Terminal do Mac), não dentro do chat do Claude. Precisa ter o Claude Code já instalado.
+          os passos 1 e 2 rodam no <strong className="font-semibold text-foreground">terminal</strong> (PowerShell
+          no Windows, Terminal no Mac; o Prompt de Comando antigo não roda a linha do passo 2), não dentro do chat do
+          Claude. Precisa ter o Claude Code já instalado.
           O passo 3 é o contrário: vai no chat, e está marcado.
         </p>
       </div>

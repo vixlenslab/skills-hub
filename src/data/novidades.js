@@ -12,6 +12,20 @@ export const DIAS_NOVIDADE = 21
 export const novidades = [
   {
     data: '2026-09-28',
+    titulo: 'Marca própria ganhou skill: /marca-propria',
+    tipo: 'novo',
+    corpo:
+      'Pedir "marca própria da ótica X" numa sessão aberta em outra pasta levava o Claude a procurar o gerador no lugar errado, ou a cair na <code>/manual-cliente</code>, que monta outro manual e não passa pelas 7 travas. A <strong>vixlens-catalogo 0.8.0</strong> traz a <code>/marca-propria</code>: ela acha a pasta do Drive compartilhado em qualquer letra de unidade, manda ler o <code>CLAUDE.md</code> de lá antes de tudo e resolve as pegadinhas do Windows (<code>python</code> no lugar de <code>python3</code>, o <code>pdfplumber</code> da trava 7). As regras não mudaram e continuam só no Drive.',
+  },
+  {
+    data: '2026-09-28',
+    titulo: 'Índice do catálogo sem vermelho no cilindro',
+    tipo: 'mudou',
+    corpo:
+      'O <code>0.00 a -4.00</code> das famílias de entrada saía em vermelho na matriz de receita. A pedido do Otávio, a <strong>vixlens-catalogo 0.7.1</strong> tirou a cor: o cilindro sai igual às outras linhas, e a nota abaixo da matriz fala só do negrito da Alt. mín. Na tabela da Native, a coluna Pág. vazava 16px pela borda por causa das larguras antigas; corrigido direto no Figma.',
+  },
+  {
+    data: '2026-09-28',
     titulo: 'Atualizar as skills virou um comando só',
     tipo: 'novo',
     corpo:

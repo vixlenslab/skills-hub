@@ -11,7 +11,7 @@ const STEPS = [
   },
   {
     label: '2. Instale os quatro plugins',
-    hint: 'Rode uma linha de cada vez. vixlens-brand traz marca e documentos; vixlens-ui traz interface e código; vixlens-catalogo monta a tabela de preço no Figma; vixlens-relatorios tira os relatórios mensais do Volpe.',
+    hint: 'Rode uma linha de cada vez. vixlens-brand traz marca e documentos; vixlens-ui traz interface e código; vixlens-catalogo monta a tabela de preço no Figma e leva ao projeto de Marca Própria; vixlens-relatorios tira os relatórios mensais do Volpe.',
     commands: [
       'claude plugin install vixlens-brand',
       'claude plugin install vixlens-ui',

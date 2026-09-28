@@ -11,6 +11,28 @@ export const DIAS_NOVIDADE = 21
 
 export const novidades = [
   {
+    data: '2026-09-28',
+    titulo: 'A tabela no Figma aprendeu marca própria da ótica',
+    tipo: 'novo',
+    corpo:
+      'Até agora o catálogo assumia que toda lente era marca própria Vixlens e que todo antirreflexo se chamava Reflecta. Não é o caso: a ótica pode batizar as lentes — a do Toninho chama a linha dela de <strong>EyeTech</strong> — e até o antirreflexo, e ainda revender algumas famílias sem marca nenhuma. A <strong>vixlens-catalogo 0.6.0</strong> trata os dois grupos na mesma peça: quem leva o nome da ótica e quem continua Vixlens. Também aprendeu a suprimir a coluna de um tratamento que a família inteira não tem — antes saía uma coluna inteira de travessões.',
+  },
+  {
+    data: '2026-09-28',
+    titulo: 'O índice do catálogo perdia duas colunas sem avisar',
+    tipo: 'corrigido',
+    corpo:
+      'As larguras que a skill mandava usar somavam 535 contra 495 disponíveis. O Figma não reclama: ele empurra o que não cabe para fora da caixa, e as colunas <strong>Ø máx.</strong> e <strong>Pág.</strong> sumiam da peça. Foram junto outras três correções de legibilidade: o vermelho do cilindro reprovava contraste em corpo 7, as bolinhas Cinza e Esmeralda não davam o mínimo com a sigla dentro, e <code>Esf. +0.00</code> afirmava atender grau positivo até zero — zero não leva sinal.',
+  },
+  {
+    data: '2026-09-28',
+    titulo: 'A conta de quantas páginas o catálogo tem estava errada',
+    tipo: 'mudou',
+    corpo:
+      'A skill estimava as páginas pelo número de famílias, e errava. Agora a altura de cada tabela sai de uma fórmula aferida contra páginas reais, com margem de 2px, e daí vem a regra que decide tudo: <strong>21 produtos com 5 índices já ocupam 606px contra 602 disponíveis</strong> — essas famílias quebram em duas, sempre. Quem estoura por pouco cabe numa página só abrindo mão da foto. Com 16 famílias o catálogo fecha em 24 páginas.',
+  },
+  
+  {
     data: '2026-09-26',
     titulo: 'Landing page em minutos: /nova-pagina',
     tipo: 'novo',

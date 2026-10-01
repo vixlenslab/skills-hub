@@ -12,6 +12,13 @@ export const DIAS_NOVIDADE = 21
 export const novidades = [
   {
     data: '2026-10-01',
+    titulo: 'Promovix: pílula Transitions, selo de montagem e Solar compacta',
+    tipo: 'mudou',
+    corpo:
+      'A <code>/promovix</code> (<strong>vixlens-catalogo 0.11.0</strong>) ganhou os ajustes da Promovix de outubro. <strong>Transitions</strong> no nome do produto vira pílula sozinho: Gen S em degradê, XTRActive em cinza-escuro com texto branco — não precisa mais do destaque FOTO. A faixa preta de montagem virou um <strong>selo "Montagem lente pronta R$15"</strong> no canto do cabeçalho (coluna <code>selo_montagem</code>), e família curta pode sair em <strong>bloco compacto</strong> de 2 colunas (coluna <code>compacta</code>) — foi assim que a Solar entrou na página da lente pronta. As tabelas com o adesivo REFLECTA −50% ganharam mais folga no topo. O Excel modelo já vem com as colunas novas.',
+  },
+  {
+    data: '2026-10-01',
     titulo: 'Catálogo sai com o nome que a ótica deu às linhas',
     tipo: 'mudou',
     corpo:

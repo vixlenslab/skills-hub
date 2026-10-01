@@ -11,6 +11,13 @@ export const DIAS_NOVIDADE = 21
 
 export const novidades = [
   {
+    data: '2026-10-01',
+    titulo: 'Catálogo sai com o nome que a ótica deu às linhas',
+    tipo: 'mudou',
+    corpo:
+      'O simulador de markup ganhou a tabela <strong>Nome das suas linhas</strong>: a ótica de marca própria escreve, uma vez, o nome de cada linha dela ao lado da equivalente Vixlens (Virtu Start = Vix Total). O nome vai no CSV numa coluna nova, a 29ª, <code>Linha do cliente</code>, e a <strong>vixlens-catalogo 0.10.0</strong> usa esse nome como título da família no catálogo — só pergunta o de-para do que vier em branco. As 28 colunas de antes não mudaram, e CSV antigo segue aceito. No mesmo dia, os códigos das 13 famílias de marca própria passaram para os da Matriz (15000–15437), iguais para todo cliente de MP.',
+  },
+  {
     data: '2026-09-30',
     titulo: 'Promovix do mês ganhou skill: /promovix',
     tipo: 'novo',

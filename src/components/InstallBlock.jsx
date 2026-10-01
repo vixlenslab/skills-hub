@@ -14,7 +14,7 @@ const STEPS = [
   },
   {
     label: '2. Instale o pacote Vixlens',
-    hint: 'Uma linha só instala os quatro plugins: vixlens-brand traz marca e documentos; vixlens-ui traz interface e código; vixlens-catalogo monta a tabela de preço no Figma e leva ao projeto de Marca Própria; vixlens-relatorios tira os relatórios mensais do Volpe.',
+    hint: 'Uma linha só instala os quatro plugins: vixlens-brand traz marca e documentos; vixlens-ui traz interface e código; vixlens-catalogo monta a tabela de preço e a Promovix do mês no Figma e leva ao projeto de Marca Própria; vixlens-relatorios tira os relatórios mensais do Volpe.',
     commands: ['claude plugin install vixlens'],
   },
   {
@@ -130,7 +130,7 @@ export default function InstallBlock({ onCopy }) {
           no chat. As marcadas como <span className="font-mono">ref</span> carregam sozinhas quando o assunto aparece —
           digitar o comando só força na hora. Já as marcadas como <span className="font-mono">terminal</span> não são
           skills de chat: rodam no terminal, como os comandos aqui de cima. A{' '}
-          <span className="font-mono">/tabela-optica-figma</span> ainda precisa do conector do Figma ligado, numa conta
+          <span className="font-mono">/tabela-optica-figma</span> e a <span className="font-mono">/promovix</span> precisam do conector do Figma ligado, numa conta
           com permissão de edição no arquivo. A <span className="font-mono">/transitionsvix</span> roda de dentro do
           clone do AI-Vixlens e precisa do cofre do Volpe na máquina.
         </p>

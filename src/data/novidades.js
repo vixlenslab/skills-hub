@@ -11,6 +11,13 @@ export const DIAS_NOVIDADE = 21
 
 export const novidades = [
   {
+    data: '2026-09-30',
+    titulo: 'Promovix do mês ganhou skill: /promovix',
+    tipo: 'novo',
+    corpo:
+      'A tabela promocional mensal agora sai de um Excel. A <strong>vixlens-catalogo 0.9.0</strong> traz a <code>/promovix</code>: você atualiza mês, validade e preços no Excel modelo, e ela confere tudo antes de ir ao Figma — calcula Reflecta Guard e Blue pela regra dos 50%, acusa preço fora da regra e cor Transitions fora de ordem — e monta as páginas no layout novo. A tabela é a mesma do catálogo, com cara de promoção: faixa amarelo-clara e adesivo <strong>REFLECTA −50%</strong> nas colunas em oferta, preço em negrito, rodapé com a validade em toda página e o painel VixClub. A Promovix de outubro já foi gerada assim.',
+  },
+  {
     data: '2026-09-28',
     titulo: 'Os quatro plugins numa linha: claude plugin install vixlens',
     tipo: 'mudou',

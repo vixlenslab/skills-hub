@@ -584,7 +584,7 @@ export const guia = {
             ],
             [
               "<strong>vixlens-catalogo</strong>",
-              "Catálogo A4 de tabela de preço no Figma a partir do CSV por ótica"
+              "Catálogo A4 de tabela de preço no Figma a partir do CSV por ótica, a Promovix do mês a partir de Excel (<code>/promovix</code>) e o atalho para o projeto de Marca Própria"
             ],
             [
               "<strong>vixlens-relatorios</strong>",

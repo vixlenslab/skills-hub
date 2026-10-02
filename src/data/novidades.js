@@ -11,6 +11,13 @@ export const DIAS_NOVIDADE = 21
 
 export const novidades = [
   {
+    data: '2026-10-02',
+    titulo: 'Promovix com página de combo',
+    tipo: 'mudou',
+    corpo:
+      'A <code>/promovix</code> (<strong>vixlens-catalogo 0.12.0</strong>) agora começa perguntando <strong>"terá combo este mês?"</strong>. Com combo, o Excel ganha a aba <code>Combos</code> e a P01 traz a tabela Lente + Montagem, com chip por marca, bolinha do residual e o painel da campanha Freevix com <strong>QR</strong> para o site. Sem combo, sai a peça de sempre. A peça inteira agora é montada em <strong>Auto Layout</strong>, com chips de A.R. nas cores e símbolos do DS, ícone por família e selo "Combo disponível" nas linhas que também têm combo. O selo de montagem R$15 saiu do padrão. Atualize com <code>/atualizar-skills</code>.',
+  },
+  {
     data: '2026-10-01',
     titulo: 'Promovix: pílula Transitions, selo de montagem e Solar compacta',
     tipo: 'mudou',

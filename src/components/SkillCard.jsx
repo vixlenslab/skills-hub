@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Copy, Check, Command, Sparkle, Lightbulb, Terminal } from '@phosphor-icons/react'
+import { Copy, Check, Command, Sparkle, Lightbulb, Terminal, ClockCounterClockwise } from '@phosphor-icons/react'
 import { cn, skillCommand } from '@/lib/utils'
 
 const badgeStyle = {
@@ -101,6 +101,27 @@ export default function SkillCard({ skill, onCopy }) {
             {skill.tip}
           </p>
         </div>
+      )}
+
+      {skill.historico?.length > 0 && (
+        <details className="group mt-1 rounded-vix-chip border border-border px-3 py-2">
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-[12px] font-semibold text-foreground">
+            <ClockCounterClockwise size={15} weight="bold" className="text-muted-foreground" />
+            Histórico
+            <span className="rounded-vix-chip bg-vix-amarelo px-1.5 py-0.5 text-[10px] font-medium text-vix-preto">
+              v{skill.historico[0].v}
+            </span>
+          </summary>
+          <ol className="mt-2 flex flex-col gap-2">
+            {skill.historico.map((h) => (
+              <li key={h.v} className="text-[12px] leading-snug text-muted-foreground">
+                <span className="font-mono font-semibold text-foreground">v{h.v}</span>
+                <span className="ml-2">{h.data.split('-').reverse().join('/')}</span>
+                <p className="mt-0.5">{h.texto}</p>
+              </li>
+            ))}
+          </ol>
+        </details>
       )}
     </div>
   )

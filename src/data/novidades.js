@@ -11,6 +11,13 @@ export const DIAS_NOVIDADE = 21
 
 export const novidades = [
   {
+    data: '2026-10-05',
+    titulo: 'Promovix: UV+ vira pílula azul',
+    tipo: 'mudou',
+    corpo:
+      'A <code>/promovix</code> (<strong>vixlens-catalogo 0.12.1</strong>) agora desenha o <strong>UV+</strong> do nome do produto como uma pílula azul-ciano com contorno, nas tabelas e no combo. Escolhemos azul de propósito: o roxo já é a bolinha de residual do combo, e o azul liso do chip BLUE UV continua sendo da Essilor.',
+  },
+  {
     data: '2026-10-02',
     titulo: 'Promovix com página de combo',
     tipo: 'mudou',

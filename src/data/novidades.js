@@ -12,6 +12,13 @@ export const DIAS_NOVIDADE = 21
 export const novidades = [
   {
     data: '2026-10-05',
+    titulo: 'Promovix: selo de montagem R$15 volta',
+    tipo: 'mudou',
+    corpo:
+      'A <code>/promovix</code> (<strong>vixlens-catalogo 0.12.2</strong>) trouxe de volta o selo <strong>"Montagem lente pronta R$15"</strong> no canto do cabeçalho das lentes prontas Kodak e Essilor e da Optview. O Excel com combo já vem com ele ligado e com a bolinha de residual em todas as linhas do combo.',
+  },
+  {
+    data: '2026-10-05',
     titulo: 'Promovix: UV+ vira pílula azul',
     tipo: 'mudou',
     corpo:

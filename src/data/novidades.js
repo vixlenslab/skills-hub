@@ -11,6 +11,13 @@ export const DIAS_NOVIDADE = 21
 
 export const novidades = [
   {
+    data: '2026-10-07',
+    titulo: 'Esférico da Premium Transitions Gen S corrigido',
+    tipo: 'corrigido',
+    corpo:
+      'O atendimento achou dois esféricos errados na <strong>Freevix Premium</strong> com Transitions Gen S: o <strong>1.59 Poli</strong> é <strong>+7 a −8</strong> (estava +6) e o <strong>1.67 Resina</strong> é <strong>+9 a −10</strong> (estava +6). Corrigido no simulador, no catálogo A4 (<strong>vixlens-catalogo 0.12.3</strong>) e na planilha de markup. <strong>CSV e Excel baixados antes de 07/10 têm o valor antigo</strong>: baixe de novo no simulador.',
+  },
+  {
     data: '2026-10-05',
     titulo: 'Promovix: selo de montagem R$15 volta',
     tipo: 'mudou',

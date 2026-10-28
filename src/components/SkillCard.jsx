@@ -4,6 +4,7 @@ import { cn, skillCommand } from '@/lib/utils'
 
 const badgeStyle = {
   Proprietária: 'bg-vix-amarelo text-vix-preto',
+  Mari: 'bg-secondary text-secondary-foreground',
   Marketing: 'bg-secondary text-secondary-foreground',
   Design: 'bg-secondary text-secondary-foreground',
   Escrita: 'bg-secondary text-secondary-foreground',

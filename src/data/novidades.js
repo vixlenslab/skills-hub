@@ -12,6 +12,13 @@ export const DIAS_NOVIDADE = 21
 export const novidades = [
   {
     data: '2026-10-28',
+    titulo: 'Aba Mari no catálogo',
+    tipo: 'novo',
+    corpo:
+      'O catálogo ganhou a aba <strong>Mari</strong>, logo depois de Vixlens, com as skills pessoais: <code>/mary-voice</code> (escreve com a voz da Mari) e <code>/carrossel-figma</code>. Agora são 337 skills.',
+  },
+  {
+    data: '2026-10-28',
     titulo: 'Catálogo com 336 skills e comandos novos no guia',
     tipo: 'mudou',
     guia: 'commands',

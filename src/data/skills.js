@@ -313,7 +313,7 @@ export const skills = [
   {"name":"artifact-diagramming","category":"Nativa","description":"Como e quando desenhar diagramas em Artifacts: SVG inline legível em light/dark e escolha do mecanismo certo","command":"/artifact-diagramming","type":"slash"},
   {"name":"artifact-capabilities","category":"Nativa","description":"Capacidades runtime de um Artifact publicado: chamar conectores MCP do usuário a partir da página","command":"/artifact-capabilities","type":"slash"},
   {"name":"anthropic-skills:morning","category":"Nativa","description":"Rotina matinal: recupera contexto, agenda e prioridades para começar o dia","command":"/anthropic-skills:morning","type":"slash"},
-  {"name":"carrossel-figma","category":"Design","description":"Cria carrossel de Instagram (10 slides, 1080x1350) no Figma no estilo editorial \"Brands Decoded\"","command":"/carrossel-figma","type":"slash"},
+  {"name":"carrossel-figma","category":"Mari","description":"Cria carrossel de Instagram (10 slides, 1080x1350) no Figma no estilo editorial \"Brands Decoded\"","command":"/carrossel-figma","type":"slash"},
   {"name":"claude-mem:agent-cost-report","category":"Plugin","description":"Relatório de custo dos agentes em qualquer período, com tokens medidos e preço estimado, em HTML/PDF","command":"/claude-mem:agent-cost-report","type":"slash"},
   {"name":"claude-mem:backup-setup","category":"Plugin","description":"Configura, confere ou restaura os backups locais do banco de memória","command":"/claude-mem:backup-setup","type":"slash"},
   {"name":"claude-mem:build","category":"Plugin","description":"Automatiza uma tarefa de código de ponta a ponta: planeja, executa e acompanha o PR","command":"/claude-mem:build","type":"slash"},
@@ -338,7 +338,8 @@ export const skills = [
   {"name":"anthropic-skills:import-memory","category":"Nativa","description":"Importa a memória exportada de outro assistente de IA para o Claude","command":"/anthropic-skills:import-memory","type":"slash"},
   {"name":"anthropic-skills:setup-claude","category":"Nativa","description":"Configuração guiada: instala plugins do seu papel, conecta ferramentas e testa uma skill","command":"/anthropic-skills:setup-claude","type":"slash"},
   {"name":"workflow-authoring","category":"Nativa","description":"Referência para escrever scripts de Workflow (vários subagentes orquestrados)","command":"/workflow-authoring","type":"slash"},
-  {"name":"plugin-authoring","category":"Nativa","description":"Cria mods: painéis, barra de status, comandos e hooks que mudam a interface do Claude","command":"/plugin-authoring","type":"slash"}
+  {"name":"plugin-authoring","category":"Nativa","description":"Cria mods: painéis, barra de status, comandos e hooks que mudam a interface do Claude","command":"/plugin-authoring","type":"slash"},
+  {"name":"mary-voice","category":"Mari","description":"Escreve e reescreve mensagens, respostas, legendas e convites com a voz da Mari","command":"/mary-voice","type":"slash"}
 ]
 
-export const categories = ['Proprietária', 'Marketing', 'Design', 'Escrita', 'Plugin', 'Nativa']
+export const categories = ['Proprietária', 'Mari', 'Marketing', 'Design', 'Escrita', 'Plugin', 'Nativa']

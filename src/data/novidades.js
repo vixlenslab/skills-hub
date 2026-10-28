@@ -12,6 +12,13 @@ export const DIAS_NOVIDADE = 21
 export const novidades = [
   {
     data: '2026-10-28',
+    titulo: 'Mais skills no catálogo: Instagram, vídeo e caveman',
+    tipo: 'novo',
+    corpo:
+      'Entraram <code>/instagram-conta</code> (aba Mari: pautas, roteiros e legendas por conta), <code>/watch:watch</code> (o Claude assiste a um vídeo e responde sobre ele) e mais 14 skills do plugin <code>caveman</code>, como <code>/caveman:surgical-patch</code>, <code>/caveman:safe-refactor</code> e <code>/caveman:verify-and-stop</code>. Agora são 353 skills.',
+  },
+  {
+    data: '2026-10-28',
     titulo: 'Aba Mari no catálogo',
     tipo: 'novo',
     corpo:

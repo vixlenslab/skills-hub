@@ -339,7 +339,23 @@ export const skills = [
   {"name":"anthropic-skills:setup-claude","category":"Nativa","description":"Configuração guiada: instala plugins do seu papel, conecta ferramentas e testa uma skill","command":"/anthropic-skills:setup-claude","type":"slash"},
   {"name":"workflow-authoring","category":"Nativa","description":"Referência para escrever scripts de Workflow (vários subagentes orquestrados)","command":"/workflow-authoring","type":"slash"},
   {"name":"plugin-authoring","category":"Nativa","description":"Cria mods: painéis, barra de status, comandos e hooks que mudam a interface do Claude","command":"/plugin-authoring","type":"slash"},
-  {"name":"mary-voice","category":"Mari","description":"Escreve e reescreve mensagens, respostas, legendas e convites com a voz da Mari","command":"/mary-voice","type":"slash"}
+  {"name":"mary-voice","category":"Mari","description":"Escreve e reescreve mensagens, respostas, legendas e convites com a voz da Mari","command":"/mary-voice","type":"slash"},
+  {"name":"instagram-conta","category":"Mari","description":"Planeja o Instagram de uma das contas da Mari: pautas, ganchos, roteiros de Reels, carrosséis e legendas em rascunho","command":"/instagram-conta","type":"slash"},
+  {"name":"watch:watch","category":"Plugin","description":"Assiste a um vídeo (link ou arquivo): baixa, tira quadros, pega a transcrição e responde perguntas sobre o que há nele","command":"/watch:watch","type":"slash"},
+  {"name":"caveman:caveman-init","category":"Plugin","description":"Coloca a regra de ativação do caveman no repositório atual, para todos os agentes de IDE","command":"/caveman:caveman-init","type":"slash"},
+  {"name":"caveman:caveman-discover","category":"Plugin","description":"Acha e rotula cada fluxo de LLM do repositório para separar o gasto por fluxo","command":"/caveman:caveman-discover","type":"slash"},
+  {"name":"caveman:caveman-evidence-review","category":"Plugin","description":"Revisão somente leitura das evidências do Caveman Cloud: custo, fluxos, latência, erros e economia","command":"/caveman:caveman-evidence-review","type":"slash"},
+  {"name":"caveman:caveman-explore","category":"Plugin","description":"Explora o repositório só para leitura e devolve caminho:linha, sem encher o contexto principal","command":"/caveman:caveman-explore","type":"slash"},
+  {"name":"caveman:caveman-learn","category":"Plugin","description":"Age sobre o relatório do caveman: mostra onde os tokens vão e aplica cortes de custo com seu aval","command":"/caveman:caveman-learn","type":"slash"},
+  {"name":"caveman:caveman-manage","category":"Plugin","description":"Acompanha o ciclo dos experimentos do Caveman Cloud e bloqueia execução insegura","command":"/caveman:caveman-manage","type":"slash"},
+  {"name":"caveman:caveman-optimize","category":"Plugin","description":"Transforma uma observação de otimização em candidato avaliado contra a base; pede aprovação","command":"/caveman:caveman-optimize","type":"slash"},
+  {"name":"caveman:caveman-setup","category":"Plugin","description":"Liga o repositório ao gateway do Caveman Cloud para medir cada requisição sem mudar o comportamento","command":"/caveman:caveman-setup","type":"slash"},
+  {"name":"caveman:investigate-first","category":"Plugin","description":"Diagnostica falhas ambíguas antes de editar, com hipóteses ordenadas por evidência","command":"/caveman:investigate-first","type":"slash"},
+  {"name":"caveman:lean-build","category":"Plugin","description":"Constrói funcionalidade nova sem exagero: reaproveita o que existe, escopo fechado e critério de parada","command":"/caveman:lean-build","type":"slash"},
+  {"name":"caveman:migration","category":"Plugin","description":"Faz migrações reversíveis (esquema, dados, API, dependência) com prova de que nada se perdeu","command":"/caveman:migration","type":"slash"},
+  {"name":"caveman:safe-refactor","category":"Plugin","description":"Reestrutura código preservando o comportamento, verificando antes e depois","command":"/caveman:safe-refactor","type":"slash"},
+  {"name":"caveman:surgical-patch","category":"Plugin","description":"Corrige bug na menor camada responsável, com teste de regressão","command":"/caveman:surgical-patch","type":"slash"},
+  {"name":"caveman:verify-and-stop","category":"Plugin","description":"Prova que o trabalho atende aos critérios de aceite, sem ampliar o escopo","command":"/caveman:verify-and-stop","type":"slash"}
 ]
 
 export const categories = ['Proprietária', 'Mari', 'Marketing', 'Design', 'Escrita', 'Plugin', 'Nativa']

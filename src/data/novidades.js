@@ -11,6 +11,14 @@ export const DIAS_NOVIDADE = 21
 
 export const novidades = [
   {
+    data: '2026-10-28',
+    titulo: 'Catálogo com 336 skills e comandos novos no guia',
+    tipo: 'mudou',
+    guia: 'commands',
+    corpo:
+      'O catálogo ganhou <strong>26 skills</strong> que já estavam instaladas e não apareciam: handoff, build, release e outras do <code>claude-mem</code>, os atalhos do <strong>Lovable</strong>, o guia dos navegadores e do computer use, <code>/docs</code> e <code>/google-workspace</code>. Na tabela de comandos do guia entraram <code>/code-review</code> (no lugar do antigo <code>/review</code>), <code>/simplify</code>, <code>/reload-skills</code>, <code>/loop</code>, <code>/schedule</code>, <code>/fast</code>, <code>/effort</code> e <code>/auto-mode-setup</code>. O exemplo de tarefa agendada também passou a apontar para <code>C:\vixlens</code>.',
+  },
+  {
     data: '2026-10-07',
     titulo: 'Esférico da Premium Transitions Gen S corrigido',
     tipo: 'corrigido',

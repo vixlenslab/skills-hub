@@ -675,7 +675,7 @@ export const guia = {
         {
           "type": "code",
           "label": "No chat do Claude Code",
-          "code": "Toda segunda às 8h, monte o relatório de produção da semana\nanterior e salve em C:\\vixfactory\\relatorios com a data no nome."
+          "code": "Toda segunda às 8h, monte o relatório de produção da semana\nanterior e salve em C:\\vixlens\\relatorios com a data no nome."
         },
         {
           "type": "p",
@@ -1382,8 +1382,32 @@ export const guia = {
               "Cria um CLAUDE.md básico no projeto atual"
             ],
             [
-              "<code>/review</code>",
-              "Code review do diff atual"
+              "<code>/code-review</code>",
+              "Revisa o diff atual (ou um PR) atrás de bugs; aceita nível de esforço"
+            ],
+            [
+              "<code>/simplify</code>",
+              "Revisa o que mudou e aplica limpezas de reuso e simplificação"
+            ],
+            [
+              "<code>/reload-skills</code>",
+              "Recarrega as skills sem fechar a sessão — útil logo depois de atualizar"
+            ],
+            [
+              "<code>/loop 5m /comando</code>",
+              "Repete um comando ou pedido a cada intervalo, ou no ritmo que o Claude escolher"
+            ],
+            [
+              "<code>/schedule</code>",
+              "Cria e gerencia rotinas agendadas"
+            ],
+            [
+              "<code>/fast e /effort</code>",
+              "Alternam o modo rápido e o nível de esforço do raciocínio"
+            ],
+            [
+              "<code>/auto-mode-setup</code>",
+              "Guia a configuração do modo automático a partir do seu projeto"
             ],
             [
               "<code>/doctor</code>",

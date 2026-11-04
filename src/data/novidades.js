@@ -11,6 +11,13 @@ export const DIAS_NOVIDADE = 21
 
 export const novidades = [
   {
+    data: '2026-11-04',
+    titulo: 'Duas skills novas: /artefato-otavio e /instagram',
+    tipo: 'novo',
+    corpo:
+      'A <code>/artefato-otavio</code> (plugin <strong>vixlens-ui</strong> 0.6.0) monta o artefato que o Otávio aplica no Lovable: protótipo React vivo e código TSX conferido contra o projeto, em .zip, para ele aplicar tudo de uma vez e gastar menos crédito. A <code>/instagram</code> (plugin <strong>vixlens-brand</strong> 0.8.0) faz a triagem das DMs e dos comentários do Instagram da Vixlens e só envia com aprovação. Para receber, digite <code>/atualizar-skills</code> no chat. Agora são 355 skills.',
+  },
+  {
     data: '2026-10-28',
     titulo: 'Mais skills no catálogo: Instagram, vídeo e caveman',
     tipo: 'novo',

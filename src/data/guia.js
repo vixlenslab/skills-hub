@@ -603,14 +603,14 @@ export const guia = {
         },
         {
           "type": "code",
-          "label": "Quando sair versão nova — digite no chat do Claude, não no terminal",
+          "label": "Quando sair versão nova — digite dentro do Claude Code, não no terminal",
           "code": "/atualizar-skills"
         },
         {
           "type": "box",
           "tone": "warn",
-          "title": "No terminal, não no chat.",
-          "body": "Esses comandos vão no Prompt de Comando, PowerShell ou Terminal do Mac, não dentro da conversa com o Claude. E precisa ter o Claude Code instalado antes."
+          "title": "Os dois primeiros no terminal; o /atualizar-skills no Claude Code.",
+          "body": "Os comandos <code>claude plugin ...</code> vão no Prompt de Comando, PowerShell ou Terminal do Mac. O <code>/atualizar-skills</code> é o contrário: você digita dentro de uma sessão do Claude Code (aba Code), não no terminal e não na aba Chat. E precisa ter o Claude Code instalado antes."
         },
         {
           "type": "h3",

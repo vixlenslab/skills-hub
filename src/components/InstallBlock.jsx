@@ -21,7 +21,7 @@ const STEPS = [
     label: '3. Sempre que sair versão nova',
     // Eram cinco linhas de terminal na ordem certa. Quem trocava a ordem
     // atualizava o catálogo e não os plugins, e seguia na versão velha.
-    hint: 'Esta aqui não é no terminal: digite no chat do Claude. Ele atualiza o catálogo e todos os plugins, diz o que mudou de versão e avisa para reiniciar.',
+    hint: 'Esta aqui não é no terminal: abra o Claude Code e digite na conversa dele (aba Code, não a aba Chat). Ele atualiza o catálogo e todos os plugins, diz o que mudou de versão e avisa para reiniciar.',
     commands: ['/atualizar-skills'],
     noTerminal: true,
   },
@@ -59,7 +59,7 @@ function CommandLine({ command, noTerminal, onCopy }) {
       <span className="min-w-0 flex-1 break-all">{command}</span>
       {noTerminal && (
         <span className="shrink-0 rounded-vix-chip bg-vix-amarelo px-2 py-0.5 font-sans text-[10px] font-semibold text-black">
-          no chat
+          no Code
         </span>
       )}
     </button>
@@ -96,7 +96,7 @@ export default function InstallBlock({ onCopy }) {
           </p>
           <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
             Quando o time publicar melhorias, você atualiza digitando{' '}
-            <span className="font-mono text-foreground">/atualizar-skills</span> no chat do Claude — ele faz o resto
+            <span className="font-mono text-foreground">/atualizar-skills</span> dentro do Claude Code — ele faz o resto
             sozinho, sem ninguém precisar te mandar arquivo.
           </p>
         </div>
@@ -108,9 +108,8 @@ export default function InstallBlock({ onCopy }) {
         <p className="text-[12px] leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground">Antes de começar: </span>
           os passos 1 e 2 rodam no <strong className="font-semibold text-foreground">terminal</strong> (PowerShell
-          ou Prompt de Comando no Windows, Terminal no Mac), não dentro do chat do
-          Claude. Precisa ter o Claude Code já instalado.
-          O passo 3 é o contrário: vai no chat, e está marcado.
+          ou Prompt de Comando no Windows, Terminal no Mac), não dentro do Claude Code. Precisa ter o Claude Code já instalado.
+          O passo 3 é o contrário: vai dentro do Claude Code, e está marcado.
         </p>
       </div>
 
@@ -127,9 +126,9 @@ export default function InstallBlock({ onCopy }) {
         <p className="text-[12px] leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground">Depois de instalar: </span>
           feche e abra o Claude Code. Todo atalho de skill começa com <span className="font-mono">/</span> e é digitado
-          no chat. As marcadas como <span className="font-mono">ref</span> carregam sozinhas quando o assunto aparece —
+          no Claude Code. As marcadas como <span className="font-mono">ref</span> carregam sozinhas quando o assunto aparece —
           digitar o comando só força na hora. Já as marcadas como <span className="font-mono">terminal</span> não são
-          skills de chat: rodam no terminal, como os comandos aqui de cima. A{' '}
+          skills do Claude Code: rodam no terminal, como os comandos aqui de cima. A{' '}
           <span className="font-mono">/tabela-optica-figma</span> e a <span className="font-mono">/promovix</span> precisam do conector do Figma ligado, numa conta
           com permissão de edição no arquivo. A <span className="font-mono">/transitionsvix</span> roda de dentro do
           clone do AI-Vixlens e precisa do cofre do Volpe na máquina.

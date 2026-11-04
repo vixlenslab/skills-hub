@@ -12,6 +12,14 @@ export const DIAS_NOVIDADE = 21
 export const novidades = [
   {
     data: '2026-11-04',
+    titulo: 'Onde digitar o /atualizar-skills',
+    tipo: 'corrigido',
+    guia: 'plugins',
+    corpo:
+      'A instrução dizia que o <code>/atualizar-skills</code> vai "no chat", e isso confundia com a aba Chat do app. Ele é digitado <strong>dentro do Claude Code</strong> (aba Code), não no terminal e não na aba Chat. Corrigido na página de instalação, no Guia e no cartão da skill.',
+  },
+  {
+    data: '2026-11-04',
     titulo: 'Duas skills novas: /artefato-otavio e /instagram',
     tipo: 'novo',
     corpo:

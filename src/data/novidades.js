@@ -11,6 +11,13 @@ export const DIAS_NOVIDADE = 21
 
 export const novidades = [
   {
+    data: '2026-11-05',
+    titulo: '/artefato-otavio agora pensa primeiro no celular e segue o Design System',
+    tipo: 'mudou',
+    corpo:
+      'A <code>/artefato-otavio</code> (plugin <strong>vixlens-ui</strong> 0.6.1) passou a chamar sempre as skills <code>vixlens-design-system</code> e <code>ui-boas-praticas</code> em toda entrega. Como os consultores usam o sistema no celular, ela desenha primeiro para 390 px: coluna única em ordem de uso, ação principal em largura total e abas em colunas com ícone. Para receber, digite <code>/atualizar-skills</code> no Claude Code.',
+  },
+  {
     data: '2026-11-04',
     titulo: 'Onde digitar o /atualizar-skills',
     tipo: 'corrigido',

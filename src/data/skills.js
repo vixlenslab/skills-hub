@@ -357,7 +357,9 @@ export const skills = [
   {"name":"caveman:migration","category":"Plugin","description":"Faz migrações reversíveis (esquema, dados, API, dependência) com prova de que nada se perdeu","command":"/caveman:migration","type":"slash"},
   {"name":"caveman:safe-refactor","category":"Plugin","description":"Reestrutura código preservando o comportamento, verificando antes e depois","command":"/caveman:safe-refactor","type":"slash"},
   {"name":"caveman:surgical-patch","category":"Plugin","description":"Corrige bug na menor camada responsável, com teste de regressão","command":"/caveman:surgical-patch","type":"slash"},
-  {"name":"caveman:verify-and-stop","category":"Plugin","description":"Prova que o trabalho atende aos critérios de aceite, sem ampliar o escopo","command":"/caveman:verify-and-stop","type":"slash"}
+  {"name":"caveman:verify-and-stop","category":"Plugin","description":"Prova que o trabalho atende aos critérios de aceite, sem ampliar o escopo","command":"/caveman:verify-and-stop","type":"slash"},
+  {"name":"postiz:postiz","category":"Marketing","description":"Agenda e publica posts em mais de 28 redes (Instagram, LinkedIn, TikTok, YouTube, Facebook, X e outras) pelo Postiz","command":"/postiz:postiz","type":"slash"},
+  {"name":"greptile:review","category":"Plugin","description":"Revisa o branch atual com o Greptile","command":"/greptile:review","type":"slash"}
 ]
 
 export const categories = ['Proprietária', 'Mari', 'Marketing', 'Design', 'Escrita', 'Plugin', 'Nativa']

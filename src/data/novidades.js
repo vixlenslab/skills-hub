@@ -11,6 +11,13 @@ export const DIAS_NOVIDADE = 21
 
 export const novidades = [
   {
+    data: '2026-11-06',
+    titulo: 'Postiz no catálogo',
+    tipo: 'novo',
+    corpo:
+      'Entrou o <code>/postiz:postiz</code>, que agenda e publica posts em mais de 28 redes sociais, e o <code>/greptile:review</code>. As skills do plugin <code>design</code> (crítica de design, handoff, acessibilidade, UX copy, pesquisa) já estão na aba Design.',
+  },
+  {
     data: '2026-11-05',
     titulo: '/artefato-otavio agora pensa primeiro no celular e segue o Design System',
     tipo: 'mudou',

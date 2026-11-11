@@ -26,6 +26,19 @@ const STEPS = [
   },
 ]
 
+const MANUAL_STEPS = [
+  {
+    label: 'A. Registre o marketplace da Vixlens',
+    hint: 'No terminal, uma vez só. Precisa estar logado no GitHub (gh auth login) com uma conta que tenha acesso de leitura ao repositório vixlenslab/vixlens-ds. Sem esse acesso o comando dá "Repository not found": peça à Mari.',
+    commands: ['claude plugin marketplace add vixlenslab/vixlens-ds'],
+  },
+  {
+    label: 'B. Instale o pacote Vixlens',
+    hint: 'Uma linha instala os quatro plugins.',
+    commands: ['claude plugin install vixlens'],
+  },
+]
+
 function CommandLine({ command, noTerminal, onCopy }) {
   const [copied, setCopied] = useState(false)
 
@@ -106,7 +119,7 @@ export default function InstallBlock({ onCopy }) {
         <Terminal size={16} weight="bold" className="mt-0.5 shrink-0 text-muted-foreground" />
         <p className="text-[12px] leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground">Antes de começar: </span>
-          os comandos desta página vão <strong className="font-semibold text-foreground">dentro do Claude Code</strong> (aba Code), e estão marcados. Você precisa estar logado com o e-mail da Vixlens. Quem não está na organização do GitHub não consegue usar <span className="font-mono">claude plugin marketplace add</span>: o repositório é privado.
+          os comandos desta página vão <strong className="font-semibold text-foreground">dentro do Claude Code</strong> (aba Code), e estão marcados. Você precisa estar logado com o e-mail da Vixlens. Sem conta da organização, use a instalação manual mais abaixo.
         </p>
       </div>
 
@@ -114,6 +127,23 @@ export default function InstallBlock({ onCopy }) {
       <div className="flex flex-col gap-4">
         {STEPS.map((s) => (
           <CommandRow key={s.label} label={s.label} hint={s.hint} commands={s.commands} noTerminal={s.noTerminal} onCopy={onCopy} />
+        ))}
+      </div>
+
+      {/* Manual */}
+      <div className="flex flex-col gap-4 border-t border-border pt-5">
+        <div>
+          <h3 className="font-vix text-[14px] font-semibold text-card-foreground">
+            Conta Max, ou fora da organização? Instale na mão
+          </h3>
+          <p className="mt-1 text-[12px] leading-relaxed text-muted-foreground">
+            Serve para quem usa Claude com conta própria (Max, por exemplo) e não recebe os plugins da organização:
+            administradora, marketing e quem mais precisar. Os dois comandos abaixo vão no{' '}
+            <strong className="font-semibold text-foreground">terminal</strong>. Depois, o passo 3 acima mantém tudo atualizado.
+          </p>
+        </div>
+        {MANUAL_STEPS.map((s) => (
+          <CommandRow key={s.label} label={s.label} hint={s.hint} commands={s.commands} onCopy={onCopy} />
         ))}
       </div>
 

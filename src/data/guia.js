@@ -565,7 +565,7 @@ export const guia = {
         },
         {
           "type": "p",
-          "body": "O plugin mora num repositório do GitHub. Esse repositório é o <strong>marketplace</strong>, o catálogo, que pode ter vários plugins dentro. O nosso é o <code>vixlenslab/vixlens-ds</code>, com dois:"
+          "body": "O plugin mora num repositório do GitHub. Esse repositório é o <strong>marketplace</strong>, o catálogo, que pode ter vários plugins dentro. O nosso é o <code>vixlenslab/vixlens-ds</code>, privado, entregue pela organização no Claude, com quatro plugins:"
         },
         {
           "type": "table",

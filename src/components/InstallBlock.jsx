@@ -8,20 +8,19 @@ import { counts } from '@/lib/search'
 // passo 3 é a /atualizar-skills, que percorre a lista de plugins instalados.
 const STEPS = [
   {
-    label: '1. Registre o marketplace da Vixlens',
-    hint: 'Só precisa fazer isso uma vez.',
-    commands: ['claude plugin marketplace add vixlenslab/vixlens-ds'],
+    label: '1. Entre no Claude com a conta da Vixlens',
+    hint: 'Os plugins vixlens-brand (marca e documentos) e vixlens-ui (interface e código) vêm obrigatórios pela organização: não há nada para instalar. Feche e abra o Claude Code depois de entrar.',
+    commands: [],
   },
   {
-    label: '2. Instale o pacote Vixlens',
-    hint: 'Uma linha só instala os quatro plugins: vixlens-brand traz marca e documentos; vixlens-ui traz interface e código; vixlens-catalogo monta a tabela de preço e a Promovix do mês no Figma e leva ao projeto de Marca Própria; vixlens-relatorios tira os relatórios mensais do Volpe.',
-    commands: ['claude plugin install vixlens'],
+    label: '2. Quer também catálogo e relatórios? Abra a lista de plugins',
+    hint: 'No Claude Code, digite o comando abaixo e instale vixlens-catalogo (tabela de preço e Promovix no Figma) e vixlens-relatorios (relatórios mensais do Volpe). Eles aparecem na lista da organização.',
+    commands: ['/plugin'],
+    noTerminal: true,
   },
   {
     label: '3. Sempre que sair versão nova',
-    // Eram cinco linhas de terminal na ordem certa. Quem trocava a ordem
-    // atualizava o catálogo e não os plugins, e seguia na versão velha.
-    hint: 'Esta aqui não é no terminal: abra o Claude Code e digite na conversa dele (aba Code, não a aba Chat). Ele atualiza o catálogo e todos os plugins, diz o que mudou de versão e avisa para reiniciar.',
+    hint: 'A organização sincroniza sozinha com o repositório. Se uma skill parecer velha, digite no Claude Code (aba Code, não a aba Chat) e feche e abra de novo.',
     commands: ['/atualizar-skills'],
     noTerminal: true,
   },
@@ -91,8 +90,8 @@ export default function InstallBlock({ onCopy }) {
             Como instalar as skills Vixlens
           </h2>
           <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
-            As {counts.vixlens} skills desta aba não vêm junto com o Claude Code. Elas são nossas, e ficam num repositório da
-            Vixlens. Você instala uma vez e elas passam a valer em qualquer projeto seu, não só num repo específico.
+            As {counts.vixlens} skills desta aba não vêm junto com o Claude Code. Elas são nossas, e ficam num repositório privado da
+            Vixlens. A organização entrega as principais para a sua conta, e elas valem em qualquer projeto seu.
           </p>
           <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
             Quando o time publicar melhorias, você atualiza digitando{' '}
@@ -107,9 +106,7 @@ export default function InstallBlock({ onCopy }) {
         <Terminal size={16} weight="bold" className="mt-0.5 shrink-0 text-muted-foreground" />
         <p className="text-[12px] leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground">Antes de começar: </span>
-          os passos 1 e 2 rodam no <strong className="font-semibold text-foreground">terminal</strong> (PowerShell
-          ou Prompt de Comando no Windows, Terminal no Mac), não dentro do Claude Code. Precisa ter o Claude Code já instalado.
-          O passo 3 é o contrário: vai dentro do Claude Code, e está marcado.
+          os comandos desta página vão <strong className="font-semibold text-foreground">dentro do Claude Code</strong> (aba Code), e estão marcados. Você precisa estar logado com o e-mail da Vixlens. Quem não está na organização do GitHub não consegue usar <span className="font-mono">claude plugin marketplace add</span>: o repositório é privado.
         </p>
       </div>
 

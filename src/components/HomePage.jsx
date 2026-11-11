@@ -88,16 +88,7 @@ export default function HomePage({ onOpenSearch, onNavigate }) {
 
       {/* Rodapé de contexto */}
       <p className="mt-12 max-w-[62ch] text-[13px] leading-relaxed text-muted-foreground">
-        As skills da Vixlens vivem em{' '}
-        <a
-          href="https://github.com/vixlenslab/vixlens-ds"
-          target="_blank"
-          rel="noreferrer"
-          className="text-foreground underline decoration-vix-amarelo/50 underline-offset-4 hover:decoration-vix-amarelo"
-        >
-          vixlenslab/vixlens-ds
-        </a>
-        . Skill nova pra publicar ou dúvida: fala com a Mari.
+        As skills da Vixlens vivem num repositório privado, entregue pela organização no Claude. Skill nova pra publicar ou dúvida: fala com a Mari.
       </p>
     </main>
   )
